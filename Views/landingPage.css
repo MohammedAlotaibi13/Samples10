@@ -1,0 +1,91 @@
+body {
+	font-family: 'Cairo', sans-serif;
+}
+
+nav {
+	direction: rtl;
+}
+
+li {
+	padding-left: 15px;
+}
+
+.jumbotron{
+	text-align: center;
+	padding: 120px;
+	background-color: #F4F9F4;
+}
+
+.jumbotron a {
+	margin-top: 15px;
+}
+
+
+
+#test-information {
+	text-align: center;
+	border-bottom: 1px solid black;
+	width: 14%;
+}
+
+#test-section{
+	text-align: center;
+	margin-top: 55px;
+	margin-right:  25px;
+	margin-bottom: 100px;
+}
+
+
+.image-border{
+   border: 1px solid black;
+   width: 50%;
+   border-radius: 50%;
+   padding: 40px;
+    
+}
+
+.col-4 h4 , p {
+	margin-right: 165px;
+	margin-top: 20px;
+}
+#computer-section {
+ margin-top: 150px;
+ margin-bottom: 100px;
+
+}
+
+#text {
+	text-align: center;
+	width: 30%;
+}
+
+#start-exam-button {
+	margin-top: 50px;
+}
+
+#cards-price {
+	margin-top: 50px;
+	margin-bottom: 100px;
+
+}
+
+.card-text {
+	text-align: center;
+	margin-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 75px;
+}
+
+a {
+	text-decoration : none;
+	color: inherit;
+}
+
+.footer-link li{
+	list-style-type: none;
+	padding-top: 10px;
+}
+
+.footer-link {
+	margin: 50px;
+}
