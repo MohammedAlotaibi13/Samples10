@@ -1,0 +1,56 @@
+/*nav style and body*/
+
+body {
+	font-family: 'Cairo', sans-serif;
+}
+
+nav {
+	direction: rtl;
+}
+
+li {
+	padding-left: 15px;
+}
+ 
+ /* End of nav style and body*/
+
+
+.card  {
+	width: 250px;
+	text-align: center;
+	margin: 30px 0 30px 50px ;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+}
+
+.card img {
+	width: 127px;
+	height: 127px;
+	text-align: center;
+	margin: 10px 0 0 70px;
+}
+
+.card a {
+	padding: 0 25px 0 25px;
+    margin: 5px 0 0 0 ;
+    border-radius: 12px;
+}
+ 
+ /*Footer style */
+
+
+a {
+	text-decoration : none;
+	color: inherit;
+}
+
+.footer-link li{
+	list-style-type: none;
+	padding-top: 10px;
+}
+
+.footer-link {
+	margin: 50px;
+}
+
+ /* EndFooter style */
