@@ -1,0 +1,43 @@
+/*nav style and body*/
+
+body {
+	font-family: 'Cairo', sans-serif;
+}
+
+nav {
+	direction: rtl;
+}
+
+li {
+	padding-left: 15px;
+}
+ 
+ /* End of nav style and body*/
+
+ h3 {
+ 	margin-top: 25px;
+ }
+
+.col-md-10 {
+	margin: 50px 0 50px 100px ;
+}
+
+
+ /*Footer style */
+
+
+a {
+	text-decoration : none;
+	color: inherit;
+}
+
+.footer-link li{
+	list-style-type: none;
+	padding-top: 10px;
+}
+
+.footer-link {
+	margin: 50px;
+}
+
+ /* EndFooter style */
