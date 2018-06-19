@@ -1,0 +1,33 @@
+body {
+	background-color: #F5F5F5;
+	font-family: 'Cairo', sans-serif;
+	text-align: center;
+	align-items: center;
+	margin: 25px 0 0 0;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.form-group {
+	width: 40%;
+	margin: 20px 0 0 420px;
+}
+
+
+
+
+#sign-button {
+	padding: 5px 160px 5px 160px ; 
+	border-radius: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	margin: 0 0 0 150px;
+}
+
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}

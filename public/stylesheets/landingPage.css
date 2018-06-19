@@ -1,0 +1,99 @@
+body {
+	font-family: 'Cairo', sans-serif;
+}
+
+nav {
+	direction: rtl;
+}
+
+li {
+	padding-left: 15px;
+}
+
+.jumbotron{
+	text-align: center;
+	padding: 120px;
+	background-color: #F4F9F4;
+}
+
+.jumbotron a {
+	text-align: center;
+	margin-top: 25px;
+	padding: 0 25px 0 25px;
+	border-radius: 15px ; 
+}
+
+
+
+#test-information {
+	text-align: center;
+	border-bottom: 1px solid black;
+	width: 15%;
+}
+
+
+#test-section{
+
+	text-align: center;
+	margin-top: 55px;
+	margin-left: 250px;
+	margin-bottom: 100px;
+	margin-right: 0;
+		} 
+
+
+.image-border{
+   border: 1px solid black;
+   width: 50%;
+   border-radius: 50%;
+   padding: 40px;
+    
+}
+
+.col-4 h4 , p {
+	margin-right: 165px;
+	margin-top: 19px;
+}
+
+#computer-section {
+ margin-top: 150px;
+ margin-bottom: 100px;
+
+}
+
+#text {
+	text-align: center;
+}
+
+#start-exam-button {
+	margin-top: 25px;
+	border-radius: 15px;
+}
+
+#cards-price {
+	text-align: center;
+	margin: 35px 0 30px 50px ;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.card-text {
+	text-align: center;
+	margin-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 75px;
+}
+
+a {
+	text-decoration : none;
+	color: inherit;
+}
+
+.footer-link li{
+	list-style-type: none;
+	padding-top: 10px;
+}
+
+.footer-link {
+	margin: 50px;
+}
