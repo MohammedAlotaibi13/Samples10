@@ -1,11 +1,22 @@
+.grid-container {
+	display: grid;
+	grid-template-columns:  auto auto ;
+	grid-gap: 5px;
+	justify-content: center;
+}
 
+.grid-container > div {
+	text-align: center;
+	padding-right: 50px;
+	padding-left: 50px;
+}
 
 #title {
 	margin: 35px 0 0 0 ;
 }
 .form-group {
   
-  margin: 25px 0 25px 350px;
+  margin: 30px 100px 18px 250px;
 }
 
 .btn {
