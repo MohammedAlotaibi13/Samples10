@@ -13,8 +13,8 @@
     <title>Hello, world!</title>
   </head>
 <body class="text-center">
-	<h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
-		<form>
+	<!-- <h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
+		<form >
 			<div class="form-group row">
 				<div class="col-sm-10">
 					<input type="email" class="form-control" placeholder="Email" name="">
@@ -38,7 +38,37 @@
 					</div>
 				</div>
 				
-      	</form>
+      	</form> -->
+
+      	<div class="grid-container">
+	      		<div class="item-1">
+	      			<h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
+	      		</div>
+	      	<form>
+	      		<div class="form-group">
+		      		<div class="item-2">
+			      	    <input type="email" class="form-control" placeholder="Email" name="">
+			      	    <input type="password" class="form-control"  placeholder="Password">
+						<input type="password" class="form-control"  placeholder="Rewrire Password">
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+						    <option selected>Gender</option>
+				            <option value="1">ذكر</option>
+					        <option value="2">أنثى</option>
+	                    </select>
+	                </div>
+		      	</div>
+		      		<div class="item-3">
+			      		<div class="form-group">
+						    <button type="submit" class="btn btn-lg btn-success" id="sign-button">تسجيل</button>   	
+					    </div>
+		      		</div>
+		      		<div class="item-4">
+		      			<div class="form-group">
+		      				<p>Copyright © 2018 Samples, Inc.</p>
+		      			</div>
+		      		</div>
+	      	</form>
+	    </div>
    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

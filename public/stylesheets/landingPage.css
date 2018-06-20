@@ -32,6 +32,19 @@ li {
 }
 
 
+.grid-container {
+	margin-top: 70px;
+	margin-bottom: 70px;
+	display: grid;
+	grid-template-columns: 25% 25% 25%;
+	grid-gap: 20px ;
+	justify-content: space-around;
+}
+
+.grid-container > div {
+	text-align: center;
+}
+
 #test-section{
 
 	text-align: center;
@@ -45,15 +58,16 @@ li {
 .image-border{
    border: 1px solid black;
    width: 50%;
+   margin-left:  100px;
    border-radius: 50%;
    padding: 40px;
     
 }
 
-.col-4 h4 , p {
+/*.col-4 h4 , p {
 	margin-right: 165px;
 	margin-top: 19px;
-}
+}*/
 
 #computer-section {
  margin-top: 150px;

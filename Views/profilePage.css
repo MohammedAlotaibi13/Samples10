@@ -22,6 +22,10 @@ li {
   margin: 25px 0 25px 350px;
 }
 
+.btn {
+	border-radius: 10px;
+}
+
 /*Footer style */
 
 

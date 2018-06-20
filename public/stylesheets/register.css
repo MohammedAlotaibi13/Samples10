@@ -8,13 +8,22 @@ body {
 	padding-bottom: 40px;
 }
 
-.form-group {
+/*.form-group {
 	width: 40%;
 	margin: 20px 0 0 420px;
+}*/
+
+
+.grid-container {
+	display: grid;
+	grid-template-rows: auto auto auto auto;
+	grid-gap: 5px;
+	justify-content: center;
 }
 
-
-
+.grid-container > div {
+	text-align: center;
+}
 
 #sign-button {
 	padding: 5px 160px 5px 160px ; 

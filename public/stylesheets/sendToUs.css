@@ -14,15 +14,29 @@ li {
  
  /* End of nav style and body*/
 
- .form-group {
+.grid-container {
+	display: grid;
+	margin-top: 60px;
+	grid-template-rows: auto auto ;
+	grid-gap: 7px;
+	justify-content: space-around;
+}
+
+.grid-container > div {
+	text-align: center;
+}
+
+
+/* .form-group {
   
   margin: 25px 0 25px 350px;
-}
+}*/
 
 .btn {
 	text-align: center;
-	padding: 0 150px 0 150px ;
-	margin-left: 100px;
+	padding: 0 250px 0 250px ;
+	border-radius: 10px;
+
 }
 
  /*Footer style */
@@ -31,6 +45,7 @@ li {
 a {
 	text-decoration : none;
 	color: inherit;
+
 }
 
 .footer-link li{

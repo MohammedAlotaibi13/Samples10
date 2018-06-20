@@ -8,11 +8,22 @@ body {
 	padding-bottom: 40px;
 }
 
-.form-group {
+/*.form-group {
 	width: 40%;
 	margin: 20px 0 0 420px;
+}*/
+
+
+.grid-container {
+	display: grid;
+	grid-template-rows: auto auto auto auto;
+	grid-gap: 5px;
+	justify-content: center;
 }
 
+.grid-container > div {
+	text-align: center;
+}
 
 
 
@@ -24,7 +35,7 @@ body {
 a {
 	text-decoration: none;
 	color: inherit;
-	margin: 0 0 0 150px;
+	/*margin: 0 0 0 150px;*/
 }
 
 a:hover {
