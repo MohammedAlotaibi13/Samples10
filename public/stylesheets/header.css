@@ -14,26 +14,13 @@ li {
  
  /* End of nav style and body*/
 
-
- h3 {
- 	margin-top: 30px;
- }
-
- .btn {
- 	border-radius: 10px;
- }
-
- .form-group {
-  
-  margin: 25px 0 25px 350px;
-}
-
- /*Footer style */
+  /*Footer style */
 
 
 a {
 	text-decoration : none;
 	color: inherit;
+
 }
 
 .footer-link li{
@@ -44,5 +31,3 @@ a {
 .footer-link {
 	margin: 50px;
 }
-
- /* EndFooter style */
