@@ -1,3 +1,14 @@
+.grid-container {
+	display: grid;
+	grid-template-rows: auto auto auto  ;
+	grid-gap: 10px;
+	justify-content: center;
+}
+
+.grid-container > div {
+	text-align: center;
+}
+
 
 
  h3 {
@@ -6,10 +17,9 @@
 
  .btn {
  	border-radius: 10px;
+ 	padding: 5px 125px 5px 125px ; 
+ 	margin-bottom: 20px;
  }
 
- .form-group {
-  
-  margin: 25px 0 25px 0 ;
-}
+
 

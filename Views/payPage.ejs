@@ -8,7 +8,7 @@
    <% include partails/header.ejs %>
 
 
- <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
+ <!-- <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
  <div class="container">
   <form>
     <div class="form-group row">
@@ -31,9 +31,30 @@
           <input type="button" class="btn btn-success form-control" value="دفع">
         </div>
     </div>
-  </form>
-  
-</div>
+  </form> -->
+
+  <div class="grid-container">
+    <div class="item-1">
+      <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
+    </div>
+    <form>
+      <div class="form-group">
+        <div class="item-2">
+          <input type="email" class="form-control" value="mt2001@hotmail.com">
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option selected>العضوية</option>
+            <option  value="1">Pro</option>
+            <option value="2">Gold</option>
+           </select>
+          </div>
+        </div>  
+        <div class="form-group">
+           <div class="item-3">
+             <input type="button" class="btn btn-success form-control" value="دفع">
+           </div>
+        </div>
+    </form>
+  </div>
 
 <% include partails/footer.ejs %>
  
