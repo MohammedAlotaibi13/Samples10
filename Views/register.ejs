@@ -10,16 +10,17 @@
 	      		<div class="item-1">
 	      			<h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
 	      		</div>
-	      	<form>
+	      	<form method="post" action="/register">
 	      		<div class="form-group">
 		      		<div class="item-2">
-			      	    <input type="email" class="form-control" placeholder="Email" name="">
-			      	    <input type="password" class="form-control"  placeholder="Password">
-						<input type="password" class="form-control"  placeholder="Rewrire Password">
-						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+			      	    <input type="email" class="form-control" placeholder="Email" name="email">
+			      	    <input type="hidden" name="username">
+			      	    <input type="password" class="form-control"  placeholder="Password" name="password">
+						<input type="password" class="form-control"  placeholder="Rewrire Password" name="rewritePassword">
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="gender">
 						    <option selected>Gender</option>
-				            <option value="1">ذكر</option>
-					        <option value="2">أنثى</option>
+				            <option value="male">ذكر</option>
+					        <option value="female">أنثى</option>
 	                    </select>
 	                </div>
 		      	</div>
