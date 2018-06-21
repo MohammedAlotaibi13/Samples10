@@ -26,8 +26,14 @@ passport.use( new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req,res,next){
+   res.locals.currentUser = req.user;
+   next()
+});
+
 app.get("/" , function(req ,res){
-	res.render("landingPage");
+
+	res.render("landingPage" , {currentUser: req.user});
 })
 
 
@@ -41,11 +47,10 @@ app.get("/register" , function(req , res){
 
 app.post("/register" , function(req , res){
  var email = req.body.email;
- var username = req.body.email;
+ var username = req.body.username;
  var password = req.body.password;
  var rewritePassword = req.body.rewritePassword;
  var gender = req.body.gender;
-  if (password === rewritePassword) {
       User.register(new User({username: username , email: email , gender: gender}) , password , function(error , user){
           if(error){
             console.log(error)
@@ -53,14 +58,8 @@ app.post("/register" , function(req , res){
           } 
             passport.authenticate("local")(req , res , function(){
                  res.redirect("/test");
-            });
-          
+            }); 
       });
-  } else {
-    console.log("password dont match");
-
-  }
-
 });
 
 
@@ -78,6 +77,13 @@ app.post("/signIn" , passport.authenticate("local" , {
 
 }) , function(req , res){
 
+});
+
+
+// logout 
+app.get("/logout" , function(req, res){
+  req.logout();
+  res.redirect("/")
 });
 
 app.get("/message" , function(req , res){
