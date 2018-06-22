@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var localStrategy = require("passport-local");
 var User          = require("./models/user");
 var passportLocalMongoose = require("passport-local-mongoose");
+var nodemailer = require("nodemailer");
 
 // database
 
@@ -90,6 +91,46 @@ app.get("/message" , function(req , res){
     res.render("sendToUs");
 });
 
+app.post("/send" , function(req , res){  
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'muhammedalotaibi13@gmail.com', // generated ethereal user
+            pass: 'Mohammed@1411' // generated ethereal password
+        } , 
+        tls: {
+          rejectUnauthorized: false
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"nodemailer Contact" <muhammedalotaibi13@gmail.com>', // sender address
+        to: 'mt2001@hotmail.com', // list of receivers
+        subject: 'Node testing', // Subject line
+        text: 'Hello world?', // plain text body
+        html: '<h3>From : </h3>' + req.body.email + '<h3>Subject: </h3>' + req.body.subject +
+        '<h3> message:</h3>' + req.body.message // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        res.render("landingPage");
+    });
+});
+
 app.get("/about" , function(req , res){
    res.render("whoWeAre");
 });
@@ -108,6 +149,10 @@ app.get("/result" , function(req , res){
 
 app.get("/test" , isLoggedIn ,function(req , res){
   res.render("testPage");
+});
+
+app.get("/testOne" , function(req , res){
+   res.render("testOne");
 });
 
 
