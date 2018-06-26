@@ -11,6 +11,8 @@ var async      = require("async");
 var crypto     = require("crypto");
 var methodOverride = require("method-override");
 var flash          = require("connect-flash");
+var bcrypt         = require("bcrypt");
+var expressVlidator = require("express-validator");
 
   // User.remove({}, function(error){
   //           if(error){
@@ -29,17 +31,43 @@ app.set("view engine" , "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.use(expressVlidator());
 app.use(require("express-session")({
     secret : "i love my self",
     resave: false,
     saveUninitialized: false
 }));
 
+
+
+// passport.use( new localStrategy(
+//   function(email, passowrd, done) {
+//     User.getUserByEmail(email , function(error , user){
+//        if(error) throw error; 
+//        if(!user){
+//            return done(null , false , console.log("Email not found"));
+//        }
+
+//        User.comparePassword(passowrd , user.passowrd , function(error , isMatch){
+//            if(error) throw error ;
+//            if(isMatch){
+//             return done(null , user);
+//            } else {
+//                return done(null , false , console.log("invalid passowrd"));
+//            }
+//        });
+//     });
+//   }
+// ));
+
+
 app.use(passport.initialize());
-app.use(passport.session());
-passport.use( new localStrategy(User.authenticate()));
+
+passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(passport.session());
 
 app.use(function(req,res,next){
    res.locals.currentUser = req.user;
@@ -47,6 +75,17 @@ app.use(function(req,res,next){
    res.locals.success     = req.flash("success");
    next()
 });
+// passport.serializeUser(function(user , done){
+//   done(null , user.id)
+// });
+// passport.deserializeUser(function(id , done){
+//   User.getUserById(id , function(error , user){
+//      done(error , user);
+//   });
+// });
+
+
+
 
 app.get("/" , function(req ,res){
 
@@ -66,13 +105,48 @@ app.post("/register" , function(req , res){
  var email = req.body.email;
  var username = req.body.username;
  var password = req.body.password;
- var rewritePassword = req.body.rewritePassword;
+ var confirmPassword = req.body.confirm;
  var gender = req.body.gender;
-  if(password == rewritePassword){
+
+
+ // validatation 
+ // req.checkBody('email' , 'الرجاء كتابة الإيمل  ').notEmpty()
+ // req.checkBody('username' , 'الرجاء كتابة اسم المستخدم  ').notEmpty()
+ // req.checkBody('password' , 'الرجاء كتابة كلمة المرور  ').notEmpty()
+ // req.checkBody('confirm' , 'الرجاء إعادة كتابة كلمة المرور  ' ).notEmpty()
+ //  req.checkBody('confirm' , 'كلمة المرور غير متطابقة ' ).equals(password)
+
+
+ // req.getValidationResult()
+ // .then(function(result){
+ //  if(result.isEmpty() === false) {
+ //    result.array().forEach((error) => {
+ //       req.flash("error" , error.msg)
+ //    });
+ //    res.redirect("back");
+ //  } else {
+ //      var newUser = new User({
+ //        email: email,
+ //        username: username,
+ //        password: password,
+ //        gender: gender
+ //      })
+
+ //      User.createUser(newUser , function(error , user) {
+ //         if(error){
+ //          console.log(error)
+ //         } 
+ //      });
+ //      res.redirect("/test");
+ //  }
+ // });
+
+
+  if(password == confirmPassword){
     User.register(new User({username: username , email: email , gender: gender}) , password , function(error , user){
           if(error){
             console.log(error)
-            return res.render("register" , {error: error.message});
+            return res.render("register" , {error: "اسم المستخدم او الإيمل مسجل مسبقاً"});
           } 
             passport.authenticate("local")(req , res , function(){
                  res.redirect("/test");
@@ -94,13 +168,11 @@ app.get("/signIn" , function(req ,res){
 
 // logIn logic
 
-app.post("/signIn" , passport.authenticate("local" , {
+app.post("/signIn" , passport.authenticate('local', {
+     successRedirect: '/result', 
+     failureRedirect: '/signIn'
+}), function(req , res){
     
-    successRedirect: "/test",
-    failureRedirect: "/signIn"
-
-}) , function(req , res){
-
 });
 
 
@@ -144,7 +216,7 @@ app.post("/forgot" , function(req , res){
                  service : "Gmail" , 
                  auth: {
                      user: "muhammedalotaibi13@gmail.com",
-                     pass: "Mohammed@1411"
+                     pass: 
                  }
               });
               var mailOptions = {
@@ -209,7 +281,7 @@ app.post("/reset/:token" , function(req , res){
         service: 'Gmail', 
         auth: {
           user: 'muhammedalotaibi13@gmail.com',
-          pass: "Mohammed@1411"
+          pass: 
         }
       });
       var mailOptions = {
@@ -244,7 +316,7 @@ app.post("/send" , function(req , res){
         secure: false, // true for 465, false for other ports
         auth: {
             user: 'muhammedalotaibi13@gmail.com', // generated ethereal user
-            pass: 'Mohammed@1411' // generated ethereal password
+            pass:  // generated ethereal password
         } , 
         // this only for localhost 
         tls: {
