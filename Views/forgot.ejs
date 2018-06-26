@@ -5,6 +5,16 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/signInpage.css">
   </head>
 <body class="text-center">
+
+	<div class="container">
+	  <% if(error && error.length > 0) { %>
+	
+       <div class="alert alert-danger" role="alert">
+       <%= error %>
+      
+       </div>
+       <% } %>
+	</div>
           <div class="grid-container">
          	<div class="item-1">
          	    <h1 class="h3 mb-3 font-weight-normal">نسيت كلمة المرور</h1>

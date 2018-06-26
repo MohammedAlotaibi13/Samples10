@@ -3,7 +3,7 @@ var app = express();
 var passport = require("passport");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-var localStrategy = require("passport-local");
+var localStrategy = require("passport-local").Strategy;
 var User          = require("./models/user");
 var passportLocalMongoose = require("passport-local-mongoose");
 var nodemailer = require("nodemailer");
@@ -20,7 +20,7 @@ var expressVlidator = require("express-validator");
   //           } else {
   //               console.log("all user removed");
   //           }
-  //       })
+  //        })
 
 // databas
 
@@ -37,37 +37,41 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-
-
-
-// passport.use( new localStrategy(
-//   function(email, passowrd, done) {
-//     User.getUserByEmail(email , function(error , user){
-//        if(error) throw error; 
-//        if(!user){
-//            return done(null , false , console.log("Email not found"));
-//        }
-
-//        User.comparePassword(passowrd , user.passowrd , function(error , isMatch){
-//            if(error) throw error ;
-//            if(isMatch){
-//             return done(null , user);
-//            } else {
-//                return done(null , false , console.log("invalid passowrd"));
-//            }
-//        });
-//     });
-//   }
-// ));
-
-
 app.use(passport.initialize());
-
-passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 app.use(passport.session());
+passport.serializeUser(function(user , done){
+  done(null , user)
+});
+passport.deserializeUser(function(user , done){
+   done(null , user)
+});
+passport.use(new localStrategy({
+  usernameField: "email",
+  passwordField: "password"
+}, function(email , password , done){
+     User.findOne({email:email} , function(error , doc){
+        if(error) { done(error)}
+        else {
+          if(doc){
+             var valid =  doc.comparePassword(password , doc.password)
+             if(valid){
+                 done(null , {
+                   username: doc.username,
+                   password: doc.password,
+                   email: doc.email, 
+                   id: doc.id, 
+                   memberShip: doc.memberShip,
+                   gender: doc.gender
+                 })
+             } else {
+              done(null , false , (error ,  "كلمة المرور غير صحيحة"));
+             }
+          } else {
+             done(null , false , (error ,  "إيميل غير مسجل"));
+          }
+        }
+     });
+}))
 
 app.use(function(req,res,next){
    res.locals.currentUser = req.user;
@@ -75,21 +79,11 @@ app.use(function(req,res,next){
    res.locals.success     = req.flash("success");
    next()
 });
-// passport.serializeUser(function(user , done){
-//   done(null , user.id)
-// });
-// passport.deserializeUser(function(id , done){
-//   User.getUserById(id , function(error , user){
-//      done(error , user);
-//   });
-// });
-
-
 
 
 app.get("/" , function(req ,res){
-
-	res.render("landingPage" , {currentUser: req.user});
+     
+	res.render("landingPage");
 })
 
 
@@ -109,54 +103,50 @@ app.post("/register" , function(req , res){
  var gender = req.body.gender;
 
 
- // validatation 
- // req.checkBody('email' , 'الرجاء كتابة الإيمل  ').notEmpty()
- // req.checkBody('username' , 'الرجاء كتابة اسم المستخدم  ').notEmpty()
- // req.checkBody('password' , 'الرجاء كتابة كلمة المرور  ').notEmpty()
- // req.checkBody('confirm' , 'الرجاء إعادة كتابة كلمة المرور  ' ).notEmpty()
- //  req.checkBody('confirm' , 'كلمة المرور غير متطابقة ' ).equals(password)
+
+   //validatation 
+   req.checkBody('email' , 'الرجاء كتابة الإيمل  ').notEmpty()
+   req.checkBody('username' , 'الرجاء كتابة اسم المستخدم  ').notEmpty()
+   req.checkBody('password' , 'الرجاء كتابة كلمة المرور  ').notEmpty()
+   req.checkBody('confirm' , 'الرجاء إعادة كتابة كلمة المرور  ' ).notEmpty()
+   req.checkBody('confirm' , 'كلمة المرور غير متطابقة ' ).equals(password)
 
 
- // req.getValidationResult()
- // .then(function(result){
- //  if(result.isEmpty() === false) {
- //    result.array().forEach((error) => {
- //       req.flash("error" , error.msg)
- //    });
- //    res.redirect("back");
- //  } else {
- //      var newUser = new User({
- //        email: email,
- //        username: username,
- //        password: password,
- //        gender: gender
- //      })
-
- //      User.createUser(newUser , function(error , user) {
- //         if(error){
- //          console.log(error)
- //         } 
- //      });
- //      res.redirect("/test");
- //  }
- // });
-
-
-  if(password == confirmPassword){
-    User.register(new User({username: username , email: email , gender: gender}) , password , function(error , user){
-          if(error){
-            console.log(error)
-            return res.render("register" , {error: "اسم المستخدم او الإيمل مسجل مسبقاً"});
-          } 
-            passport.authenticate("local")(req , res , function(){
-                 res.redirect("/test");
-            }); 
-      });
-
-  } else {
-    req.flash("error" , "كلمة المرور غير متطابقة");
-    res.redirect("back");
-  }
+   req.getValidationResult()
+   .then(function(result){
+    if(result.isEmpty() === false) {
+        result.array().forEach((error) => {
+           req.flash("error" , error.msg)
+        });
+        res.redirect("back");
+    } else {
+           User.findOne({email: email} , function(error , doc) {
+        if(error) {res.status(500).send("error occured")}
+          else {
+            if(doc) {
+             res.status(500).send("email alredy exist")
+            }
+            else {
+              var newUser = new User()
+              newUser.username = username;
+              newUser.email = email;
+              newUser.password = newUser.hashPassword(password)
+              newUser.gender = gender;
+              newUser.save(function(error , user){
+                   if(error){
+                    res.status(500).send(" db error occured");
+                   } else {
+                    // sign in 
+                    passport.authenticate("local")(req , res , function(){
+                        res.redirect("/test");
+                    });
+                   }
+              });
+            }
+          }
+        });
+    }
+  })
       
 });
 
@@ -169,8 +159,9 @@ app.get("/signIn" , function(req ,res){
 // logIn logic
 
 app.post("/signIn" , passport.authenticate('local', {
-     successRedirect: '/result', 
-     failureRedirect: '/signIn'
+     successRedirect: '/test', 
+     failureRedirect: '/signIn', 
+     failureFlash: true
 }), function(req , res){
     
 });
@@ -199,8 +190,8 @@ app.post("/forgot" , function(req , res){
           function(token , done){
               User.findOne({ email: req.body.email} , function(error , user){
                   if(!user){
-                      console.log("error email");
-                      return res.redirect("/forget");
+                      req.flash( "error" , "إيميل غير مسجل");
+                      return res.redirect("/forgot");
                   }
                   
                   user.resetPasswordToken = token;
@@ -216,7 +207,7 @@ app.post("/forgot" , function(req , res){
                  service : "Gmail" , 
                  auth: {
                      user: "muhammedalotaibi13@gmail.com",
-                     pass: 
+                     pass: process.env.PASS
                  }
               });
               var mailOptions = {
@@ -228,14 +219,15 @@ app.post("/forgot" , function(req , res){
                          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
                    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
               };
-              smtpTransport.sendMail(mailOptions, function(err) {
+              smtpTransport.sendMail(mailOptions, function(err) {  
           console.log('mail sent');
+          req.flash("error" , "done")
           done(err, 'done');
         });
           }
           ] , function(err){
              if (err) return next(err);
-      res.redirect('/forgot'); 
+             res.redirect('/forgot'); 
           });
   
 });
@@ -243,7 +235,7 @@ app.post("/forgot" , function(req , res){
 app.get("/reset/:token" , function(req , res){
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpiration: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
-      console.log('error', 'Password reset token is invalid or has expired.');
+      req.flash('error', 'كلمة المرور غير صالحة أو انتهت صلاحيتها');
       return res.redirect('/forgot');
     }
     res.render('reset', {token: req.params.token});
@@ -256,7 +248,7 @@ app.post("/reset/:token" , function(req , res){
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpiration: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          console.log('Password reset token is invalid or has expired.');
+          req.flash('error', 'كلمة المرور غير صالحة أو انتهت صلاحيتها');
           return res.redirect('back');
         }
         if(req.body.password === req.body.confirm) {
@@ -271,7 +263,7 @@ app.post("/reset/:token" , function(req , res){
             });
           })
         } else {
-            console.log("Passwords do not match.");
+           req.flash("error", "Passwords do not match.");
             return res.redirect('back');
         }
       });
@@ -281,7 +273,7 @@ app.post("/reset/:token" , function(req , res){
         service: 'Gmail', 
         auth: {
           user: 'muhammedalotaibi13@gmail.com',
-          pass: 
+          pass: process.env.PASS
         }
       });
       var mailOptions = {
@@ -292,7 +284,7 @@ app.post("/reset/:token" , function(req , res){
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        console.log('Success! Your password has been changed.');
+        req.flash('Success! Your password has been changed.');
         done(err);
       });
     }
@@ -316,7 +308,7 @@ app.post("/send" , function(req , res){
         secure: false, // true for 465, false for other ports
         auth: {
             user: 'muhammedalotaibi13@gmail.com', // generated ethereal user
-            pass:  // generated ethereal password
+            pass:  process.env.PASS // generated ethereal password
         } , 
         // this only for localhost 
         tls: {
@@ -345,7 +337,8 @@ app.post("/send" , function(req , res){
 
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-        res.render("landingPage");
+        req.flash("error" , "تم ارسال رسالتكم وسوف نوافيكم في أقرب وقت")
+        res.redirect("/message");
     });
 });
 
@@ -353,11 +346,12 @@ app.get("/about" , function(req , res){
    res.render("whoWeAre");
 });
 
-app.get("/pay" , function(req , res){
+app.get("/pay" ,isLoggedIn, function(req , res){
    res.render("payPage");
 });
 
-app.get("/profile/:id" , function(req , res){
+app.get("/profile/:id" ,isLoggedIn, function(req , res){
+  console.log(req.params.id)
    User.findById(req.params.id , function(error , foundUser){
       if(error){
         console.log(error)
@@ -368,7 +362,7 @@ app.get("/profile/:id" , function(req , res){
    });
 });
 
-app.get("/result" , function(req , res){
+app.get("/result", isLoggedIn , function(req , res){
   res.render("resultPage");
 });
 
@@ -376,11 +370,11 @@ app.get("/test" , isLoggedIn ,function(req , res){
   res.render("testPage");
 });
 
-app.get("/testOne" , function(req , res){
+app.get("/testOne",isLoggedIn , function(req , res){
    res.render("testOne");
 });
 
-app.delete("/profile/:id" , function(req , res){
+app.delete("/profile/:id",isLoggedIn , function(req , res){
   User.findByIdAndRemove(req.params.id , function(error , foundUser){
      if(error){
        console.log(error);
