@@ -14,10 +14,22 @@
 #title {
 	margin: 35px 0 0 0 ;
 }
-.form-group {
-  
+
+@media screen and (min-width: 760px){
+.form-group {  
   margin: 30px 100px 18px 250px;
 }
+
+}
+
+@media screen and (max-width: 759px){
+.form-group {  
+  margin: 0
+}
+}
+
+
+
 
 .btn {
 	border-radius: 10px;

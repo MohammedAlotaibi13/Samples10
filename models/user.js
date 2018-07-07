@@ -9,6 +9,12 @@ var userSchema = new mongoose.Schema({
 	password: String,
 	gender: { type: String , required: true},
 	memberShip: {type: String , required: true , default: "pro"},
+	tests: [
+       {
+       	type:  mongoose.Schema.Types.ObjectId,
+       	ref: "Test"
+       }
+	], 
 	resetPasswordToken: String,
 	resetPasswordExpiration: Date
 });

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <% include partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/testPage.css">
   </head>
@@ -16,9 +15,11 @@
 		  		<div class="card-body">
 		  			<hr>
 		  			<h5 class="card-title" style="padding-bottom: 32px;">الأختبار الأول</h5>
-		  			<a href="/testOne" class="btn btn-success"> أبداء</a>
+		  			<a href="/result/<%= userInfo.id %>/test/category" class="btn btn-primary"> نتيجة الأختبار</a><br>
+		  		<a href="/testOne/<%= userInfo.id %>" class="btn btn-warning"> أكمل الأختبار</a>
 		  		</div>
 		  	</div>
+		  	
 		</div>
 		<div class="col-md-4">
   	      <div class="card">
@@ -48,5 +49,3 @@
 
 
   </body>
-</html>
-</html>

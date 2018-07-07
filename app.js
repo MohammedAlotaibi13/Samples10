@@ -13,6 +13,9 @@ var methodOverride = require("method-override");
 var flash          = require("connect-flash");
 var bcrypt         = require("bcrypt");
 var expressVlidator = require("express-validator");
+var forge = require('node-forge');
+var request = require("request");
+var Test    = require("./models/test")
 
   // User.remove({}, function(error){
   //           if(error){
@@ -23,12 +26,20 @@ var expressVlidator = require("express-validator");
   //        })
 
 // databas
+User.findOne({email: "mt2001@hotmail.com"}).populate("tests").exec(function(err , user){
+    if(err){
+        console.log(err);
+    } else {
+        console.log(user);
+    }
+});
 
 mongoose.connect("mongodb://localhost/samples10")
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine" , "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
@@ -159,7 +170,7 @@ app.get("/signIn" , function(req ,res){
 // logIn logic
 
 app.post("/signIn" , passport.authenticate('local', {
-     successRedirect: '/test', 
+     successRedirect: '/', 
      failureRedirect: '/signIn', 
      failureFlash: true
 }), function(req , res){
@@ -351,7 +362,6 @@ app.get("/pay" ,isLoggedIn, function(req , res){
 });
 
 app.get("/profile/:id" ,isLoggedIn, function(req , res){
-  console.log(req.params.id)
    User.findById(req.params.id , function(error , foundUser){
       if(error){
         console.log(error)
@@ -362,15 +372,36 @@ app.get("/profile/:id" ,isLoggedIn, function(req , res){
    });
 });
 
-app.get("/result", isLoggedIn , function(req , res){
-  res.render("resultPage");
+app.get("/result/:id/test/:testName", isLoggedIn , function(req , res){
+  User.findById(req.params.id , function(error , userInfo){
+    if(error){
+      console.log(error)
+    } else {
+      Test.findOne({testName: req.params.testName} , function(error , resultInfo){
+        if(error){
+          console.log(error)
+        } else{
+          res.render("resultPage" , {resultInfo: resultInfo});
+        }
+      })
+     
+    }
+  })
+  
 });
 
-app.get("/test" , isLoggedIn ,function(req , res){
-  res.render("testPage");
+app.get("/test/:id" , isLoggedIn ,function(req , res){
+   User.findById(req.params.id , function(error , userInfo){
+    if(error){
+      console.log(error)
+    } else{
+       res.render("testPage" , {userInfo: userInfo});
+    }
+   })
 });
 
-app.get("/testOne",isLoggedIn , function(req , res){
+app.get("/testOne/:id",isLoggedIn , function(req , res){
+   console.log(req.params.id)
    res.render("testOne");
 });
 
@@ -395,6 +426,76 @@ function isLoggedIn(req , res , next){
   }
 }
 
+
+// classmark code 
+app.post('/result/:id', function (req, res) {
+    // var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");
+     var jsonData = req.body;
+    // // You are given a uniquе sеcret code when crеating a Wеbhook.
+    // var secret = 'lG4NjRHhxAdbSwz';
+    
+    // var verified = verifyData(jsonData,headerHmacSignature,secret);
+    //  console.log
+    // if(verified){
+        // Savе rеsults in your databasе.
+        var userId = jsonData["result"]["cm_user_id"]
+        var testName = jsonData["test"]["test_name"]
+        var totalResult = jsonData["result"]["points_scored"]
+        var listening = jsonData["category_results"][0]["points_scored"]
+        var reading = jsonData["category_results"][1]["points_scored"]
+        var grammar = jsonData["category_results"][2]["points_scored"]
+        User.findById(userId , function(error , user) {
+          if (error) {
+            console.log(error)
+          } else {
+            Test.create({
+              testName : testName,
+              totalResult: totalResult,
+              listening: listening , 
+              reading: reading , 
+              grammarAndWriting: grammar
+            } , function(error , result){
+              if(error){
+                console.log(error)
+              } else {
+                result.save()
+                user.tests.push(result)
+                user.save()
+              }
+            })
+          }
+        })
+         console.log(jsonData["result"]["cm_user_id"])
+         console.log(req.body["result"]["points_scored"])
+         console.log(req.body["result"]["cm_user_id"])
+         console.log(req.body["category_results"][0]["points_scored"])
+         console.log(req.body["category_results"][1]["points_scored"])
+         console.log(req.body["category_results"][2]["points_scored"])
+        // Important: Do not use a script that will take a long timе to respond.
+
+        // Notify ClassMarker you have recеived the Wеbhook.
+        res.sendStatus(200);
+    // }
+    // else{
+    //     res.sendStatus(400)
+    // }
+
+});
+
+var verifyData = function(jsonData,headerHmacSignature, secret)
+{
+    var jsonHmac = computeHmac(jsonData, secret);
+    return jsonHmac == headerHmacSignature;
+};
+
+var computeHmac = function(jsonData, secret){
+    var hmac = forge.hmac.create();
+    hmac.start('sha256', secret);
+    var jsonString = JSON.stringify(jsonData);
+    var jsonBytes = new Buffer(jsonString, 'ascii');
+    hmac.update(jsonBytes);
+    return forge.util.encode64(hmac.digest().bytes());
+};
 
 app.listen(3000 , function(){
 	console.log("app is starting");

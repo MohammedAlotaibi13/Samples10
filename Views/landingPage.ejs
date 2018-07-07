@@ -8,20 +8,24 @@
   <body>
     <% include partails/header.ejs %>
 
-    <div class="jumbotron">
+    <div class="jumbotron ">
       <div class="container">
-        
-      <h1 class="display-5">ستيب معنا أسهل </h1>
-       <p class="lead" style="text-align: center;">أكسر الخوف وتهيئ للأختبار مع مجموعة متعددة من ألأختبارات <br>المحاكاة من أختبار قياس</p>  
-        <a class="btn btn-success btn-lg" href="/register" role="button">أبدء ألاأن</a>
-      
-   </div>
+       
+          <h1 class="display-5">ستيب معنا أسهل </h1>
+           <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للأختبار مع مجموعة متعددة من ألأختبارات <br>المحاكاة من أختبار قياس</p>  
+            <a class="btn btn-success btn-lg" href="/register" role="button">أبدء ألاأن</a>
+          </div>
 </div>
      <!-- text informtion section -->
    <div class="container" id="test-information">
-     <h3> جوانب ألاختبار</h3>
+    <div class="row">
+      <div class="col-sm-12">
+         <h3> جوانب ألاختبار</h3>
+      </div>
+    </div>
    </div>
-   <div class="grid-container">
+  
+   <div class="grid-container ">
      <div>
        <div class="image-border">
          <img class="rounded-circle" src="../image/audio.png" width="80" height="80">
@@ -37,27 +41,30 @@
         <img class="rounded-circle text-center" src="../image/book.png" width="80" height="80">
       </div>
      </div>
-     <div>
+     <div class="one">
        <h4>قواعد وكتابة</h4>
         <p>أهم قواعد اللغة وطق كتابة الجمل وعلامات الترقيم</p>
      </div>
-     <div>
+     <div class="two">
         <h4>قراءة</h4>
       <p>نصوص مقتبسة من مقالات علمية وكتب عالمية</p>
      </div>
-     <div>
+     <div class="three">
        <h4>إستماع</h4>
        <p>مقاطع صوتية تركز على النقاط التي يقيسها الأختبار</p>
      </div>
    </div>
+
      <hr>
      <!-- computer section -->
      <div class="container">
        <div class="row" id="computer-section">
-         <div class="col-sm-6">
+        
+         <div class="col-md-9 d-none d-md-block">
            <img src="../image/computer.png" width="542" height="278">
          </div>
-         <div class="col-sm-6" id="text" >
+
+         <div class=" col-md-3 col-sm-12" id="text" >
            <h3>لاتتردد</h3>
            <p id="text">أبداء إختبارك الأول مجاناً
            <br>وتعرف على جوانب القوة والضعف <br>لديك قبل دخولك الإختبار</p>
@@ -102,7 +109,6 @@
          </div>
        </div>
      </div>
-     <hr>
      <% include partails/footer.ejs %>
   </body>
 </html>

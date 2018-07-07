@@ -17,10 +17,25 @@
   margin: 25px 0 25px 350px;
 }*/
 
+
+/* for mobile */
+
+@media screen and (max-width: 759px){
+	#sendButton {
+	text-align: center;
+	padding: 5px 150px 5px 150px ;
+	border-radius: 5px;
+
+}
+
+}
+@media screen and (min-width: 760px) {
 #sendButton {
 	text-align: center;
 	padding: 5px 250px 5px 250px ;
 	border-radius: 5px;
 
 }
+}
+
 

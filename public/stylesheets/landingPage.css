@@ -1,4 +1,6 @@
-
+body {
+	
+}
 .jumbotron{
 	text-align: center;
 	padding: 120px;
@@ -20,18 +22,48 @@
 	width: 15%;
 }
 
+.grid-container {
+	margin-top: 70px;
+	margin-bottom: 70px;
+	display: grid;
+	grid-template-rows:  auto auto auto;
+	grid-gap: 20px ;
+	justify-content: space-around;
+}
+
+ @media screen and (max-width: 759px){
+.one {
+	grid-row: 2/3
+}
+
+.two {
+	grid-row: 4/5;
+}
+.three {
+	grid-row: 6/7;
+}
+.grid-container > div {
+	text-align: center;
+}
+}
+
+/*desktop */
+
+@media screen and (min-width: 760px) {
 
 .grid-container {
 	margin-top: 70px;
 	margin-bottom: 70px;
 	display: grid;
-	grid-template-columns: 25% 25% 25%;
+	grid-template-columns: auto auto auto;
 	grid-gap: 20px ;
 	justify-content: space-around;
 }
 
 .grid-container > div {
 	text-align: center;
+}
+
 }
 
 #test-section{
@@ -86,3 +118,7 @@
 	padding-top: 10px;
 	padding-bottom: 75px;
 }
+/* For desktop: */
+
+
+
