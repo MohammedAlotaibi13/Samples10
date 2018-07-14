@@ -26,14 +26,14 @@ var TestId   = require("./models/testId");
   //           }
   //        })
 
-//databas
-User.find({email: "ahmed@n.com"},function(error , found){
-  if(error){
-    console.log(error)
-  } else {
-  console.log(found)  
-}
-})
+ //databas
+// User.find({email: "ahmed@n.com"},function(error , found){
+//   if(error){
+//     console.log(error)
+//   } else {
+//   console.log(found)  
+// }
+// })
 
 
 mongoose.connect("mongodb://localhost/samples10")
@@ -135,10 +135,13 @@ app.post("/register" , function(req , res){
         res.redirect("back");
     } else {
            User.findOne({email: email} , function(error , doc) {
-        if(error) {res.status(500).send("error occured")}
+        if(error){
+           console.log(error)
+        }
           else {
             if(doc) {
-             res.status(500).send("email alredy exist")
+             req.flash("error" , "إيميل مسجل سابقاً")
+              res.redirect("back")
             }
             else {
               var newUser = new User()
@@ -149,7 +152,8 @@ app.post("/register" , function(req , res){
               newUser.accountExpiration = Date.now() + 300000 // 5 minutes
               newUser.save(function(error , user){
                    if(error){
-                    res.status(500).send(" db error occured");
+                    req.flash("error" , "اسم مستخدم مسجل سابقاً")
+                    res.redirect("back")
                    } else {
                     // sign in 
                     passport.authenticate("local")(req , res , function(){
