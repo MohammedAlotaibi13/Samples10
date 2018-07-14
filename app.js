@@ -27,19 +27,25 @@ var TestId   = require("./models/testId");
   //        })
 
 //databas
-Test.find({testTaker: "5b49b4d37657ba15df6b2d59"},function(error , found){
-  if(error){
-    console.log(error)
-  } else {
-    found.forEach(function(test){
-      if(test.testId == 954702){
-        console.log("found")
-      }
-    })
-    console.log("after if ")
-    }
+// Test.find({testTaker: "5b49b4d37657ba15df6b2d59"},function(error , found){
+//   if(error){
+//     console.log(error)
+//   } else {
+//     found.forEach(function(test){
+//       if(test.testId == 954702){
+//        Test.findOneAndRemove({testId: test.testId} , function(error , removed){
+//         if(error){
+//           console.log(error)
+//         } else{
+//           console.log("test removed")
+//         }
+//        })
+//       }
+//     })
+//     console.log("after if ")
+//     }
   
-})
+// })
 
 
 mongoose.connect("mongodb://localhost/samples10")
@@ -384,23 +390,13 @@ app.get("/profile/:id" ,isLoggedIn, function(req , res){
 
 
 app.get("/result/:testName/test/:id", isLoggedIn , function(req , res){
-    Test.findOne({testName: req.params.testName} , function(error , resultInfo){
-        if(error){
-          console.log(error)
-        } else{
-         Test.findOne({ testTaker:  req.params.id} , function(error , userInfo){
+   Test.findOne({ testTaker:  req.params.id , testName: req.params.testName} , function(error , userInfo){
            if(error){
              console.log(error)
-           } else {
-             res.render("resultPage" , {resultInfo: userInfo})
-     
-           }
-         })
-          
-        }
-      })
-  
-  
+             } else {
+               res.render("resultPage" , {resultInfo: userInfo})         
+                 }
+             })
 });
 
 
@@ -475,12 +471,21 @@ app.post('/result', function (req, res) {
         var listening = jsonData["category_results"][0]["points_scored"]
         var reading = jsonData["category_results"][1]["points_scored"]
         var grammar = jsonData["category_results"][2]["points_scored"]
-        User.findById(userId , function(error , user) {
+        Test.find({testTaker: userId} , function(error , tests) {
           if (error) {
             console.log(error)
           } else {
-            // check if we have result about this test before to delete it before create new one 
-          // Test.find({testTaker: userId})
+             tests.forEach(function(test){
+              if(test.testId == testId && test.testTaker == userId){
+                Test.findOneAndRemove({testTaker: userId} , function(error , testRemove){
+                  if(error){
+                    console.log(error)
+                  }else{
+                    console.log("test removed")
+                  }
+                })
+              }
+             })
             Test.create({
               testName : testName,
               testId : testId,
@@ -493,13 +498,11 @@ app.post('/result', function (req, res) {
               if(error){
                 console.log(error)
               } else {
-                TestId.create({testNumber: testId} , function(error , test){
+                User.findById(userId , function(error , user){
                   if(error){
                     console.log(error)
                   } else {
                      result.save()
-                     test.save()
-                     user.testId.push(test)
                      user.tests.push(result)
                      user.save()
                   }
