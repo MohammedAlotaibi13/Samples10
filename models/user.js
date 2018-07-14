@@ -24,7 +24,8 @@ var userSchema = new mongoose.Schema({
 
 	],
 	resetPasswordToken: String,
-	resetPasswordExpiration: Date
+	resetPasswordExpiration: Date,
+	accountExpiration: Date
 });
 
 userSchema.methods.hashPassword = function(password) {

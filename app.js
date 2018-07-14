@@ -102,7 +102,6 @@ app.use(function(req,res,next){
    res.locals.currentUser = req.user;
    res.locals.error       = req.flash("error");
    res.locals.success     = req.flash("success");
-   res.locals.resultInfo  = req.resultInfo;
    next()
 });
 
@@ -221,7 +220,7 @@ app.post("/forgot" , function(req , res){
                   }
                   
                   user.resetPasswordToken = token;
-                  user.resetPasswordExpiration = Date.now() + 36000000;
+                  user.resetPasswordExpiration = Date.now() + 3600000 // 1 hour;
                   
                   user.save(function(error){
                      done(error , token , user); 
@@ -233,7 +232,7 @@ app.post("/forgot" , function(req , res){
                  service : "Gmail" , 
                  auth: {
                      user: "info@samples10.com",
-                     pass: "Mohammed@1411"
+                     pass: ""
                  }
               });
               var mailOptions = {
@@ -299,7 +298,7 @@ app.post("/reset/:token" , function(req , res){
         service: 'Gmail', 
         auth: {
           user: 'info@samples10.com',
-          pass: "Mohammed@1411"
+          pass: ""
         }
       });
       var mailOptions = {
@@ -334,7 +333,7 @@ app.post("/send" , function(req , res){
         secure: false, // true for 465, false for other ports
         auth: {
             user: 'info@samples10.com', // generated ethereal user
-            pass:  "Mohammed@1411" // generated ethereal password
+            pass:  "" // generated ethereal password
         } , 
         // this only for localhost 
         tls: {
