@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 
 var testSchema = new mongoose.Schema({
 	testName: String,
+	testId: Number,
+	testTaker: String,
 	totalResult: Number,
 	listening: Number , 
 	reading:   Number , 

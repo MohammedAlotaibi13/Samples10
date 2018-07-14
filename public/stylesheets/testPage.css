@@ -36,21 +36,4 @@ li {
     border-radius: 12px;
 }
  
- /*Footer style */
-
-
-a {
-	text-decoration : none;
-	color: inherit;
-}
-
-.footer-link li{
-	list-style-type: none;
-	padding-top: 10px;
-}
-
-.footer-link {
-	margin: 50px;
-}
-
- /* EndFooter style */
+ 

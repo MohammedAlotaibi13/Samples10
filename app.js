@@ -15,9 +15,10 @@ var bcrypt         = require("bcrypt");
 var expressVlidator = require("express-validator");
 var forge = require('node-forge');
 var request = require("request");
-var Test    = require("./models/test")
+var Test    = require("./models/test");
+var TestId   = require("./models/testId");
 
-  // User.remove({}, function(error){
+  // Test.remove({}, function(error){
   //           if(error){
   //               console.log(error)
   //           } else {
@@ -25,18 +26,25 @@ var Test    = require("./models/test")
   //           }
   //        })
 
-// databas
-User.findOne({email: "mt2001@hotmail.com"}).populate("tests").exec(function(err , user){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(user);
+//databas
+Test.find({testTaker: "5b49b4d37657ba15df6b2d59"},function(error , found){
+  if(error){
+    console.log(error)
+  } else {
+    found.forEach(function(test){
+      if(test.testId == 954702){
+        console.log("found")
+      }
+    })
+    console.log("after if ")
     }
-});
+  
+})
+
 
 mongoose.connect("mongodb://localhost/samples10")
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
 app.set("view engine" , "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
@@ -88,12 +96,13 @@ app.use(function(req,res,next){
    res.locals.currentUser = req.user;
    res.locals.error       = req.flash("error");
    res.locals.success     = req.flash("success");
+   res.locals.resultInfo  = req.resultInfo;
    next()
 });
 
 
 app.get("/" , function(req ,res){
-     
+    
 	res.render("landingPage");
 })
 
@@ -217,22 +226,22 @@ app.post("/forgot" , function(req , res){
               var  smtpTransport = nodemailer.createTransport({
                  service : "Gmail" , 
                  auth: {
-                     user: "muhammedalotaibi13@gmail.com",
-                     pass: process.env.PASS
+                     user: "info@samples10.com",
+                     pass: "Mohammed@1411"
                  }
               });
               var mailOptions = {
                   to: user.email,
-                  from: "muhammedalotaibi13@gmail.com",
-                  subject: "forget Password",
-                  text : "You forget your passowrd please don't do it again \n\n" +
-                         "Please click the link \n\n" +
+                  from: "info@samples10.com",
+                  subject: "إعادة ضبط كلمة المرور",
+                  text : "لإعادة ضبط كلمة المرور  \n\n" +
+                         "الرجاء الضغط على الرابط في الأسفل \n\n" +
                          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-                   'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                   'اذا لم تطلب إعادة ضبط كلمة المرور الرجاء تجاهل الرسالة وسوف تبقى كلمة المرور السابقة\n'
               };
               smtpTransport.sendMail(mailOptions, function(err) {  
           console.log('mail sent');
-          req.flash("error" , "done")
+           req.flash("success" , "تم إرسال الرسالة الى بريدك")
           done(err, 'done');
         });
           }
@@ -274,7 +283,7 @@ app.post("/reset/:token" , function(req , res){
             });
           })
         } else {
-           req.flash("error", "Passwords do not match.");
+           req.flash("error", "كلمة المرور غير متطابقة");
             return res.redirect('back');
         }
       });
@@ -283,19 +292,19 @@ app.post("/reset/:token" , function(req , res){
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail', 
         auth: {
-          user: 'muhammedalotaibi13@gmail.com',
-          pass: process.env.PASS
+          user: 'info@samples10.com',
+          pass: "Mohammed@1411"
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'muhammedalotaibi13@gmail.com',
-        subject: 'Your password has been changed',
+        from: 'info@samples10.com',
+        subject: 'تم تغير كلمة المرور',
         text: 'Hello,\n\n' +
-          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+          'هذه رسالة تاكيدية ان كلمة المرور للحساب ' + user.email + ' تم تغييرها.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('Success! Your password has been changed.');
+        req.flash("success" , "تم تغيير كلمة المرور");
         done(err);
       });
     }
@@ -318,8 +327,8 @@ app.post("/send" , function(req , res){
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'muhammedalotaibi13@gmail.com', // generated ethereal user
-            pass:  process.env.PASS // generated ethereal password
+            user: 'info@samples10.com', // generated ethereal user
+            pass:  "Mohammed@1411" // generated ethereal password
         } , 
         // this only for localhost 
         tls: {
@@ -329,8 +338,8 @@ app.post("/send" , function(req , res){
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"nodemailer Contact" <muhammedalotaibi13@gmail.com>', // sender address
-        to: 'mt2001@hotmail.com', // list of receivers
+        from: '"nodemailer Contact" <info@samples10.com', // sender address
+        to: 'info@samples10.com', // list of receivers
         subject: 'Node testing', // Subject line
         text: 'Hello world?', // plain text body
         html: '<h3>From : </h3>' + req.body.email + '<h3>Subject: </h3>' + req.body.subject +
@@ -348,7 +357,7 @@ app.post("/send" , function(req , res){
 
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-        req.flash("error" , "تم ارسال رسالتكم وسوف نوافيكم في أقرب وقت")
+        req.flash("success" , "تم ارسال رسالتكم وسوف نوافيكم في أقرب وقت")
         res.redirect("/message");
     });
 });
@@ -372,37 +381,50 @@ app.get("/profile/:id" ,isLoggedIn, function(req , res){
    });
 });
 
-app.get("/result/:id/test/:testName", isLoggedIn , function(req , res){
-  User.findById(req.params.id , function(error , userInfo){
-    if(error){
-      console.log(error)
-    } else {
-      Test.findOne({testName: req.params.testName} , function(error , resultInfo){
+
+
+app.get("/result/:testName/test/:id", isLoggedIn , function(req , res){
+    Test.findOne({testName: req.params.testName} , function(error , resultInfo){
         if(error){
           console.log(error)
         } else{
-          res.render("resultPage" , {resultInfo: resultInfo});
+         Test.findOne({ testTaker:  req.params.id} , function(error , userInfo){
+           if(error){
+             console.log(error)
+           } else {
+             res.render("resultPage" , {resultInfo: userInfo})
+     
+           }
+         })
+          
         }
       })
-     
-    }
-  })
+  
   
 });
 
+
 app.get("/test/:id" , isLoggedIn ,function(req , res){
-   User.findById(req.params.id , function(error , userInfo){
-    if(error){
+   User.findById(req.params.id).populate("tests").populate("testId").exec( function(error , userInfo){
+    if(error && !userInfo){
       console.log(error)
-    } else{
-       res.render("testPage" , {userInfo: userInfo});
+      req.flash("error" , "error")
+      res.redirect("back")
+    } else {
+      // console.log(userInfo.tests[0]["testName"])
+      res.render("testPage" , {userInfo: userInfo})
     }
    })
-});
+   })
 
 app.get("/testOne/:id",isLoggedIn , function(req , res){
    console.log(req.params.id)
    res.render("testOne");
+});
+
+app.get("/testTwo/:id",isLoggedIn , function(req , res){
+   console.log(req.params.id)
+   res.render("testTwo");
 });
 
 app.delete("/profile/:id",isLoggedIn , function(req , res){
@@ -417,6 +439,14 @@ app.delete("/profile/:id",isLoggedIn , function(req , res){
   });
 });
 
+app.get("/blog" , function(req , res){
+  res.render("blog")
+})
+
+app.get("/app" , function(req , res){
+  res.render("app")
+})
+
 
 function isLoggedIn(req , res , next){
   if(req.isAuthenticated()) {
@@ -428,18 +458,19 @@ function isLoggedIn(req , res , next){
 
 
 // classmark code 
-app.post('/result/:id', function (req, res) {
-    // var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");
+app.post('/result', function (req, res) {
+    //  var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");
      var jsonData = req.body;
-    // // You are given a uniquе sеcret code when crеating a Wеbhook.
-    // var secret = 'lG4NjRHhxAdbSwz';
+    //  // You are given a uniquе sеcret code when crеating a Wеbhook.
+    //  var secret = 'lG4NjRHhxAdbSwz';
     
-    // var verified = verifyData(jsonData,headerHmacSignature,secret);
-    //  console.log
-    // if(verified){
+    //  var verified = verifyData(jsonData,headerHmacSignature,secret);
+    // //  console.log
+    //  if(verified){
         // Savе rеsults in your databasе.
         var userId = jsonData["result"]["cm_user_id"]
         var testName = jsonData["test"]["test_name"]
+        var testId    = jsonData["test"]["test_id"]
         var totalResult = jsonData["result"]["points_scored"]
         var listening = jsonData["category_results"][0]["points_scored"]
         var reading = jsonData["category_results"][1]["points_scored"]
@@ -448,8 +479,12 @@ app.post('/result/:id', function (req, res) {
           if (error) {
             console.log(error)
           } else {
+            // check if we have result about this test before to delete it before create new one 
+          // Test.find({testTaker: userId})
             Test.create({
               testName : testName,
+              testId : testId,
+              testTaker: userId,
               totalResult: totalResult,
               listening: listening , 
               reading: reading , 
@@ -458,28 +493,25 @@ app.post('/result/:id', function (req, res) {
               if(error){
                 console.log(error)
               } else {
-                result.save()
-                user.tests.push(result)
-                user.save()
+                TestId.create({testNumber: testId} , function(error , test){
+                  if(error){
+                    console.log(error)
+                  } else {
+                     result.save()
+                     test.save()
+                     user.testId.push(test)
+                     user.tests.push(result)
+                     user.save()
+                  }
+                })
+               
               }
             })
           }
         })
-         console.log(jsonData["result"]["cm_user_id"])
-         console.log(req.body["result"]["points_scored"])
-         console.log(req.body["result"]["cm_user_id"])
-         console.log(req.body["category_results"][0]["points_scored"])
-         console.log(req.body["category_results"][1]["points_scored"])
-         console.log(req.body["category_results"][2]["points_scored"])
-        // Important: Do not use a script that will take a long timе to respond.
-
-        // Notify ClassMarker you have recеived the Wеbhook.
+         
+      
         res.sendStatus(200);
-    // }
-    // else{
-    //     res.sendStatus(400)
-    // }
-
 });
 
 var verifyData = function(jsonData,headerHmacSignature, secret)
