@@ -27,25 +27,13 @@ var TestId   = require("./models/testId");
   //        })
 
 //databas
-// Test.find({testTaker: "5b49b4d37657ba15df6b2d59"},function(error , found){
-//   if(error){
-//     console.log(error)
-//   } else {
-//     found.forEach(function(test){
-//       if(test.testId == 954702){
-//        Test.findOneAndRemove({testId: test.testId} , function(error , removed){
-//         if(error){
-//           console.log(error)
-//         } else{
-//           console.log("test removed")
-//         }
-//        })
-//       }
-//     })
-//     console.log("after if ")
-//     }
-  
-// })
+User.find({email: "ahmed@n.com"},function(error , found){
+  if(error){
+    console.log(error)
+  } else {
+  console.log(found)  
+}
+})
 
 
 mongoose.connect("mongodb://localhost/samples10")
@@ -86,7 +74,8 @@ passport.use(new localStrategy({
                    email: doc.email, 
                    id: doc.id, 
                    memberShip: doc.memberShip,
-                   gender: doc.gender
+                   gender: doc.gender,
+                   accountExpiration: doc.accountExpiration
                  })
              } else {
               done(null , false , (error ,  "كلمة المرور غير صحيحة"));
@@ -157,6 +146,7 @@ app.post("/register" , function(req , res){
               newUser.email = email;
               newUser.password = newUser.hashPassword(password)
               newUser.gender = gender;
+              newUser.accountExpiration = Date.now() + 300000 // 5 minutes
               newUser.save(function(error , user){
                    if(error){
                     res.status(500).send(" db error occured");
@@ -400,16 +390,21 @@ app.get("/result/:testName/test/:id", isLoggedIn , function(req , res){
 
 
 app.get("/test/:id" , isLoggedIn ,function(req , res){
-   User.findById(req.params.id).populate("tests").populate("testId").exec( function(error , userInfo){
-    if(error && !userInfo){
-      console.log(error)
-      req.flash("error" , "error")
-      res.redirect("back")
+   User.findOne({id: req.params.id , accountExpiration: { $gt: Date.now() }} , function(error , userInfo){
+    if(!userInfo){
+      req.flash("error" , "end")
+      res.redirect("/")
     } else {
-      // console.log(userInfo.tests[0]["testName"])
-      res.render("testPage" , {userInfo: userInfo})
+    if(error){
+      console.log(error)
+    } else {
+       res.render("testPage" , {userInfo: userInfo})
     }
+  }
    })
+      // console.log(userInfo.tests[0]["testName"])
+     
+   
    })
 
 app.get("/testOne/:id",isLoggedIn , function(req , res){

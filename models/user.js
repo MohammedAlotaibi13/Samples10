@@ -10,6 +10,7 @@ var userSchema = new mongoose.Schema({
 	password: String,
 	gender: { type: String , required: true},
 	memberShip: {type: String , required: true , default: "gold"},
+	accountExpiration: {type: Date , required: true},
 	tests: [
        {
        	type:  mongoose.Schema.Types.ObjectId,
@@ -25,7 +26,7 @@ var userSchema = new mongoose.Schema({
 	],
 	resetPasswordToken: String,
 	resetPasswordExpiration: Date,
-	accountExpiration: Date
+
 });
 
 userSchema.methods.hashPassword = function(password) {
