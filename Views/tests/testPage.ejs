@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <% include partails/head.ejs %>
+    <% include ../partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/testPage.css">
   </head>
   <body>
 
-    <% include partails/subHeader.ejs %>
+    <% include ../partails/subHeader.ejs %>
 
   <div class="container">
   	<div class="row">
@@ -46,14 +46,14 @@
 		  			<a href="#" class="btn btn-primary"> إبداء الأختبار
 		  			<a href="/result/<%= userInfo.id %>/test/three" class="btn btn-success"> نتيجة الاختبار</a>
 		  		</div>
-		  	</div>
+		  </div>
 		</div>
 		<% } %>
 	  </div>
   </div>
 
      
-     <% include partails/footer.ejs %>
+     <% include ../partails/footer.ejs %>
 
 
   </body>
