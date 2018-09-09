@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
 	email: { type: String , unique: true , required: true} ,
 	password: String,
 	gender: { type: String , required: true},
-	memberShip: {type: String , required: true , default: "gold"},
+	memberShip: {type: String , required: true , default: "free"},
 	accountExpiration: {type: Date , required: true},
 	tests: [
        {
@@ -16,13 +16,6 @@ var userSchema = new mongoose.Schema({
        	ref: "Test"
        }
 	], 
-	testId: [
-       {
-       	type: mongoose.Schema.Types.ObjectId,
-       	ref: "TestId"
-       }
-
-	],
 	resetPasswordToken: String,
 	resetPasswordExpiration: Date,
 

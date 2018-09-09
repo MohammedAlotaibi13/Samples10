@@ -12,10 +12,10 @@ var flash          = require("connect-flash");
 var bcrypt         = require("bcrypt");
 var expressVlidator = require("express-validator");
 var Test    = require("./models/test");
-var TestId   = require("./models/testId");
-var users    = require("./routes/users")
-var tests    = require("./routes/tests")
-var index    = require("./routes/index")
+var users    = require("./routes/users");
+var tests    = require("./routes/tests");
+var index    = require("./routes/index");
+var async    = require("async");
 
 // connect database
 mongoose.connect("mongodb://localhost/samples10")

@@ -15,11 +15,14 @@ router.get("/result/:testName/test/:id", middleware.isLoggedIn ,function(req , r
     })
 });
 
+router.get("/instruction" ,function(req, res){
+  res.render("tests/instructions")
+})
 
-router.get("/test/:id" , middleware.isLoggedIn  ,function(req , res){
-   User.findById( req.params.id , function(error , userInfo){
-    if(error){
-      req.flash("error" , "end")
+router.get("/test/:username" , middleware.isLoggedIn  ,function(req , res){
+   User.findOne({username: req.params.username , accountExpiration:  { $gt: Date.now()} } , function(error , userInfo){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب ")
       res.redirect("/")
     } else {
     if(error){

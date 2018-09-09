@@ -3,6 +3,7 @@ var router  = express.Router();
 var User    = require("../models/user");
 var passport = require("passport");
 var nodemailer = require("nodemailer")
+var async    = require("async");
 
 
 router.get("/register" , function(req , res){
@@ -50,7 +51,7 @@ router.post("/register" , function(req , res){
               newUser.email = email;
               newUser.password = newUser.hashPassword(password)
               newUser.gender = gender;
-              newUser.accountExpiration = Date.now() + 300000 // 5 minutes
+              newUser.accountExpiration = Date.now() + 259200000 // 3 days
               newUser.save(function(error , user){
                    if(error){
                     req.flash("error" , "اسم مستخدم مسجل سابقاً")
@@ -58,7 +59,7 @@ router.post("/register" , function(req , res){
                    } else {
                     // sign in 
                     passport.authenticate("local")(req , res , function(){
-                        res.redirect("/test");
+                        res.redirect("/test/" + user.username);
                     });
                    }
               });
