@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+     <% include ../partails/head.ejs %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/register.css">
+  </head>
+<body class="text-center">
+	<div class="container">
+	  <% if(error && error.length > 0) { %>
+	
+       <div class="alert alert-danger" role="alert">
+       <%= error %>
+      
+       </div>
+       <% } %>
+	</div>
+	
+      	<div class="grid-container">
+	      		<div class="item-1">
+	      			<h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
+	      		</div>
+	      	<form method="post" action="/register" >
+	      		<div class="form-group">
+		      		<div class="item-2">
+			      	    <input type="email" class="form-control" placeholder="Email" name="email" >
+			      	    <input type="text" class="form-control" placeholder="username" name="username" >
+			      	    <input type="password" class="form-control"  placeholder="Password" name="password"  minlength="6" maxlength="16"  >
+						<input type="password" class="form-control"  placeholder="Confirm Password" name="confirm"  minlength="6" maxlength="16"  >
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="gender" required>
+						    <option selected>Gender</option>
+				            <option value="male">ذكر</option>
+					        <option value="female">أنثى</option>
+	                    </select>
+	                </div>
+		      	</div>
+		      		<div class="item-3">
+			      		<div class="form-group">
+						    <input type="submit" class="btn btn-lg btn-success" id="sign-button" value="تسجيل">  	
+					    </div>
+		      		</div>
+		      		<div class="item-4">
+		      			<div class="form-group">
+		      				<p>Copyright © 2018 Samples, Inc.</p>
+		      			</div>
+		      		</div>
+	      	</form>
+	    </div>
+   <!-- Optional JavaScript -->
+   
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+</body>
+</html>

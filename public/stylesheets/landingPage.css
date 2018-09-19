@@ -1,15 +1,6 @@
 body {
-	font-family: 'Cairo', sans-serif;
+	
 }
-
-nav {
-	direction: rtl;
-}
-
-li {
-	padding-left: 15px;
-}
-
 .jumbotron{
 	text-align: center;
 	padding: 120px;
@@ -17,7 +8,10 @@ li {
 }
 
 .jumbotron a {
-	margin-top: 15px;
+	text-align: center;
+	margin-top: 25px;
+	padding: 0 25px 0 25px;
+	border-radius: 15px ; 
 }
 
 
@@ -25,29 +19,77 @@ li {
 #test-information {
 	text-align: center;
 	border-bottom: 1px solid black;
-	width: 14%;
+	width: 15%;
+}
+
+.grid-container {
+	margin-top: 70px;
+	margin-bottom: 70px;
+	display: grid;
+	grid-template-rows:  auto auto auto;
+	grid-gap: 20px ;
+	justify-content: space-around;
+}
+
+ @media screen and (max-width: 759px){
+.one {
+	grid-row: 2/3
+}
+
+.two {
+	grid-row: 4/5;
+}
+.three {
+	grid-row: 6/7;
+}
+.grid-container > div {
+	text-align: center;
+}
+}
+
+/*desktop */
+
+@media screen and (min-width: 760px) {
+
+.grid-container {
+	margin-top: 70px;
+	margin-bottom: 70px;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: 20px ;
+	justify-content: space-around;
+}
+
+.grid-container > div {
+	text-align: center;
+}
+
 }
 
 #test-section{
+
 	text-align: center;
 	margin-top: 55px;
-	margin-right:  25px;
+	margin-left: 250px;
 	margin-bottom: 100px;
-}
+	margin-right: 0;
+		} 
 
 
 .image-border{
    border: 1px solid black;
    width: 50%;
+   margin-left:  80px;
    border-radius: 50%;
    padding: 40px;
     
 }
 
-.col-4 h4 , p {
+/*.col-4 h4 , p {
 	margin-right: 165px;
-	margin-top: 20px;
-}
+	margin-top: 19px;
+}*/
+
 #computer-section {
  margin-top: 150px;
  margin-bottom: 100px;
@@ -56,16 +98,17 @@ li {
 
 #text {
 	text-align: center;
-	width: 30%;
 }
 
 #start-exam-button {
-	margin-top: 50px;
+	margin-top: 25px;
+	border-radius: 15px;
 }
 
 #cards-price {
-	margin-top: 50px;
-	margin-bottom: 100px;
+	text-align: center;
+	margin: 35px 0 30px 50px ;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
@@ -75,17 +118,8 @@ li {
 	padding-top: 10px;
 	padding-bottom: 75px;
 }
+/* For desktop: */
 
-a {
-	text-decoration : none;
-	color: inherit;
-}
 
-.footer-link li{
-	list-style-type: none;
-	padding-top: 10px;
-}
 
-.footer-link {
-	margin: 50px;
-}
+

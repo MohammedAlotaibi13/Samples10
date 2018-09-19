@@ -1,0 +1,23 @@
+.grid-container {
+	display: grid;
+	grid-template-rows: auto auto auto  ;
+	grid-gap: 10px;
+	justify-content: center;
+}
+
+.grid-container > div {
+	text-align: center;
+}
+
+ h3 {
+ 	margin-top: 25px;
+ }
+
+ #payButton {
+ 	border-radius: 10px;
+ 	padding: 6px 125px 6px 125px ; 
+ 	margin-bottom: 20px;
+ }
+
+
+
