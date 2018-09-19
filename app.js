@@ -18,6 +18,8 @@ var index    = require("./routes/index");
 var async    = require("async");
 
 // connect database
+console.log(process.env.DATABASEURL)
+console.log(process.env.PASSWORD)
 mongoose.connect(process.env.DATABASEURL)
 
 app.use(express.static("public"));
