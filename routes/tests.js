@@ -33,18 +33,6 @@ router.get("/instruction/:username" ,function(req, res){
 })
 
 router.get("/test" , middleware.isLoggedIn  ,function(req , res){
-   // User.findOne({username: req.params.username , accountExpiration:  { $gt: Date.now()}, numberOfAttempts: { $gt: 0} } , function(error , userInfo){
-   //  if(!userInfo){
-   //    req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
-   //    res.redirect("/")
-   //  } else {
-   //  if(error){
-   //    console.log(error)
-   //  } else {
-   //     res.render("tests/testPage" , {userInfo: userInfo})
-   //     }
-   //   }
-   // })
    res.render("tests/testPage")
  })
 

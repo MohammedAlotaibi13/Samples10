@@ -18,7 +18,7 @@ var index    = require("./routes/index");
 var async    = require("async");
 
 // connect database
-mongoose.connect("mongodb://localhost/samples10")
+mongoose.connect(process.env.DATABASEURL)
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");

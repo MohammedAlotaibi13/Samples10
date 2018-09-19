@@ -59,7 +59,7 @@ router.post("/register" , function(req , res){
                    } else {
                     // sign in 
                     passport.authenticate("local")(req , res , function(){
-                        res.redirect("/test/" + user.username);
+                        res.redirect("/test");
                     });
                    }
               });
@@ -79,7 +79,7 @@ router.get("/signIn" , function(req ,res){
 // logIn logic
 
 router.post("/signIn" , passport.authenticate('local', {
-     successRedirect: '/', 
+     successRedirect: '/test', 
      failureRedirect: '/signIn', 
      failureFlash: true
 }), function(req , res){
@@ -127,7 +127,7 @@ router.post("/forgot" , function(req , res){
                  service : "Gmail" , 
                  auth: {
                      user: "info@samples10.com",
-                     pass: ""
+                     pass: (process.env.PASSWORD)
                  }
               });
               var mailOptions = {
@@ -193,7 +193,7 @@ router.post("/reset/:token" , function(req , res){
         service: 'Gmail', 
         auth: {
           user: 'info@samples10.com',
-          pass: ""
+          pass: (process.env.PASSWORD)
         }
       });
       var mailOptions = {
