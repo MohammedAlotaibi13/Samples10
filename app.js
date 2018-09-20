@@ -23,6 +23,7 @@ mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");
+app.set('Views', path.join(__dirname, 'Views'))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 app.use(methodOverride("_method"));
