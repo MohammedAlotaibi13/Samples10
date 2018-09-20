@@ -19,10 +19,7 @@ var session  = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 
 // connect database
-// mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
-app.use(session({
-    store: new MongoStore({ url: 'mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10' })
-}));
+mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");
@@ -31,9 +28,10 @@ app.use(bodyParser.json())
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
-app.use(session({
-    secret: 'foo',
-    store: new MongoStore(options)
+app.use(require("express-session")({
+    secret : "i love my self",
+    resave: false,
+    saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
