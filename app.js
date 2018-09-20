@@ -9,7 +9,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var nodemailer = require("nodemailer");
 var methodOverride = require("method-override");
 var flash          = require("connect-flash");
-var bcrypt         = require("bcrypt");
 var expressVlidator = require("express-validator");
 var Test    = require("./models/test");
 var users    = require("./routes/users");
