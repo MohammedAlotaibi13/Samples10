@@ -83,6 +83,6 @@ app.use(users);
 app.use(tests);
 app.use(index);
 
-app.listen(3000 , function(){
+app.listen(process.env.PORT || 3000 , function(){
 	console.log("app is starting");
 });
