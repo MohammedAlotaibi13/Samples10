@@ -7,7 +7,7 @@ var middleware = require("../middleware/index")
 
 router.get("/" , function(req ,res){
     
-	res.render("blog");
+	res.render("landingPage");
 })
 
 router.get("/about" , function(req , res){
