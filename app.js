@@ -18,7 +18,7 @@ var async    = require("async");
 var session  = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 
-// connect database
+// connect mongo database
 mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 
 app.use(express.static("public"));
