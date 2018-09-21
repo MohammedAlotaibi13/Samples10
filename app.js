@@ -19,7 +19,7 @@ var session  = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 
 // connect mongo database
-mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
+mongoose.connect(process.env.DATABASE)
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");
