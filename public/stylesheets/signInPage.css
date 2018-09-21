@@ -13,7 +13,6 @@ body {
 	margin: 20px 0 0 420px;
 }*/
 
-
 .grid-container {
 	display: grid;
 	grid-template-rows: auto auto auto auto;
