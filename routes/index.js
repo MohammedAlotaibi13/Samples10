@@ -63,7 +63,7 @@ router.post("/send" , function(req , res){
         secure: false, // true for 465, false for other ports
         auth: {
             user: 'info@samples10.com', // generated ethereal user
-            pass:  "" // generated ethereal password
+            pass:  process.env.PASSWORD // generated ethereal password
         } , 
         // this only for localhost 
         tls: {
