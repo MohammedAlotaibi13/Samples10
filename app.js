@@ -11,15 +11,19 @@ var methodOverride = require("method-override");
 var flash          = require("connect-flash");
 var expressVlidator = require("express-validator");
 var Test    = require("./models/test");
+var Payment    = require("./models/payment");
 var users    = require("./routes/users");
 var tests    = require("./routes/tests");
 var index    = require("./routes/index");
 var async    = require("async");
 var session  = require("express-session");
 var MongoStore = require('connect-mongo')(session);
+var https       = require('https');
+var querystring = require('querystring');
 
 // connect mongo database
-mongoose.connect(process.env.DATABASE)
+
+mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");

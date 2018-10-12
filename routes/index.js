@@ -1,7 +1,10 @@
 var express = require("express");
 var router  = express.Router();
 var nodemailer = require("nodemailer")
+var https       = require('https');
+var querystring = require('querystring')
 var User    = require("../models/user");
+var Payment    = require("../models/payment");
 var middleware = require("../middleware/index")
 
 
@@ -25,6 +28,136 @@ router.get("/blog" , function(req , res){
 router.get("/app" , function(req , res){
   res.render("app")
 })
+
+
+function generateCheckoutId(obj){
+  
+  var path='/v1/checkouts';
+  var data = querystring.stringify( {
+    'authentication.userId' : '8a82941866529a2e016652ac34070027',
+    'authentication.password' : 'BPJr2xBKaN',
+    'authentication.entityId' : '8a82941866529a2e016652acc495002b',
+    'amount' : obj.amount,
+    'currency': "SAR",
+    'paymentType' : 'DB',
+    'merchantTransactionId' : obj.merchantTransactionId,
+     'customer.email': 'email@email.com',
+    'billing.street1': 'street',
+    'billing.city': 'city',
+    'billing.state': 'city',
+    'billing.postcode': '123',
+    'customer.givenName': 'name',
+    'customer.surname': 'name',
+    'billing.country': 'SA',
+  });
+  var options = {
+    port: 443,
+    host: 'test.oppwa.com',
+    path: path,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': data.length
+    }
+  };
+  var postRequest = https.request(options, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      jsonRes = JSON.parse(chunk);
+      return obj.cb(jsonRes);
+    });
+  });
+  postRequest.write(data);
+  postRequest.end();
+}
+
+router.get("/checkout/:id/:memberShip" , middleware.isLoggedIn , function(req , res){
+  User.findById(req.params.id , function(error, foundUser){
+    if(error){
+      console.log(error)
+      res.redirect("back")
+    } else {
+      Payment.create({
+        memberShip: req.params.memberShip,
+        timeOfPayment: Date.now(),
+        status: "pending"
+      } , function(error, paymentInfo){
+        if(error){
+          console.log(error)
+          return res.redirect("back")
+        } else {
+          paymentInfo.save()
+          foundUser.payments.push(paymentInfo)
+          foundUser.save()
+          console.log(paymentInfo)
+        }
+        generateCheckoutId({
+        amount: '79.00',
+        merchantTransactionId : paymentInfo.id,
+        cb: (result) => {
+        console.log(result)
+        res.render("checkoutPage" , {checkoutId: result.id})
+    },
+   })
+      })
+    }
+  })
+
+})
+
+
+function generateResult(resourcePath , callback) {
+  var path=resourcePath
+  path += '?authentication.userId=8a82941866529a2e016652ac34070027';
+  path += '&authentication.password=BPJr2xBKaN';
+  path += '&authentication.entityId=8a82941866529a2e016652acc495002b';
+  var options = {
+    port: 443,
+    host: 'test.oppwa.com',
+    path: path,
+    method: 'GET',
+  };
+  var postRequest = https.request(options, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      jsonRes = JSON.parse(chunk);
+      return callback(jsonRes);
+    });
+  });
+  postRequest.end();
+}
+
+
+router.get("/paymentResult" , function(req , res){
+  res.render("paymentStatus")
+})
+
+router.get("/success" , function(req , res){
+  console.log(req.query);
+  console.log(req.body);
+  // Check checkout status
+  generateResult(req.query.resourcePath, (response) => {
+    console.log(response);
+    // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
+    console.log('response.merchantTransactionId', response.merchantTransactionId)
+    if (response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)) {
+      // Create Payment instance here
+      Payment.findById(response.merchantTransactionId , function(error , paymentInfo){
+        paymentInfo.status = "successful"
+        paymentInfo.save()
+        console.log(paymentInfo)
+      })
+      req.flash("success" , " تم الدفع بنجاح")
+      res.redirect("/paymentResult");
+    } else {
+      // For some reasons it was not success. Check response.result.code and match it with https://gate2play.docs.oppwa.com/reference/resultCodes
+      req.flash("error" , response.result.description)
+      res.redirect("/paymentResult")
+    }
+  });
+
+})
+
 
 
 router.get("/profile/:id", middleware.isLoggedIn , function(req , res){

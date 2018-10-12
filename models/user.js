@@ -17,6 +17,12 @@ var userSchema = new mongoose.Schema({
        	ref: "Test"
        }
 	], 
+	payments: [
+	{
+	    type:  mongoose.Schema.Types.ObjectId,
+       	ref: "Payment"	
+	}
+	],
 	resetPasswordToken: String,
 	resetPasswordExpiration: Date,
 
