@@ -29,9 +29,9 @@
                 <a class="dropdown-item" href="/logout">خروج</a>
           </div>
          </li>
-          <% if(currentUser.memberShip == "free" || currentUser.memberShip == "pro") { %>
+          <% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro") { %>
          <li class="nav-item">
-           <a href="/pay" class="nav-link  btn btn-outline-success">ترقية العضوية </a>
+           <a href="/pay/<%= currentUser.id %>" class="nav-link  btn btn-outline-success">ترقية العضوية </a>
            <% } %>
          </li>
           <% } %>

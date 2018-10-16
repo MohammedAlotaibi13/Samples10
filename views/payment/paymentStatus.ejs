@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <% include partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
+    <% include ../partails/head.ejs %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/paymentStatus.css">
     <title>Payment Result</title>
   </head>
   <body>
-   <% include partails/subHeader.ejs %>
+   <% include ../partails/subHeader.ejs %>
    <div class="grid-container">
    	 <div class="form-group row">
 	   	<div class="col-md-6">
-	   		<a href="" class="btn btn-success">الاختبارات</a>
+	   		<a href="/test" class="btn btn-success">الاختبارات</a>
 	   	</div>
 	   	<div class="col-md-6">
-	   		<a href="" class="btn btn-success">الحساب</a>
+	   		<a href="/profile/<%= currentUser.id %>" class="btn btn-primary">الحساب</a>
 	   	</div>
       </div>
    </div>
 
 
- <% include partails/footer.ejs %>
+ <% include ../partails/footer.ejs %>
 </body>

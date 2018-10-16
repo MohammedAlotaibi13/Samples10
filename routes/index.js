@@ -17,9 +17,35 @@ router.get("/about" , function(req , res){
    res.render("whoWeAre");
 });
 
-router.get("/pay", middleware.isLoggedIn , function(req , res){
-   res.render("payPage");
+router.get("/pay/:id", middleware.isLoggedIn , function(req , res){
+   res.render("payment/payPage");
 });
+
+router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
+  User.findById(req.params.id , function(error, foundUser){
+    if(error){
+      console.log(error)
+      res.redirect("back")
+    } else {
+      Payment.create({
+        userId: foundUser.id,
+        memberShip: req.body.memberShipPicker,
+        timeOfPayment: Date.now(),
+        status: "success"
+      } , function(error, paymentInfo){
+        if(error){
+          console.log(error)
+          return res.redirect("back")
+        } else {
+          //paymentInfo.save()
+          foundUser.payments.push(paymentInfo)
+          console.log(paymentInfo)
+        }
+        res.redirect('/checkout/' + paymentInfo.id)
+      })
+    }
+  })
+})
 
 router.get("/blog" , function(req , res){
   res.render("blog")
@@ -42,6 +68,7 @@ function generateCheckoutId(obj){
     'paymentType' : 'DB',
     'merchantTransactionId' : obj.merchantTransactionId,
      'customer.email': 'email@email.com',
+     'testMode' : 'EXTERNAL',
     'billing.street1': 'street',
     'billing.city': 'city',
     'billing.state': 'city',
@@ -71,39 +98,17 @@ function generateCheckoutId(obj){
   postRequest.end();
 }
 
-router.get("/checkout/:id/:memberShip" , middleware.isLoggedIn , function(req , res){
-  User.findById(req.params.id , function(error, foundUser){
-    if(error){
-      console.log(error)
-      res.redirect("back")
-    } else {
-      Payment.create({
-        memberShip: req.params.memberShip,
-        timeOfPayment: Date.now(),
-        status: "pending"
-      } , function(error, paymentInfo){
-        if(error){
-          console.log(error)
-          return res.redirect("back")
-        } else {
-          paymentInfo.save()
-          foundUser.payments.push(paymentInfo)
-          foundUser.save()
-          console.log(paymentInfo)
-        }
-        generateCheckoutId({
+router.get("/checkout/:id" , middleware.isLoggedIn , function(req , res){
+       generateCheckoutId({
         amount: '79.00',
-        merchantTransactionId : paymentInfo.id,
+        merchantTransactionId : req.params.id,
         cb: (result) => {
         console.log(result)
-        res.render("checkoutPage" , {checkoutId: result.id})
-    },
-   })
+        res.render("payment/checkoutPage" , {checkoutId: result.id})
+           }
       })
-    }
-  })
-
-})
+ })
+ 
 
 
 function generateResult(resourcePath , callback) {
@@ -129,12 +134,13 @@ function generateResult(resourcePath , callback) {
 
 
 router.get("/paymentResult" , function(req , res){
-  res.render("paymentStatus")
-})
+        res.render("payment/paymentStatus") 
+  })
 
-router.get("/success" , function(req , res){
+router.get("/success/:id" , function(req , res){
   console.log(req.query);
   console.log(req.body);
+  console.log(req.params.id)
   // Check checkout status
   generateResult(req.query.resourcePath, (response) => {
     console.log(response);
@@ -142,13 +148,20 @@ router.get("/success" , function(req , res){
     console.log('response.merchantTransactionId', response.merchantTransactionId)
     if (response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)) {
       // Create Payment instance here
-      Payment.findById(response.merchantTransactionId , function(error , paymentInfo){
-        paymentInfo.status = "successful"
-        paymentInfo.save()
-        console.log(paymentInfo)
-      })
-      req.flash("success" , " تم الدفع بنجاح")
-      res.redirect("/paymentResult");
+       User.findById( req.params.id , function(error  , userInfo){
+        if(error){
+          console.log(error)
+        } else{
+        userInfo.memberShip = "Pro"
+        userInfo.numberOfAttempts = 15
+        userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
+        userInfo.save()
+        res.status(200)
+        req.flash("success" , " تم الدفع بنجاح")
+       res.redirect("/paymentResult" );
+        }
+       })
+       
     } else {
       // For some reasons it was not success. Check response.result.code and match it with https://gate2play.docs.oppwa.com/reference/resultCodes
       req.flash("error" , response.result.description)

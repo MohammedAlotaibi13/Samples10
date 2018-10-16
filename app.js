@@ -24,6 +24,7 @@ var querystring = require('querystring');
 // connect mongo database
 
 mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
+mongoose.set('useFindAndModify', false);
 
 app.use(express.static("public"));
 app.set("view engine" , "ejs");
@@ -40,10 +41,12 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user , done){
-  done(null , user)
+  done(null , user.id)
 });
-passport.deserializeUser(function(user , done){
-   done(null , user)
+passport.deserializeUser(function(id , done){
+  User.findById(id , function (error , user){
+     done(null , user)
+  })
 });
 passport.use(new localStrategy({
   usernameField: "email",

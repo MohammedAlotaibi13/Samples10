@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <% include partails/head.ejs %>
+    <% include ../partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
     <title>Pay Page</title>
   </head>
   <body>
-   <% include partails/subHeader.ejs %>
+   <% include ../partails/subHeader.ejs %>
 
   <div class="grid-container">
     <div class="item-1">
       <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
     </div>
-    <form>
+    <form method="post" action="/pay/<%= currentUser.id %>">
       <div class="form-group">
         <div class="item-2">
           <input type="email" class="form-control" value="<%= currentUser.email %>">
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-            <option selected>العضوية</option>
-            <option  value="1">Pro   (79 SR)</option>
-            <option value="2">Gold (99 SR)</option>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="memberShipPicker">
+            <option  value="Pro" name="Pro">Pro   (79 SAR)</option>
+            <option value="Gold" name="Gold" hidden>Gold (99 SAR)</option>
            </select>
           </div>
         </div>  
         <div class="form-group">
            <div class="item-3">
-             <a  class="btn btn-success form-control" href="/checkout/<%= currentUser.id %>/Pro" type="button"  id="payButton">دفع</a>
+             <input type="submit" name="" class="btn btn-success form-control" value="دفع"  id="payButton">
            </div>
         </div>
     </form>
   </div>
 
-<% include partails/footer.ejs %>
+<% include ../partails/footer.ejs %>
  
 </body>
