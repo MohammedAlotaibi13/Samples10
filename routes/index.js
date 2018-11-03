@@ -29,6 +29,7 @@ router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
     } else {
       Payment.create({
         userId: foundUser.id,
+        email: foundUser.email,
         memberShip: req.body.memberShipPicker,
         timeOfPayment: Date.now(),
         status: "success"
@@ -60,26 +61,25 @@ function generateCheckoutId(obj){
   
   var path='/v1/checkouts';
   var data = querystring.stringify( {
-    'authentication.userId' : '8a82941866529a2e016652ac34070027',
-    'authentication.password' : 'BPJr2xBKaN',
-    'authentication.entityId' : '8a82941866529a2e016652acc495002b',
+    'authentication.userId' : '8ac9a4c766aafd7c0166c4987eea5448',
+    'authentication.password' : '2mJ88pth6W',
+    'authentication.entityId' : '8ac9a4c766aafd7c0166c498d8435450',
     'amount' : obj.amount,
     'currency': "SAR",
     'paymentType' : 'DB',
     'merchantTransactionId' : obj.merchantTransactionId,
-     'customer.email': 'email@email.com',
-     'testMode' : 'EXTERNAL',
+    'customer.email': obj.email,
     'billing.street1': 'street',
-    'billing.city': 'city',
-    'billing.state': 'city',
-    'billing.postcode': '123',
+    'billing.city': 'Riyadh',
+    'billing.state': 'Riyadh',
+    'billing.postcode': '11564',
     'customer.givenName': 'name',
     'customer.surname': 'name',
     'billing.country': 'SA',
   });
   var options = {
     port: 443,
-    host: 'test.oppwa.com',
+    host: 'oppwa.com',
     path: path,
     method: 'POST',
     headers: {
@@ -99,26 +99,35 @@ function generateCheckoutId(obj){
 }
 
 router.get("/checkout/:id" , middleware.isLoggedIn , function(req , res){
-       generateCheckoutId({
+  Payment.findById(req.params.id , function(error , foundPayment){
+    if(error){
+      console.log(error)
+      res.redirect("back")
+    } else {
+        generateCheckoutId({
         amount: '79.00',
-        merchantTransactionId : req.params.id,
+        merchantTransactionId : foundPayment.id,
+        email: foundPayment.email,
         cb: (result) => {
         console.log(result)
         res.render("payment/checkoutPage" , {checkoutId: result.id})
            }
       })
+    }
+  })
+     
  })
  
 
 
 function generateResult(resourcePath , callback) {
   var path=resourcePath
-  path += '?authentication.userId=8a82941866529a2e016652ac34070027';
-  path += '&authentication.password=BPJr2xBKaN';
-  path += '&authentication.entityId=8a82941866529a2e016652acc495002b';
+  path += '?authentication.userId=8ac9a4c766aafd7c0166c4987eea5448';
+  path += '&authentication.password=2mJ88pth6W';
+  path += '&authentication.entityId=8ac9a4c766aafd7c0166c498d8435450';
   var options = {
     port: 443,
-    host: 'test.oppwa.com',
+    host: 'oppwa.com',
     path: path,
     method: 'GET',
   };
@@ -138,15 +147,12 @@ router.get("/paymentResult" , function(req , res){
   })
 
 router.get("/success/:id" , function(req , res){
-  console.log(req.query);
-  console.log(req.body);
-  console.log(req.params.id)
   // Check checkout status
   generateResult(req.query.resourcePath, (response) => {
-    console.log(response);
     // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
+  
     console.log('response.merchantTransactionId', response.merchantTransactionId)
-    if (response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)) {
+    if (response.result.code == /^(000\.000\.|000\.100\.1|000\.[36])/) {
       // Create Payment instance here
        User.findById( req.params.id , function(error  , userInfo){
         if(error){
