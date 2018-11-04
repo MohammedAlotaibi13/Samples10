@@ -41,7 +41,7 @@
          </li>
           <% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro") { %>
          <li class="nav-item">
-           <a href="/pay/<%= currentUser.id %>" class="nav-link  btn btn-outline-success">ترقية العضوية </a>
+           <a href="/pay/<%= currentUser.id %>" class="nav-link  btn btn-outline-success" id="upgradeButton">ترقية العضوية </a>
            <% } %>
          </li>
           <% } %>

@@ -38,8 +38,8 @@ router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
           console.log(error)
           return res.redirect("back")
         } else {
-          //paymentInfo.save()
           foundUser.payments.push(paymentInfo)
+          foundUser.save()
           console.log(paymentInfo)
         }
         res.redirect('/checkout/' + paymentInfo.id)
@@ -105,7 +105,7 @@ router.get("/checkout/:id" , middleware.isLoggedIn , function(req , res){
       res.redirect("back")
     } else {
         generateCheckoutId({
-        amount: '79.00',
+        amount: '10.00',
         merchantTransactionId : foundPayment.id,
         email: foundPayment.email,
         cb: (result) => {
@@ -150,9 +150,7 @@ router.get("/success/:id" , function(req , res){
   // Check checkout status
   generateResult(req.query.resourcePath, (response) => {
     // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
-  
-    console.log('response.merchantTransactionId', response.merchantTransactionId)
-    if (response.result.code == /^(000\.000\.|000\.100\.1|000\.[36])/) {
+    if(response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)){
       // Create Payment instance here
        User.findById( req.params.id , function(error  , userInfo){
         if(error){
@@ -164,12 +162,15 @@ router.get("/success/:id" , function(req , res){
         userInfo.save()
         res.status(200)
         req.flash("success" , " تم الدفع بنجاح")
-       res.redirect("/paymentResult" );
+        res.redirect("/paymentResult" );
         }
        })
        
-    } else {
+    } else if(response.result.code && /^(800\.1[123456]0)/.test(response.result.code)) {
       // For some reasons it was not success. Check response.result.code and match it with https://gate2play.docs.oppwa.com/reference/resultCodes
+      req.flash("error" , "تجاوزت عدد المحاولات ، استخدم بطاقة اخرى او انتظر لمدة ٢٤ ساعة")
+      res.redirect("/paymentResult")
+    } else {
       req.flash("error" , response.result.description)
       res.redirect("/paymentResult")
     }
