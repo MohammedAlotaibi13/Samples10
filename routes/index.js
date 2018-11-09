@@ -42,7 +42,7 @@ router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
           foundUser.save()
           console.log(paymentInfo)
         }
-        res.redirect('/checkout/' + paymentInfo.id)
+        res.redirect('/checkout/' + paymentInfo.id + "/" + paymentInfo.memberShip)
       })
     }
   })
@@ -61,9 +61,9 @@ function generateCheckoutId(obj){
   
   var path='/v1/checkouts';
   var data = querystring.stringify( {
-    'authentication.userId' : '8ac9a4c766aafd7c0166c4987eea5448',
-    'authentication.password' : '2mJ88pth6W',
-    'authentication.entityId' : '8ac9a4c766aafd7c0166c498d8435450',
+    'authentication.userId' : process.env.USERID,
+    'authentication.password' : process.env.PAYMENTPASSWORD,
+    'authentication.entityId' : process.env.ENTITYID,
     'amount' : obj.amount,
     'currency': "SAR",
     'paymentType' : 'DB',
@@ -98,7 +98,7 @@ function generateCheckoutId(obj){
   postRequest.end();
 }
 
-router.get("/checkout/:id" , middleware.isLoggedIn , function(req , res){
+router.get("/checkout/:id/:memberShip" , middleware.isLoggedIn , function(req , res){
   Payment.findById(req.params.id , function(error , foundPayment){
     if(error){
       console.log(error)
@@ -122,9 +122,9 @@ router.get("/checkout/:id" , middleware.isLoggedIn , function(req , res){
 
 function generateResult(resourcePath , callback) {
   var path=resourcePath
-  path += '?authentication.userId=8ac9a4c766aafd7c0166c4987eea5448';
-  path += '&authentication.password=2mJ88pth6W';
-  path += '&authentication.entityId=8ac9a4c766aafd7c0166c498d8435450';
+  path += '?authentication.userId=' + process.env.USERID;
+  path += '&authentication.password=' + process.env.PAYMENTPASSWORD;
+  path += '&authentication.entityId=' + process.env.ENTITYID;
   var options = {
     port: 443,
     host: 'oppwa.com',
@@ -140,7 +140,7 @@ function generateResult(resourcePath , callback) {
   });
   postRequest.end();
 }
-
+ 
 
 router.get("/paymentResult" , function(req , res){
         res.render("payment/paymentStatus") 
