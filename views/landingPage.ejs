@@ -101,7 +101,11 @@
              <div class="card-body">
                <h4 class="card-title">79 SR</h4>
                <p class="card-text"> خمسة اختبارات <br> لمدة 45 يوم</p>
+                <% if(currentUser) { %>
+               <a href="/test" class="btn btn-lg btn-block btn-primary">أبدأ الأن</a>
+               <% } else { %>
                <a href="/register" class="btn btn-lg btn-block btn-primary">أبدأ الأن</a>
+               <% } %>
              </div>
            </div>
          </div>
