@@ -105,7 +105,7 @@ router.get("/checkout/:id/:memberShip" , middleware.isLoggedIn , function(req , 
       res.redirect("back")
     } else {
         generateCheckoutId({
-        amount: '10.00',
+        amount: '79.00',
         merchantTransactionId : foundPayment.id,
         email: foundPayment.email,
         cb: (result) => {
