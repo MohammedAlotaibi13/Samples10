@@ -12,11 +12,12 @@
     <div class="item-1">
       <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
     </div>
+
     <form method="post" action="/pay/<%= currentUser.id %>">
       <div class="form-group">
         <div class="item-2">
           <input type="email" class="form-control" value="<%= currentUser.email %>">
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="memberShipPicker">
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name=" memberShipPicker">
             <option  value="Pro" name="Pro">Pro   (79 SAR)</option>
             <option value="Gold" name="Gold" hidden>Gold (99 SAR)</option>
            </select>
@@ -26,6 +27,7 @@
            <div class="item-3">
              <input type="submit" name="" class="btn btn-success form-control" value="دفع"  id="payButton">
            </div>
+           <iframe src="https://maroof.sa/Business/GetStamp?bid=51232" style=" width: auto; height: 250px; overflow-y:hidden; padding-left:80px  "  frameborder="0" seamless='seamless' scrollable="no"></iframe>
         </div>
     </form>
   </div>
