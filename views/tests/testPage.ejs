@@ -21,7 +21,7 @@
 
   <div class="container">
   	<div class="row">
-  		<% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
+  		<% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro" || currentUser.memberShip == "gold" || currentUser.memberShip == "Two") { %>
   		<div class="col-md-4">
   	      <div class="card">
 		  		<img class="card-img-top" src="../image/one.png"  alt="first test">
@@ -34,7 +34,7 @@
 		  	</div>
 		</div>
 		<% } %> 
-		<% if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
+		<% if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold" || currentUser.memberShip == "Two") { %>
 		<div class="col-md-4">
   	      <div class="card">
 		  		<img class="card-img-top" src="../image/two.png"  alt="first test">
