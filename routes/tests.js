@@ -36,8 +36,16 @@ router.get("/test" , middleware.isLoggedIn  ,function(req , res){
    res.render("tests/testPage")
  })
 
-router.get("/testOne/:username" , middleware.isLoggedIn , function(req , res){  
-   res.render("tests/testOne");
+router.get("/testOne/:username" , middleware.isLoggedIn , function(req , res){ 
+     User.findOne({username: req.params.username} , function(error, userInfo){
+      if (error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1 
+        userInfo.save()
+        res.render("tests/testOne");
+      }
+     }); 
 });
 
 router.get("/testTwo/:username" , middleware.isLoggedIn , function(req , res){
@@ -49,6 +57,8 @@ router.get("/testTwo/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
          res.render("tests/testTwo");
       }
     }
@@ -64,6 +74,8 @@ router.get("/testThree/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
          res.render("tests/testThree");
       }
     }
@@ -79,6 +91,8 @@ router.get("/testFour/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
        res.render("tests/testFour");
       }
     }
@@ -86,7 +100,7 @@ router.get("/testFour/:username" , middleware.isLoggedIn , function(req , res){
 });
 
 router.get("/testFive/:username" , middleware.isLoggedIn , function(req , res){
-  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()}} , function(error , userInfo ){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()} , numberOfAttempts: { $gt: 0 }} , function(error , userInfo ){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
@@ -94,11 +108,99 @@ router.get("/testFive/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
        res.render("tests/testFive");
       }
     }
   })
 });
+
+router.get("/testSix/:username" , middleware.isLoggedIn , function(req , res){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()} , numberOfAttempts: { $gt: 0 }} , function(error , userInfo ){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+       res.redirect("/test")
+    } else {
+      if(error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
+       res.render("tests/testSix");
+      }
+    }
+  })
+});
+
+router.get("/testSeven/:username" , middleware.isLoggedIn , function(req , res){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()} , numberOfAttempts: { $gt: 0 }} , function(error , userInfo ){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+       res.redirect("/test")
+    } else {
+      if(error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
+       res.render("tests/testSeven");
+      }
+    }
+  })
+});
+
+router.get("/testEight/:username" , middleware.isLoggedIn , function(req , res){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()}, numberOfAttempts: { $gt: 0 }} , function(error , userInfo ){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+       res.redirect("/test")
+    } else {
+      if(error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
+       res.render("tests/testEight");
+      }
+    }
+  })
+});
+
+router.get("/testNine/:username" , middleware.isLoggedIn , function(req , res){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()} , numberOfAttempts: { $gt: 0 }} , function(error , userInfo ){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+       res.redirect("/test")
+    } else {
+      if(error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
+       res.render("tests/testNine");
+      }
+    }
+  })
+});
+
+router.get("/testTen/:username" , middleware.isLoggedIn , function(req , res){
+  User.findOne({username: req.params.username ,  accountExpiration:  { $gt: Date.now()} , numberOfAttempts: { $gt: 0 } } , function(error , userInfo ){
+    if(!userInfo){
+      req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+       res.redirect("/test")
+    } else {
+      if(error){
+        console.log(error)
+      } else {
+        userInfo.numberOfAttempts -= 1
+        userInfo.save()
+       res.render("tests/testTen");
+      }
+    }
+  })
+});
+
 // classmark code 
 router.post('/result', function (req, res) {
     //  var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");
@@ -151,7 +253,6 @@ router.post('/result', function (req, res) {
                     console.log("another error")
                     console.log(error)
                   } else {
-                     user.numberOfAttempts -= 1
                      result.save()
                      user.tests.push(result)
                      user.save()
