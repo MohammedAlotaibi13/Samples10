@@ -41,7 +41,7 @@ router.get("/testOne/:username" , middleware.isLoggedIn , function(req , res){
       if (error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1 
+       // userInfo.numberOfAttempts -= 1 
         userInfo.save()
         res.render("tests/testOne");
       }
@@ -57,7 +57,7 @@ router.get("/testTwo/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+     //   userInfo.numberOfAttempts -= 1
         userInfo.save()
          res.render("tests/testTwo");
       }
@@ -74,7 +74,7 @@ router.get("/testThree/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+   //     userInfo.numberOfAttempts -= 1
         userInfo.save()
          res.render("tests/testThree");
       }
@@ -91,7 +91,7 @@ router.get("/testFour/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+     //   userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testFour");
       }
@@ -108,7 +108,7 @@ router.get("/testFive/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+      //  userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testFive");
       }
@@ -125,7 +125,7 @@ router.get("/testSix/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+      //  userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testSix");
       }
@@ -142,7 +142,7 @@ router.get("/testSeven/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+      //  userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testSeven");
       }
@@ -159,7 +159,7 @@ router.get("/testEight/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+     //   userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testEight");
       }
@@ -176,7 +176,7 @@ router.get("/testNine/:username" , middleware.isLoggedIn , function(req , res){
       if(error){
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
+       // userInfo.numberOfAttempts -= 1
         userInfo.save()
        res.render("tests/testNine");
       }
@@ -195,6 +195,7 @@ router.get("/testTen/:username" , middleware.isLoggedIn , function(req , res){
       } else {
         userInfo.numberOfAttempts -= 1
         userInfo.save()
+        console.log(userInfo.numberOfAttempts)
        res.render("tests/testTen");
       }
     }
@@ -253,10 +254,11 @@ router.post('/result', function (req, res) {
                     console.log("another error")
                     console.log(error)
                   } else {
+                     console.log("webhook" + user.numberOfAttempts)
                      result.save()
                      user.tests.push(result)
                      user.save()
-                     console.log(result)
+                    
                   }
                 })
               }

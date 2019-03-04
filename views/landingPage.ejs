@@ -6,7 +6,7 @@
     <meta name="google-site-verification" content="h_oCGO9ZZGMihaFmSmb1K58LuJJDcHKL5chn3qqN3mk" />
     <title>اختبار ستيب تجريبي | سامبلز </title>
     <meta name="description" content="أبدأ اختبارك التجريبي الآن واكتشف نقاط الضعف والقوى لديك في جميع المهارات ">
-    <link rel="icon" href="/image/browserIcon.jpg">
+    <link rel="icon" href="/image/circleLogo.png">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
 <script>
@@ -24,11 +24,11 @@
       <div class="container">
        
           <h1 class="display-5">ستيب معنا أسهل </h1>
-           <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للأختبار مع مجموعة متعددة من الأختبارات <br>المحاكاة من اختبار قياس</p>  
+           <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للإختبار مع مجموعة متعددة من الإختبارات <br>المحاكاة من اختبار قياس</p>  
            <% if(currentUser) { %>
-            <a class="btn btn-success btn-lg" href="/test" role="button">أبدأ الآن</a>
+            <a class="btn btn-success btn-lg" href="/test" role="button">ابدأ الآن</a>
             <% } else { %>
-            <a class="btn btn-success btn-lg" href="/register" role="button">أبدأ الأن</a>
+            <a class="btn btn-success btn-lg" href="/register" role="button">ابدأ الأن</a>
             <% } %>
           </div>
 </div>
@@ -36,7 +36,7 @@
    <div class="container" id="test-information">
     <div class="row">
       <div class="col-sm-12">
-         <h3> جوانب الأختبار</h3>
+         <h3> جوانب الإختبار</h3>
       </div>
     </div>
    </div>
@@ -67,7 +67,7 @@
      </div>
      <div class="three">
        <h4>إستماع</h4>
-       <p>مقاطع صوتية تركز على النقاط التي يقيسها الأختبار</p>
+       <p>مقاطع صوتية تركز على النقاط التي يقيسها الإختبار</p>
      </div>
    </div>
 
@@ -82,12 +82,12 @@
 
          <div class=" col-md-3 col-sm-12" id="text" >
            <h3>لاتتردد</h3>
-           <p id="text">أبدأ اختبارك الأول مجاناً
+           <p id="text">ابدأ اختبارك الأول مجاناً
            <br>وتعرف على جوانب القوة والضعف <br>لديك قبل دخولك الإختبار</p>
            <% if(currentUser) { %>
-           <a href="/test" class="btn btn-success btn-lg" id="start-exam-button">أبدأ الأختبار</a>
+           <a href="/test" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الإختبار</a>
            <% } else { %>
-             <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">أبدأ الأختبار</a>
+             <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الإختبار</a>
             <%  } %>
          </div>
        </div>
@@ -112,11 +112,11 @@
              <h3 class="card-header">Pro</h3>
              <div class="card-body">
                <h4 class="card-title">79 SR</h4>
-               <p class="card-text"> خمسة اختبارات <br> لمدة 45 يوم <br> مراجعة الإجابات بعد الاختبار</p>
+               <p class="card-text"> خمسة اختبارات <br> لمدة 45 يوم <br> مراجعة الإجابات بعد الإختبار</p>
                 <% if(currentUser) { %>
-               <a href="/test" class="btn btn-lg btn-block btn-primary">أبدأ الآن</a>
+               <a href="/test" class="btn btn-lg btn-block btn-primary">ابدأ الآن</a>
                <% } else { %>
-               <a href="/register" class="btn btn-lg btn-block btn-primary">أبدأ الآن</a>
+               <a href="/register" class="btn btn-lg btn-block btn-primary">ابدأ الآن</a>
                <% } %>
              </div>
            </div>
@@ -126,8 +126,12 @@
              <h3 class="card-header">Gold</h3>
              <div class="card-body">
                <h4 class="card-title">99 SR</h4>
-               <p class="card-text">عشرة اختبارات <br> لمدة 99 يوم <br> مراجعة الإجابات بعد الاختبار</p>
-               <a href="#" class="btn btn-lg btn-block btn-primary disabled">... قريباً</a>
+               <p class="card-text">عشرة اختبارات <br> لمدة 99 يوم <br> مراجعة الإجابات بعد الإختبار</p>
+               <% if(currentUser) { %>
+               <a href="/test" class="btn btn-lg btn-block btn-primary">ابدأ الآن</a>
+               <% } else { %>
+               <a href="/register" class="btn btn-lg btn-block btn-primary">ابدأ الآن</a>
+               <% } %>
              </div>
            </div>
          </div>

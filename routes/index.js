@@ -31,6 +31,7 @@ router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
         userId: foundUser.id,
         email: foundUser.email,
         memberShip: req.body.memberShipPicker,
+        paymentWay: req.body.paymntMethod,
         timeOfPayment: Date.now(),
         status: "success"
       } , function(error, paymentInfo){
@@ -42,7 +43,8 @@ router.post("/pay/:id" , middleware.isLoggedIn , function(req , res){
           foundUser.save()
           console.log(paymentInfo)
         }
-        res.redirect('/checkout/' + paymentInfo.id + "/" + paymentInfo.memberShip)
+        
+        res.redirect('/checkout/' + paymentInfo.id + "/" + req.body.memberShipPicker)
       })
     }
   })
@@ -104,15 +106,29 @@ router.get("/checkout/:id/:memberShip" , middleware.isLoggedIn , function(req , 
       console.log(error)
       res.redirect("back")
     } else {
-        generateCheckoutId({
+      if(req.params.memberShip == "Pro"){
+        console.log("79")
+        generateCheckoutId({  
         amount: '79.00',
         merchantTransactionId : foundPayment.id,
         email: foundPayment.email,
         cb: (result) => {
         console.log(result)
-        res.render("payment/checkoutPage" , {checkoutId: result.id})
+        res.render("payment/checkoutPage" , {checkoutId: result.id , foundPayment: foundPayment})
            }
-      })
+        })
+      } else {
+        console.log("99")
+        generateCheckoutId({  
+        amount: '99.00',
+        merchantTransactionId : foundPayment.id,
+        email: foundPayment.email,
+        cb: (result) => {
+        console.log(result)
+        res.render("payment/checkoutPage" , {checkoutId: result.id , foundPayment: foundPayment})
+           }
+        })
+      }
     }
   })
      

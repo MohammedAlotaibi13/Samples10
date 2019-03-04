@@ -29,7 +29,8 @@ mongoose.set('useFindAndModify', false);
 app.use(express.static("public"));
 app.set("view engine" , "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: "50mb"}))
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());

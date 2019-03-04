@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <% include ../partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/profilePage.css">
+     <link rel="stylesheet" type="text/css" href="/stylesheets/checkoutPage.css">
     <title>بيانات الدفع</title>
-    <link rel="icon" href="../image/browserIcon.jpg">
+    <link rel="icon" href="/image/circleLogo.png">
   </head>
   <body>
    <% include ../partails/subHeader.ejs %>
 
-
+    
     <h3 class="h3 mb-3 font-weight-normal text-center" id="title">تفاصيل الباقة</h3>
     <div class="container">
             <form>
@@ -21,7 +21,8 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-10">
-                      <label for="inputEmail3" class="col-sm-2 col-form-label"> 79 SAR</label>
+                      <% if(foundPayment.memberShip == "Pro") { %>
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">79</label>
                     </div>
                     <label for="inputPassword3" class="col-sm-2 col-form-label"> : السعر  <label>
                   </div>
@@ -40,14 +41,111 @@
               </div>
               <label  class="col-sm-2 col-form-label">: المحاولات</label>
             </div>
+            <% } else { %>
+             <label for="inputEmail3" class="col-sm-2 col-form-label">99</label>
+                    </div>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label"> : السعر  <label>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                     <label for="inputEmail3" class="col-sm-2 col-form-label"> 99 يوم </label>
+                    </div>
+                    <label  class="col-sm-2 col-form-label"> : مدة الحساب </label>
+                  </div>
+                  <div class="form-group row">
+              </form>
+              <div class="col-md-10">
+                <div>
+                  <label for="inputEmail3" class="col-sm-2 col-form-label"> 30 </label>
+                </div>
+              </div>
+              <label  class="col-sm-2 col-form-label">: المحاولات</label>
+            </div>
+            <% } %>
     </div>
-
+     <% if(foundPayment.paymentWay == "DebitCard") { %>
     <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
      <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
      <form action="https://www.samples10.com/success/<%= currentUser.id %>" class="paymentWidgets" data-brands="VISA MASTER"></form>
+     <% } else { %>
+     <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الحسابات البنكية</h3>
+     <div class="container">
+      <p class="text-right">جميع الحسابات بأسم محمد عائض العتيبي</p>
+      <p class="text-right">سيتم تفعيل الحساب في حال استقبال الحوالة مباشرةً</p>
+       <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">الراجحي</th>
+              <th scope="col">البنك</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">589608010302700</th>
+              <td>رقم الحساب</td>
+            </tr>
+            <tr>
+              <th scope="row">SA8880000589608010302700</th>
+              <td>رقم الايبان</td>
+            </tr>
+          </tbody>
+     </table>
+       <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">الإنماء</th>
+              <th scope="col">البنك</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">68200193043000</th>
+              <td>رقم الحساب</td>
+            </tr>
+            <tr>
+              <th scope="row">SA4905000068200193043000</th>
+              <td>رقم الايبان</td>
+            </tr>
+          </tbody>
+     </table>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">البلاد</th>
+              <th scope="col">البنك</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">426113202160006</th>
+              <td>رقم الحساب</td>
+            </tr>
+            <tr>
+              <th scope="row">SA3315000426113202160006</th>
+              <td>رقم الايبان</td>
+            </tr>
+          </tbody>
+     </table>
+      <table class="table table-bordered" style="margin-bottom: 30px;">
+          <thead>
+            <tr>
+              <th scope="col">الجزيرة</th>
+              <th scope="col">البنك</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">004094999908001</th>
+              <td>رقم الحساب</td>
+            </tr>
+            <tr>
+              <th scope="row">SA3560100004094999908001</th>
+              <td>رقم الايبان</td>
+            </tr>
+          </tbody>
+     </table>
+  </div>
+      <% } %>
    <% include ../partails/footer.ejs %>
-
-
-
 
 </body>
