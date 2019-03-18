@@ -30,6 +30,12 @@ body {
 	border-radius: 10px;
 }
 
+#google-button {
+	/*padding: 5px 160px 5px 160px;*/
+	/*border-radius: 10px;*/
+	margin-left: 0px;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;

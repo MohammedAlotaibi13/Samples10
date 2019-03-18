@@ -66,10 +66,11 @@
      <% if(foundPayment.paymentWay == "DebitCard") { %>
     <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
      <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
-     <form action="https://www.samples10.com/success/<%= currentUser.id %>" class="paymentWidgets" data-brands="VISA MASTER"></form>
+     <form action="https://www.samples10.com/success/<%= currentUser.id %>/<%= foundPayment.memberShip %> class="paymentWidgets" data-brands="VISA MASTER"></form>
      <% } else { %>
      <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الحسابات البنكية</h3>
      <div class="container">
+
       <p class="text-right">جميع الحسابات بأسم محمد عائض العتيبي</p>
       <p class="text-right">سيتم تفعيل الحساب في حال استقبال الحوالة مباشرةً</p>
        <table class="table table-bordered">

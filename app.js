@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var localStrategy = require("passport-local").Strategy;
 var User          = require("./models/user");
+var GoogleUser    = require("./models/googleUsers")
 var passportLocalMongoose = require("passport-local-mongoose");
 var nodemailer = require("nodemailer");
 var methodOverride = require("method-override");
@@ -20,9 +21,12 @@ var session  = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 var https       = require('https');
 var querystring = require('querystring');
+var GoogleStrategy = require("passport-google-oauth20");
+
 
 // connect mongo database
-
+mongoose.set('useNewUrlParser',true);
+mongoose.set('useCreateIndex',true);
 mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 mongoose.set('useFindAndModify', false);
 
@@ -35,7 +39,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
 app.use(require("express-session")({
-    secret : "i love my self",
+    secret : "ilovemyself",
     resave: false,
     saveUninitialized: false
 }));
@@ -57,14 +61,19 @@ passport.use(new localStrategy({
         if(error) { done(error)}
         else {
           if(doc){
+             if (!doc.active) {
+              return done(null , false , (error ,  "يجب عليك تأكيد الحساب اولاً"));
+             }
              var valid =  doc.comparePassword(password , doc.password)
              if(valid){
-                 done(null , {
+                  done(null ,  {
                    username: doc.username,
                    password: doc.password,
                    email: doc.email, 
                    id: doc.id, 
                    memberShip: doc.memberShip,
+                   googleId: doc.googleId,
+                   active: doc.active,
                    gender: doc.gender,
                    accountExpiration: doc.accountExpiration
                  })
@@ -77,6 +86,38 @@ passport.use(new localStrategy({
         }
      });
 }))
+
+passport.use( new GoogleStrategy ({
+  
+  // option for google creditional 
+  callbackURL: "/google/redirect",
+ clientID: process.env.CLIENTID,
+ clientSecret: process.env.CLIENTSECRET
+
+
+},(accessToken, refreshToke, profile, done) => {
+  // check if we already have the same user 
+  User.findOne({googleId: profile.id}).then((currentUser) => {
+  if(currentUser){
+    // already have the user
+     done(null, currentUser)
+
+  } else {
+     // create new user 
+      new User ({
+    username: profile.displayName,
+    googleId: profile.id,
+    email: profile.emails[0].value,
+    gender: profile.gender
+  }).save().then((newUser) =>{
+    done(null, newUser)
+  })
+  }
+
+  })
+ 
+})
+)
 
 app.use(function(req,res,next){
    res.locals.currentUser = req.user;

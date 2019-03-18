@@ -10,18 +10,33 @@
 <body class="text-center">
 
 	<div class="container">
-	  <% if(error && error.length > 0) { %>
-	
-       <div class="alert alert-danger" role="alert">
-       <%= error %>
-      
-       </div>
-       <% } %>
-	</div>
+  <% if(error && error.length > 0) { %> 
+  <div class="alert alert-danger " role="alert">
+    <%= error %>
+  </div>
+  <% } %>
+  <% if(success && success.length > 0) { %>
+  <div class="alert alert-success text-center">
+    <%= success %>
+  </div>
+  <% } %>
+</div>
           <div class="grid-container">
          	<div class="item-1">
          	    <h1 class="h3 mb-3 font-weight-normal">الرجاء تسجيل الدخول</h1>
          	</div>
+         	<div class="item-3">
+		      			<div class="form-group">
+		      				<a href="/google" id="google-button" ><img src="../image/googleButtonWhite.png" height="45" width="260"></a>
+
+		      			</div>
+		      		</div>
+		      		<div class="item-3">
+		      			<div class="form-group">
+		      				أو
+
+		      			</div>
+		      		</div>
          	<form method="post" action="/signIn">
          		<div class="form-group">
 	         	   <div class="item-2">

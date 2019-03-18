@@ -7,9 +7,11 @@ var userSchema = new mongoose.Schema({
 	username: String,
 	email: { type: String , unique: true , required: true} ,
 	password: String,
-	gender: { type: String , required: true},
-	memberShip: {type: String , required: true , default: "free"},
-	accountExpiration: {type: Date , required: true},
+	gender: String,
+	memberShip: {type: String , default: "free"},
+	active: Boolean, 
+	googleId: String, 
+	accountExpiration: {type: Date , required: true ,default: Date.now() + 259200000},
 	numberOfAttempts: {type: Number , default: 1},
 	tests: [
        {

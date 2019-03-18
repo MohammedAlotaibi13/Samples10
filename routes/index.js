@@ -9,7 +9,6 @@ var middleware = require("../middleware/index")
 
 
 router.get("/" , function(req ,res){
-    
 	res.render("landingPage");
 })
 
@@ -162,8 +161,9 @@ router.get("/paymentResult" , function(req , res){
         res.render("payment/paymentStatus") 
   })
 
-router.get("/success/:id" , function(req , res){
+router.get("/success/:id/:memberShip" , function(req , res){
   // Check checkout status
+  console.log(req.params.memberShip)
   generateResult(req.query.resourcePath, (response) => {
     // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
     if(response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)){
@@ -172,13 +172,24 @@ router.get("/success/:id" , function(req , res){
         if(error){
           console.log(error)
         } else{
-        userInfo.memberShip = "Pro"
-        userInfo.numberOfAttempts = 15
-        userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
-        userInfo.save()
-        res.status(200)
-        req.flash("success" , " تم الدفع بنجاح")
-        res.redirect("/paymentResult" );
+         if (req.params.memberShip == "Pro"){
+           userInfo.memberShip = "Pro"
+           userInfo.numberOfAttempts = 15
+           userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
+           userInfo.save()
+           res.status(200)
+           req.flash("success" , " تم الدفع بنجاح")
+          res.redirect("/paymentResult" );
+         } else {
+           userInfo.memberShip = "gold"
+           userInfo.numberOfAttempts = 30
+           userInfo.accountExpiration = Date.now() + 8553600000 // 99 days
+           userInfo.save()
+           res.status(200)
+           req.flash("success" , " تم الدفع بنجاح")
+          res.redirect("/paymentResult" );
+         }
+        
         }
        })
        

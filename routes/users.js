@@ -1,9 +1,13 @@
 var express = require("express");
 var router  = express.Router();
 var User    = require("../models/user");
+var Verification = require("../models/Verification")
 var passport = require("passport");
-var nodemailer = require("nodemailer")
+var nodemailer = require("nodemailer");
+var crypto = require("crypto");
 var async    = require("async");
+var GoogleStrategy = require("passport-google-oauth20")
+
 
 
 router.get("/register" , function(req , res){
@@ -49,18 +53,44 @@ router.post("/register" , function(req , res){
               var newUser = new User()
               newUser.username = username;
               newUser.email = email;
+              newUser.active = false
               newUser.password = newUser.hashPassword(password)
               newUser.gender = gender;
-              newUser.accountExpiration = Date.now() + 259200000 // 3 days
               newUser.save(function(error , user){
                    if(error){
                     req.flash("error" , "اسم مستخدم مسجل سابقاً")
                     res.redirect("back")
                    } else {
-                    // sign in 
-                    passport.authenticate("local")(req , res , function(){
-                        res.redirect("/test");
-                    });
+                  var token = new Verification()
+                  token.userId = newUser.id;
+                  token.token = crypto.randomBytes(16).toString('hex')
+                  token.save(function(error){
+                    if (error) {
+                     req.flash("error" , "الرجاء المحاولة مجدداً") 
+                     res.redirect("back")
+                   }
+                  })
+
+                  var transporter = nodemailer.createTransport({
+                    service : "Gmail" , 
+                 auth: {
+                     user: "info@samples10.com",
+                     pass: process.env.PASSWORD
+                     }
+                  })
+                  var mailOptions = {
+                     to: newUser.email,
+                     from: "info@samples10.com",
+                     subject: "تنشيط الحساب",
+                     text : 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttp:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
+                  }
+                  transporter.sendMail(mailOptions, function(error){
+                    if (error) { return res.status(500).send({"error" : error.message})}
+                      res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                  })
+                    
+                    req.flash("success" , "تم إرسال رسالة تنشيط الى الإيميل المسجل")
+                    res.redirect("back")
                    }
               });
             }
@@ -71,6 +101,71 @@ router.post("/register" , function(req , res){
       
 });
 
+
+router.get("/conformation/:token" , function(req , res){
+  Verification.findOne({ token: req.params.token}, function(err, user) {
+    if (!user) {
+      req.flash('error', 'صلاحية الرابط انتهت');
+      return res.redirect("/redendVerification");
+    }
+    User.findById(user.userId , function(error , foundUser){
+    if(error){
+      req.flash("error" , "Prpblem with the server");
+      return res.redirect("back")
+    } else {
+      foundUser.active = true; 
+      foundUser.save();
+    }
+     req.flash("success" , "تم تنشيط الحساب بنجاح")
+     res.redirect("/signIn")
+    });
+});
+});
+
+router.get("/redendVerification" , function(req , res){
+  res.render("users/resendVerifaction");
+})
+
+
+router.post("/redendVerification" , function(req , res){
+  User.findOne({email: req.body.email} , function(error , user){
+    if(!user) {
+      req.flash("error" , "إيميل غير موجود")
+      res.redirect("back")
+    } else {
+       var token = new Verification()
+                  token.userId = user.id;
+                  token.token = crypto.randomBytes(16).toString('hex')
+                  token.save(function(error){
+                    if (error) {
+                     req.flash("error" , "الرجاء المحاولة مجدداً") 
+                     res.redirect("back")
+                   }
+                  })
+
+                  var transporter = nodemailer.createTransport({
+                    service : "Gmail" , 
+                 auth: {
+                     user: "info@samples10.com",
+                     pass: process.env.PASSWORD
+                     }
+                  })
+                  var mailOptions = {
+                     to: user.email,
+                     from: "info@samples10.com",
+                     subject: "تنشيط الحساب",
+                     text : 'مرحباً,\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttp:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
+                  }
+                  transporter.sendMail(mailOptions, function(error){
+                    if (error) { return res.status(500).send({"error" : error.message})}
+                      res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                  })
+                    
+                    req.flash("success" , "تم إرسال رسالة تنشيط الى الإيميل المسجل")
+                    res.redirect("back")
+    }
+  })
+})
 
 router.get("/signIn" , function(req ,res){
 	res.render("users/signInPage");
@@ -93,6 +188,15 @@ router.get("/logout" , function(req, res){
   res.redirect("/")
 });
 
+
+router.get("/google" , passport.authenticate("google" , {
+  scope: ["profile" , "email"]
+}));
+
+router.get("/google/redirect" , passport.authenticate("google" , { 
+   failureRedirect: '/signIn'}), function(req, res) {
+        res.redirect('/test');
+});
 
 // forget Passward
 router.get("/forgot" , function(req , res){
