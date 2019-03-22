@@ -5,7 +5,6 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var localStrategy = require("passport-local").Strategy;
 var User          = require("./models/user");
-var GoogleUser    = require("./models/googleUsers")
 var passportLocalMongoose = require("passport-local-mongoose");
 var nodemailer = require("nodemailer");
 var methodOverride = require("method-override");
