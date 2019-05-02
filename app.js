@@ -21,7 +21,6 @@ var MongoStore = require('connect-mongo')(session);
 var https       = require('https');
 var querystring = require('querystring');
 var GoogleStrategy = require("passport-google-oauth20");
-var MongoStore = require('connect-mongo')(session);
 
 
 // connect mongo database
