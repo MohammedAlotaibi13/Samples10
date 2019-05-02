@@ -21,12 +21,13 @@ var MongoStore = require('connect-mongo')(session);
 var https       = require('https');
 var querystring = require('querystring');
 var GoogleStrategy = require("passport-google-oauth20");
+var MongoStore = require('connect-mongo')(session);
 
 
 // connect mongo database
 mongoose.set('useNewUrlParser',true);
 mongoose.set('useCreateIndex',true);
-mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
+mongoose.connect(process.env.DATABASE)
 mongoose.set('useFindAndModify', false);
 
 app.use(express.static("public"));
@@ -37,10 +38,12 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
-app.use(require("express-session")({
+app.use(session({
     secret : "ilovemyself",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    ttl: 3 * 24 * 60 * 60
 }));
 app.use(passport.initialize());
 app.use(passport.session());
