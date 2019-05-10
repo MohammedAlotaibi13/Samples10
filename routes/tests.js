@@ -21,14 +21,14 @@ router.get("/instruction/:username" ,function(req, res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    }  else if (error) {
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
         console.log(userInfo)
       res.render("tests/instructions" , {userInfo: userInfo})
       }
-    }
   })
 })
 
@@ -39,10 +39,18 @@ router.get("/test" , middleware.isLoggedIn  ,function(req , res){
 router.get("/testOne/:username" , middleware.isLoggedIn , function(req , res){ 
      User.findOne({username: req.params.username} , function(error, userInfo){
       if (error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1 
-        userInfo.save()
+        if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
+        
         res.render("tests/testOne");
       }
      }); 
@@ -53,15 +61,21 @@ router.get("/testTwo/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+      req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
-         res.render("tests/testTwo");
+        if (userInfo.numberOfAttempts > 0 )  {
+             userInfo.numberOfAttempts -= 1 
+             userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
+      res.render("tests/testTwo");
       }
-    }
+    
   })
 });
 
@@ -70,15 +84,20 @@ router.get("/testThree/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
-        console.log(error)
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+          if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
          res.render("tests/testThree");
       }
-    }
+    
   })
 });
 
@@ -87,15 +106,20 @@ router.get("/testFour/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+         if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testFour");
       }
-    }
   })
 });
 
@@ -104,15 +128,20 @@ router.get("/testFive/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+      req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+          if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testFive");
       }
-    }
   })
 });
 
@@ -121,15 +150,20 @@ router.get("/testSix/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+         if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testSix");
       }
-    }
   })
 });
 
@@ -138,15 +172,20 @@ router.get("/testSeven/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+       if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testSeven");
       }
-    }
   })
 });
 
@@ -155,15 +194,20 @@ router.get("/testEight/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+      req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+         if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testEight");
       }
-    }
   })
 });
 
@@ -172,15 +216,20 @@ router.get("/testNine/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
+         if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testNine");
       }
-    }
   })
 });
 
@@ -189,16 +238,20 @@ router.get("/testTen/:username" , middleware.isLoggedIn , function(req , res){
     if(!userInfo){
       req.flash("error" , "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
        res.redirect("/test")
-    } else {
-      if(error){
+    } else if(error){
+       req.flash("error" , "حدث خطأ الرجاء المحاولة مجدداً")
+       res.redirect("/test")
         console.log(error)
       } else {
-        userInfo.numberOfAttempts -= 1
-        userInfo.save()
-        console.log(userInfo.numberOfAttempts)
+         if (userInfo.numberOfAttempts > 0 )  {
+          userInfo.numberOfAttempts -= 1 
+           userInfo.save()
+        } else {
+          userInfo.numberOfAttempts = 0
+          userInfo.save()
+        }
        res.render("tests/testTen");
       }
-    }
   })
 });
 
