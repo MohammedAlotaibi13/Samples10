@@ -88,37 +88,45 @@ passport.use(new localStrategy({
      });
 }))
 
-passport.use( new GoogleStrategy ({
+// passport.use( new GoogleStrategy ({
   
-  // option for google creditional 
-  callbackURL: "/google/redirect",
- clientID: process.env.CLIENTID,
- clientSecret: process.env.CLIENTSECRET
+//   // option for google creditional 
+//   callbackURL: "/google/redirect",
+//  clientID: "",
+//  clientSecret: ""
 
 
-},(accessToken, refreshToke, profile, done) => {
-  // check if we already have the same user 
-  User.findOne({googleId: profile.id}).then((currentUser) => {
-  if(currentUser){
-    // already have the user
-     done(null, currentUser)
+// },(accessToken, refreshToke, profile, done) => {
+//   // check if we already have the same user 
+//   User.findOne({googleId: profile.id}).then((currentUser) => {
+//   if(currentUser){
+//     // already have the user
+//     try {
+//      done(null, currentUser)
+//     } catch (error){
+//       console.log(error)
+//     }
+//     } else {
+//      // create new user
+//       new User ({
+//     username: profile.displayName,
+//     googleId: profile.id,
+//     email: profile.emails[0].value,
+//     gender: profile.gender
+//   }).save().then((newUser) =>{
+//     try{
+//       done(null, newUser)
+//     } catch (error){
+//       console.log(error)
+//     }
+    
+//   })
+//   }
 
-  } else {
-     // create new user 
-      new User ({
-    username: profile.displayName,
-    googleId: profile.id,
-    email: profile.emails[0].value,
-    gender: profile.gender
-  }).save().then((newUser) =>{
-    done(null, newUser)
-  })
-  }
-
-  })
+//   })
  
-})
-)
+// })
+// )
 
 app.use(function(req,res,next){
    res.locals.currentUser = req.user;
