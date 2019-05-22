@@ -82,7 +82,7 @@ router.post("/register", function(req, res) {
                                         to: newUser.email,
                                         from: "info@samples10.com",
                                         subject: "تنشيط الحساب",
-                                        text: 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttp:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
+                                        text: 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttps:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
                                     }
                                     transporter.sendMail(mailOptions, function(error) {
                                         if (error) {
