@@ -5,6 +5,7 @@ var paymentSchema = new mongoose.Schema({
    email: String,
    memberShip: String,
    paymentWay: String, 
+   sharedOpinion: {type: Boolean , default: false},
    timeOfPayment: Date,
    status: String
 })

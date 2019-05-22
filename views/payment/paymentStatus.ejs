@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <% include ../partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/paymentStatus.css">
     <title>نتيجة الطلب</title>
     <link rel="icon" href="/image/circleLogo.png">
-  </head>
-  <body>
-   <% include ../partails/subHeader.ejs %>
-   <div class="grid-container">
-   	 <div class="form-group row">
-	   	<div class="col-md-6">
-	   		<a href="/test" class="btn btn-success">الاختبارات</a>
-	   	</div>
-	   	<div class="col-md-6">
-	   		<a href="/profile/<%= currentUser.id %>" class="btn btn-primary">الحساب</a>
-	   	</div>
-      </div>
-   </div>
+</head>
+
+<body>
+    <% include ../partails/subHeader.ejs %>
+    <div class="grid-container">
+        <div class="form-group row">
+            <div class="col-md-6">
+                <a href="/test" class="btn btn-success">الاختبارات</a>
+            </div>
+            <div class="col-md-6">
+                <a href="/profile/<%= currentUser.id %>" class="btn btn-primary">الحساب</a>
+            </div>
+        </div>
+    </div>
 
 
- <% include ../partails/footer.ejs %>
+    <% include ../partails/footer.ejs %>
 </body>

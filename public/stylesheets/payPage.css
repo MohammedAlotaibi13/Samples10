@@ -19,5 +19,16 @@
  	margin-bottom: 20px;
  }
 
+h6 {
+	color: red;
+}
 
+#checkbox {
+	direction: rtl;
+	margin-bottom: 20px;
+}
+
+#checkbox a {
+	text-decoration: underline;
+}
 

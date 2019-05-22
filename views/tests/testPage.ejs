@@ -1,154 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <link rel="icon" href="/image/circleLogo.png">
+    <link rel="icon" href="/image/circleLogo.png">
     <% include ../partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/testPage.css">
     <title>الإختبارات | سامبلز </title>
-  
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-119528477-3');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-  </head>
-  <body>
+        gtag('config', 'UA-119528477-3');
+    </script>
+
+</head>
+
+<body>
 
     <% include ../partails/subHeader.ejs %>
- <div class="container">
-  	<div class="row">
-  		<% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-  		<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/one.png"  alt="first test">
-		  		<div class="card-body">	
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الأول</h5>
-		  		    <a href="/instruction/<%= currentUser.username%>" class="btn btn-primary">ابدأ الإختبار</a> 
-		  		    <a href="/result/Test%20One/test/<%= currentUser.id%>" class="btn btn-success">نتيجة الإختبار</a>
-		  		</div>	 
-		  	</div>
-		</div>
-		<% } %> 
-		<% if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold"){ %>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/two.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثاني</h5>
-		  			<a href="/testTwo/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Two/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
-		  		</div>
-		  	</div>
-		</div>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	   <img class="card-img-top" src="../image/three.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثالث</h5>
-		  			<a href="/testThree/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Three/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-	    </div>
-	 </div>
-	 <div class="row">
-	 	<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/four.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الرابع</h5>
-		  			<a href="/testFour/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Four/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	   <img class="card-img-top" src="../image/five.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الخامس</h5>
-		  			<a href="/testFive/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Five/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-		<% } %>
-		<% if(currentUser.memberShip == "gold") { %>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/six.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار السادس</h5>
-		  			<a href="/testSix/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Six/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-	</div>
-	<div class="row">
-	 	<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/seven.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار السابع</h5>
-		  			<a href="/testSeven/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Seven/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/eight.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثامن</h5>
-		  			<a href="/testEight/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Eight/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-		<div class="col-md-4">
-  	        <div class="card">
-		  	  <img class="card-img-top" src="../image/nine.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار التاسع</h5>
-		  			<a href="/testNine/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار </a>
-		  			<a href="/result/Test%20Nine/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		    </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-  	        <div class="card">
-  	          <img class="card-img-top" src="../image/ten.png"  alt="first test">
-		  		<div class="card-body">
-		  			<hr>
-		  			<h5 class="card-title" style="padding-bottom: 32px;">الإختبار العاشر</h5>
-		  			<a href="/testTen/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
-		  			<a href="/result/Test%20Ten/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
-		  		</div>
-		  </div>
-		</div>
-     </div>
-	  <% } %>
-  
-</div> 
-     
-     <% include ../partails/footer.ejs %>
+    <div class="container">
+        <div class="row">
+            <% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/one.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الأول</h5>
+                        <a href="/instruction/<%= currentUser.username%>" class="btn btn-primary">ابدأ الإختبار</a>
+                        <a href="/result/Test%20One/test/<%= currentUser.id%>" class="btn btn-success">نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold"){ %>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/two.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثاني</h5>
+                        <a href="/testTwo/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
+                        <a href="/result/Test%20Two/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/three.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثالث</h5>
+                        <a href="/testThree/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
+                        <a href="/result/Test%20Three/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/four.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الرابع</h5>
+                        <a href="/testFour/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
+                        <a href="/result/Test%20Four/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/five.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الخامس</h5>
+                        <a href="/testFive/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
+                        <a href="/result/Test%20Five/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% if(currentUser.memberShip == "gold") { %>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/six.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار السادس</h5>
+                        <a href="/testSix/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
+                        <a href="/result/Test%20Six/test/<%= currentUser.id %>" class="btn btn-success">نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/seven.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار السابع</h5>
+                        <a href="/testSeven/<%= currentUser.username %>" class="btn btn-primary"> ابدأ الإختبار</a>
+                        <a href="/result/Test%20Seven/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/eight.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار الثامن</h5>
+                        <a href="/testEight/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
+                        <a href="/result/Test%20Eight/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/nine.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار التاسع</h5>
+                        <a href="/testNine/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار </a>
+                        <a href="/result/Test%20Nine/test/<%= currentUser.id %>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="../image/ten.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">الإختبار العاشر</h5>
+                        <a href="/testTen/<%= currentUser.username %>" class="btn btn-primary">ابدأ الإختبار</a>
+                        <a href="/result/Test%20Ten/test/<%= currentUser.id%>" class="btn btn-success"> نتيجة الإختبار</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
+    <% include ../partails/footer.ejs %>
 
 
-  </body>
+</body>
