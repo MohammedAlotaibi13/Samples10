@@ -7,6 +7,7 @@ var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var async = require("async");
 var GoogleStrategy = require("passport-google-oauth20")
+var request = require("request")
 
 
 
@@ -360,7 +361,7 @@ function mailChimp(email, username, gender) {
         url: "https://us19.api.mailchimp.com/3.0/lists/5080ca4d5f",
         method: 'POST',
         headers: {
-            Authorization: 'auth b9da814936e125ac4963237dd0bfca1a-us19'
+            Authorization: process.env.MAILCHIMPAPI
         },
         body: postData
     }
