@@ -14,7 +14,19 @@ body {
 	border-radius: 15px ; 
 }
 
-
+.hot {
+    position: absolute;
+    top: -7px;
+    background: #F80;
+    color: #fff;
+    text-transform: uppercase;
+    z-index: 2;
+    padding: 2px 5px;
+    font-size: 9px;
+    border-radius: 2px;
+    right: 10px;
+    font-weight: 700;
+}
 
 #test-information {
 	text-align: center;
