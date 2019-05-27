@@ -78,6 +78,7 @@ router.post("/register", function(req, res) {
                                             pass: process.env.PASSWORD
                                         }
                                     })
+                                    //
                                     var mailOptions = {
                                         to: newUser.email,
                                         from: "info@samples10.com",
