@@ -24,7 +24,7 @@ var GoogleStrategy = require("passport-google-oauth20");
 var request = require("request")
 
 
-
+// data
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.DATABASE)
