@@ -28,7 +28,8 @@ var request = require("request")
 // data
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.DATABASE)
+//mongoose.connect(process.env.DATABASE)
+mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
 
 
 mongoose.set('useFindAndModify', false);

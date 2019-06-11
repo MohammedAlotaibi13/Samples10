@@ -25,14 +25,13 @@
     <div class="grid-container">
         <div class="item-1">
             <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
-            <h6>عرض خاص خصم ٥٠٪ حتى تاريخ ١٠ يونيو ٢٠١٩</h6>
         </div>
 
         <form method="post" onsubmit=" return isChecked()"" action="/pay/<%= currentUser.id %>"> <div class="form-group">
             <div class="item-2">
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="memberShipPicker" required>
-                    <option value="Gold">Gold (49.50 SAR)</option>
-                    <option value="Pro">Pro (39.50 SAR)</option>
+                    <option value="Gold">Gold (99 SAR)</option>
+                    <option value="Pro">Pro (79 SAR)</option>
                 </select>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="paymntMethod" required>
                     <option value="DebitCard">طريقة الدفع</option>
@@ -44,7 +43,6 @@
     <div class="form-group">
         <div class="text-right" id="checkbox">
             <input type="checkbox" name="terms" value="terms" id="terms"> أوافق على <a href="#" onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط والأحكام</a><br>
-            <input type="checkbox" name="opinion" value="true"> أرغب في مشاركة تقييمي عن الموقع مع إدارة الموقع
         </div>
         <div class="item-3">
             <input type="submit" class="btn btn-success form-control" value="دفع">
