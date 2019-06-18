@@ -25,10 +25,12 @@ var request = require("request")
 
 
 
-// data
+// dataa
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.DATABASE)
+
+
 
 
 
