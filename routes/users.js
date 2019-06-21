@@ -95,7 +95,7 @@ router.post("/register", function(req, res) {
                                     })
 
                                     req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-                                    res.redirect("back")
+                                    res.redirect("/test")
                                 }
                             });
                         }
@@ -167,14 +167,14 @@ router.post("/redendVerification", function(req, res) {
             transporter.sendMail(mailOptions, function(error) {
                 if (error) {
                     return res.status(500).send({
-                        "error": error.message
+                     
                     })
                 }
                 res.status(200).send("A verification email has been sent to" + newUser.email + ".")
             })
 
             req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-            res.redirect("back")
+           res.redirect("back")
         }
     })
 })
@@ -199,6 +199,11 @@ router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/")
 });
+
+// for spring test 
+router.get("/Ispring" , function(req , res){
+    res.render("users/Ispring")
+})
 
 
 router.get("/google", passport.authenticate("google", {
@@ -264,7 +269,7 @@ router.post("/forgot", function(req, res) {
                 done(err, 'done');
             });
         }
-    ], function(err) {
+    ], function(err, next) {
         if (err) return next(err);
         res.redirect('/forgot');
     });
