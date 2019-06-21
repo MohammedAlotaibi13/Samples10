@@ -95,7 +95,7 @@ router.post("/register", function(req, res) {
                                     })
 
                                     req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-                                    res.redirect("/test")
+                                    res.redirect("back")
                                 }
                             });
                         }
