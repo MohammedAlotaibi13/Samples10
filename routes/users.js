@@ -88,7 +88,7 @@ router.post("/register", function(req, res) {
                                     transporter.sendMail(mailOptions, function(error) {
                                         if (error) {
                                             return res.status(500).send({
-                                                "error": error.message
+                                                
                                             })
                                         }
                                         res.status(200).send("A verification email has been sent to" + newUser.email + ".")
