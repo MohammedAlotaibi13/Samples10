@@ -343,6 +343,10 @@ router.get("/testTen/:username", middleware.isLoggedIn, function(req, res) {
     })
 });
 
+router.get("/ispringg" , function(req , res){
+     res.render("tests/ispring");
+})
+
 // classmark code 
 router.post('/result', function(req, res) {
     //  var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");

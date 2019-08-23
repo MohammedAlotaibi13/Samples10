@@ -29,7 +29,8 @@ var request = require("request")
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise
- mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE)
+
 
 
 
