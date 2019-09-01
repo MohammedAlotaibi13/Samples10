@@ -29,7 +29,7 @@ var request = require("request")
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
+mongoose.connect(process.env.DATABASE)
 
 
 
