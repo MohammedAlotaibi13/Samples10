@@ -347,6 +347,10 @@ router.get("/ispringg" , function(req , res){
      res.render("tests/ispring");
 })
 
+router.get("/course" , function(req , res){
+     res.render("tests/course");
+})
+
 // classmark code 
 router.post('/result', function(req, res) {
     //  var headerHmacSignature = req.get("X-Classmarker-Hmac-Sha256");
