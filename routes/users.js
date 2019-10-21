@@ -8,6 +8,8 @@ var crypto = require("crypto");
 var async = require("async");
 var GoogleStrategy = require("passport-google-oauth20")
 var request = require("request")
+var key = require("./key.json")
+
 
 
 
@@ -37,7 +39,7 @@ router.post("/register", function(req, res) {
                 result.array().forEach((error) => {
                     req.flash("error", error.msg)
                 });
-                res.redirect("back");
+                return res.redirect("back");
             } else {
                 User.findOne({
                     email: email
@@ -47,7 +49,7 @@ router.post("/register", function(req, res) {
                     } else {
                         if (doc) {
                             req.flash("error", "إيميل مسجل سابقاً")
-                            res.redirect("back")
+                            return  res.redirect("back")
                         } else {
                             var newUser = new User()
                             newUser.username = username;
@@ -58,25 +60,30 @@ router.post("/register", function(req, res) {
                             newUser.save(function(error, user) {
                                 if (error) {
                                     req.flash("error", "اسم مستخدم مسجل سابقاً")
-                                    res.redirect("back")
+                                  return  res.redirect("back")
                                 } else {
                                     var token = new Verification()
                                     token.userId = newUser.id;
                                     token.token = crypto.randomBytes(16).toString('hex')
                                     token.save(function(error) {
                                         if (error) {
-                                            req.flash("error", "الرجاء المحاولة مجدداً")
-                                            res.redirect("back")
+                                           return  res.redirect("back")
                                         }
                                     })
                                     mailChimp(email, username, gender)
 
                                     var transporter = nodemailer.createTransport({
-                                        service: "Gmail",
+                                        name:  "www.samples10.com",
+                                        host: "smtp.gmail.com",
+                                        port: 465,
+                                        secure: true,
                                         auth: {
+                                            type: "OAuth2",
                                             user: "info@samples10.com",
-                                            pass: process.env.PASSWORD
-                                        }
+                                            serviceClient: key.client_id,
+                                            privateKey: key.private_key,
+    
+                                        },
                                     })
                                     //
                                     var mailOptions = {
@@ -85,17 +92,18 @@ router.post("/register", function(req, res) {
                                         subject: "تنشيط الحساب",
                                         text: 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttps:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
                                     }
-                                    transporter.sendMail(mailOptions, function(error) {
+                                    transporter.sendMail(mailOptions, function(error, sent) {
                                         if (error) {
                                             return res.status(500).send({
-                                                
+                                                error: error
                                             })
-                                        }
-                                        res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                                        }    
+                                    // res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                                     req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
+                                     res.redirect("back")
                                     })
 
-                                    req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-                                    res.redirect("back")
+                                    
                                 }
                             });
                         }
@@ -179,11 +187,16 @@ router.post("/redendVerification", function(req, res) {
                 }
             })
             var transporter = nodemailer.createTransport({
-                service: "Gmail",
+                name:  "www.samples10.com",
+                host: "smtp.gmail.com",
+                 port: 465,
+                secure: true,
                 auth: {
+                    type: "OAuth2",
                     user: "info@samples10.com",
-                    pass: process.env.PASSWORD
-                }
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
+                },
             })
             var mailOptions = {
                 to: user.email,
@@ -197,7 +210,7 @@ router.post("/redendVerification", function(req, res) {
                      
                     })
                 }
-                res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                //res.status(200).send("A verification email has been sent to" + newUser.email + ".")
             })
 
             req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
@@ -275,11 +288,16 @@ router.post("/forgot", function(req, res) {
         },
         function(token, user, done) {
             var smtpTransport = nodemailer.createTransport({
-                service: "Gmail",
+                name:  "www.samples10.com",
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
                 auth: {
+                    type: "OAuth2",
                     user: "info@samples10.com",
-                    pass: process.env.PASSWORD
-                }
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
+                },
             });
             var mailOptions = {
                 to: user.email,
@@ -353,11 +371,16 @@ router.post("/reset/:token", function(req, res) {
         },
         function(user, done) {
             var smtpTransport = nodemailer.createTransport({
-                service: 'Gmail',
+                name:  "www.samples10.com",
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
                 auth: {
-                    user: 'info@samples10.com',
-                    pass: process.env.PASSWORD
-                }
+                    type: "OAuth2",
+                    user: "info@samples10.com",
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
+                },
             });
             var mailOptions = {
                 to: user.email,

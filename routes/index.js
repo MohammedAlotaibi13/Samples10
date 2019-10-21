@@ -6,6 +6,8 @@ var querystring = require('querystring')
 var User = require("../models/user");
 var Payment = require("../models/payment");
 var middleware = require("../middleware/index")
+var key = require("./key.json")
+
 
 
 router.get("/", function(req, res) {
@@ -250,17 +252,17 @@ router.get("/message", function(req, res) {
 router.post("/send", function(req, res) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        name:  "www.samples10.com",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,// true for 465, false for other ports
         auth: {
-            user: 'info@samples10.com', // generated ethereal user
-            pass: process.env.PASSWORD // generated ethereal password
+           type: "OAuth2",
+           user: "info@samples10.com",
+           serviceClient: key.client_id,
+           privateKey: key.private_key,
         },
         // this only for localhost 
-        tls: {
-            rejectUnauthorized: false
-        }
     });
 
     // setup email data with unicode symbols
