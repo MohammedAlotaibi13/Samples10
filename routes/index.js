@@ -189,7 +189,6 @@ router.get("/success/:id/:memberShip", function(req, res) {
                         userInfo.numberOfAttempts = 15
                         userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
                         userInfo.save()
-                        res.status(200)
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     } else {
@@ -197,7 +196,6 @@ router.get("/success/:id/:memberShip", function(req, res) {
                         userInfo.numberOfAttempts = 30
                         userInfo.accountExpiration = Date.now() + 8553600000 // 99 days
                         userInfo.save()
-                        res.status(200)
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     }
