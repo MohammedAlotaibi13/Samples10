@@ -194,8 +194,8 @@ router.post("/redendVerification", function(req, res) {
                 auth: {
                     type: "OAuth2",
                     user: "info@samples10.com",
-                    serviceClient: process.env.GOOGLEKEYID,
-                    privateKey: process.env.GOOGLEPRIVATEKEY,
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
                 },
             })
             var mailOptions = {
@@ -295,8 +295,8 @@ router.post("/forgot", function(req, res) {
                 auth: {
                     type: "OAuth2",
                     user: "info@samples10.com",
-                    serviceClient: process.env.GOOGLEKEYID,
-                    privateKey: process.env.GOOGLEPRIVATEKEY,
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
                 },
             });
             var mailOptions = {
@@ -378,8 +378,8 @@ router.post("/reset/:token", function(req, res) {
                 auth: {
                     type: "OAuth2",
                     user: "info@samples10.com",
-                    serviceClient: process.env.GOOGLEKEYID,
-                    privateKey: process.env.GOOGLEPRIVATEKEY,
+                    serviceClient: key.client_id,
+                    privateKey: key.private_key,
                 },
             });
             var mailOptions = {

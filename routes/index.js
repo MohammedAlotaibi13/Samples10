@@ -267,8 +267,8 @@ router.post("/send", function(req, res) {
         auth: {
            type: "OAuth2",
            user: "info@samples10.com",
-           serviceClient: process.env.GOOGLEKEYID,
-           privateKey: process.env.GOOGLEPRIVATEKEY,
+           serviceClient: key.client_id,
+           privateKey: key.private_key,
         },
         // this only for localhost 
     });
