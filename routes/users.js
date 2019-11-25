@@ -297,6 +297,7 @@ router.post("/forgot", function(req, res) {
                     user: "info@samples10.com",
                     serviceClient: process.env.GOOGLEKEYID,
                     privateKey: process.env.GOOGLEPRIVATEKEY,
+                    
                 },
             });
             var mailOptions = {
