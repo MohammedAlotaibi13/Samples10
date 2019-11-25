@@ -210,7 +210,7 @@ router.post("/redendVerification", function(req, res) {
                      
                     })
                 }
-                //res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+               
             })
 
             req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
