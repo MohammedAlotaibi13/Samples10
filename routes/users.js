@@ -114,28 +114,6 @@ router.post("/register", function(req, res) {
 
 });
 
-
-// router.get("/conformation/:token", function(req, res) {
-//     Verification.findOne({
-//         token: req.params.token
-//     }, function(err, user) {
-//         if (!user) {
-//             req.flash('error', 'صلاحية الرابط انتهت');
-//             return res.redirect("/redendVerification");
-//         }
-//         User.findById(user.userId, function(error, foundUser) {
-//             if (error) {
-//                 req.flash("error", "Prpblem with the server");
-//                 return res.redirect("back")
-//             } else {
-//                 foundUser.active = true;
-//                 foundUser.save();
-//             }
-//         });
-//     });
-//     req.flash("success", "تم تنشيط الحساب بنجاح")
-//     res.redirect("/signIn")
-// });
 router.get("/conformation/:token", function(req, res) {
     Verification.findOne({
         token: req.params.token
