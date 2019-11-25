@@ -3,6 +3,7 @@ var router = express.Router();
 var nodemailer = require("nodemailer")
 var https = require('https');
 var querystring = require('querystring')
+const axios = require('axios');
 var User = require("../models/user");
 var Payment = require("../models/payment");
 var middleware = require("../middleware/index")
@@ -70,9 +71,7 @@ function generateCheckoutId(obj) {
 
     var path = '/v1/checkouts';
     var data = querystring.stringify({
-        'authentication.userId': process.env.USERID,
-        'authentication.password': process.env.PAYMENTPASSWORD,
-        'authentication.entityId': process.env.ENTITYID,
+        'entityId': process.env.ENTITYID,
         'amount': obj.amount,
         'currency': "SAR",
         'paymentType': 'DB',
@@ -85,6 +84,7 @@ function generateCheckoutId(obj) {
         'customer.givenName': 'name',
         'customer.surname': 'name',
         'billing.country': 'SA',
+
     });
     var options = {
         port: 443,
@@ -93,7 +93,8 @@ function generateCheckoutId(obj) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': data.length
+            'Content-Length': data.length,
+            'Authorization': process.env.AUTHORIZATIONTOKE
         }
     };
     var postRequest = https.request(options, function(res) {
@@ -128,7 +129,7 @@ router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, function(req, res
                 })
             } else {
                 generateCheckoutId({
-                    amount: '99',
+                    amount: '3',
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {
@@ -145,27 +146,35 @@ router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, function(req, res
 
 })
 
+function resultRequest(resourcePath, callback) {
+  var path = resourcePath;
+  path += '?entityId=' + process.env.ENTITYID
 
+  const url = `https://oppwa.com${path}`;
 
-function generateResult(resourcePath, callback) {
-    var path = resourcePath
-    path += '?authentication.userId=' + process.env.USERID;
-    path += '&authentication.password=' + process.env.PAYMENTPASSWORD;
-    path += '&authentication.entityId=' + process.env.ENTITYID;
-    var options = {
-        port: 443,
-        host: 'oppwa.com',
-        path: path,
-        method: 'GET',
-    };
-    var postRequest = https.request(options, function(res) {
-        res.setEncoding('utf8');
-        res.on('data', function(chunk) {
-            jsonRes = JSON.parse(chunk);
-            return callback(jsonRes);
-        });
+  axios
+    .get(url, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization:    process.env.AUTHORIZATIONTOKE,
+      },
+    })
+    .then(function(response) {
+      // handle success
+
+      try {
+        resDate = JSON.parse(response);
+      } catch (e) {
+        resData = response;
+        console.log(resData.data.id);
+      }
+
+      return callback(resData.data);
+    })
+    .catch(function(error) {
+      // handle error
+      console.log(error);
     });
-    postRequest.end();
 }
 
 
@@ -176,7 +185,8 @@ router.get("/paymentResult", function(req, res) {
 router.get("/success/:id/:memberShip", function(req, res) {
     // Check checkout status
     console.log(req.params.memberShip)
-    generateResult(req.query.resourcePath, (response) => {
+    resultRequest(req.query.resourcePath, (response) => {
+        console.log(response.result.code)
         // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
         if (response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)) {
             // Create Payment instance here
@@ -257,8 +267,8 @@ router.post("/send", function(req, res) {
         auth: {
            type: "OAuth2",
            user: "info@samples10.com",
-           serviceClient: key.client_id,
-           privateKey: key.private_key,
+           serviceClient: process.env.GOOGLEKEYID,
+           privateKey: process.env.GOOGLEPRIVATEKEY,
         },
         // this only for localhost 
     });
