@@ -51,8 +51,14 @@ router.get("/test", middleware.isLoggedIn, function(req, res) {
 })
 
 router.get("/testOne/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username
+     User.findOne({
+        username: req.params.username,
+        accountExpiration: {
+            $gt: Date.now()
+        },
+        numberOfAttempts: {
+            $gt: 0
+        }
     }, function(error, userInfo) {
         if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")

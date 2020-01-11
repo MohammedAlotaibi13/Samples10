@@ -76,32 +76,8 @@ body {
 	text-align: center;
 }
 
-}
 
-#test-section{
-
-	text-align: center;
-	margin-top: 55px;
-	margin-left: 250px;
-	margin-bottom: 100px;
-	margin-right: 0;
-		} 
-
-
-.image-border{
-   border: 1px solid black;
-   width: 50%;
-   margin-left:  80px;
-   border-radius: 50%;
-   padding: 40px;
-    
-}
-
-/*.col-4 h4 , p {
-	margin-right: 165px;
-	margin-top: 19px;
-}*/
-
+ 
 #computer-section {
  margin-top: 150px;
  margin-bottom: 100px;
@@ -130,6 +106,25 @@ body {
 	padding-top: 10px;
 	padding-bottom: 75px;
 }
+
+.carousel-item{
+	margin-top: 20px;
+	margin-bottom: 45px;
+}
+
+
+.carousel-indicators  .active{
+	background-color:    grey;
+}
+
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23808080' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23808080' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
 /* For desktop: */
 
 
