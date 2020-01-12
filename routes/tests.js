@@ -31,7 +31,7 @@ router.get("/instruction/:username", function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -60,7 +60,11 @@ router.get("/testOne/:username", middleware.isLoggedIn, function(req, res) {
             $gt: 0
         }
     }, function(error, userInfo) {
-        if (error) {
+         if (!userInfo) {
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
+            res.redirect("/test")
+        }
+         else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
             res.redirect("/test")
             console.log(error)
@@ -89,7 +93,7 @@ router.get("/testTwo/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -120,7 +124,7 @@ router.get("/testThree/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -150,7 +154,7 @@ router.get("/testFour/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -180,7 +184,7 @@ router.get("/testFive/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -210,7 +214,7 @@ router.get("/testSix/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -240,7 +244,7 @@ router.get("/testSeven/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -270,7 +274,7 @@ router.get("/testEight/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -300,7 +304,7 @@ router.get("/testNine/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -330,7 +334,7 @@ router.get("/testTen/:username", middleware.isLoggedIn, function(req, res) {
         }
     }, function(error, userInfo) {
         if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الأختبار  ")
+            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
             res.redirect("/test")
         } else if (error) {
             req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
