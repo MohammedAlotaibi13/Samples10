@@ -354,7 +354,7 @@ router.get("/testTen/:username", middleware.isLoggedIn, function(req, res) {
 });
 
 router.get("/ispringg" , function(req , res){
-     res.render("tests/ispring");
+     res.render("tests/TestOne/index");
 })
 
 router.get("/course" , function(req , res){
