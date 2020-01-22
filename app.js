@@ -27,10 +27,10 @@ const axios = require('axios');
 
 // dataa
 mongoose.set('useNewUrlParser', true);
-mongoose.set( 'useUnifiedTopology', true)
+mongoose.set( 'useUnifiedTopology', true )
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://Mohammed:Mt2001@ds163402.mlab.com:63402/samples10")
+mongoose.connect(process.env.DATABASE)
 
 
 mongoose.set('useFindAndModify', false);
