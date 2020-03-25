@@ -77,7 +77,8 @@ router.get("/testOne/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.save()
             }
 
-             res.render("tests/testOne");
+            // res.render("tests/testOne");
+            res.render("tests/TestOne/index");
         }
     });
 });
