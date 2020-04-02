@@ -108,7 +108,8 @@ router.get("/testTwo/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testTwo");
+            // res.render("tests/testTwo");
+             res.render("tests/TestTwo/index");
         }
 
     })
@@ -138,7 +139,8 @@ router.get("/testThree/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testThree");
+            // res.render("tests/testThree");
+            res.render("tests/TestThree/index");
         }
 
     })
@@ -169,7 +171,8 @@ router.get("/testFour/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testFour");
+            // res.render("tests/testFour");
+            res.render("tests/TestFour/index");
         }
     })
 });
@@ -199,7 +202,8 @@ router.get("/testFive/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testFive");
+            // res.render("tests/testFive");
+            res.render("tests/TestFive/index");
         }
     })
 });
@@ -229,7 +233,8 @@ router.get("/testSix/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testSix");
+            // res.render("tests/testSix");
+            res.render("tests/TestSix/index");
         }
     })
 });
@@ -259,7 +264,8 @@ router.get("/testSeven/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testSeven");
+            // res.render("tests/testSeven");
+            res.render("tests/TestSeven/index");
         }
     })
 });
@@ -289,7 +295,8 @@ router.get("/testEight/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testEight");
+            // res.render("tests/testEight");
+            res.render("tests/TestEight/index");
         }
     })
 });
@@ -319,7 +326,8 @@ router.get("/testNine/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testNine");
+            // res.render("tests/testNine");
+            res.render("tests/TestNine/index");
         }
     })
 });
@@ -349,7 +357,8 @@ router.get("/testTen/:username", middleware.isLoggedIn, function(req, res) {
                 userInfo.numberOfAttempts = 0
                 userInfo.save()
             }
-            res.render("tests/testTen");
+            // res.render("tests/testTen");
+            res.render("tests/TestTen/index");
         }
     })
 });
