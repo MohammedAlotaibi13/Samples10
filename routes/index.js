@@ -196,14 +196,14 @@ router.get("/success/:id/:memberShip", function(req, res) {
                 } else {
                     if (req.params.memberShip == "Pro") {
                         userInfo.memberShip = "Pro"
-                        userInfo.numberOfAttempts = 15
+                        userInfo.numberOfAttempts = 70
                         userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     } else {
                         userInfo.memberShip = "gold"
-                        userInfo.numberOfAttempts = 30
+                        userInfo.numberOfAttempts = 150
                         userInfo.accountExpiration = Date.now() + 8553600000 // 99 days
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
