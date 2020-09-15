@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="/image/circleLogo.png">
+    <% include ../partails/head.ejs %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/myBag.css">
+    <title>حقيبتي | سامبلز </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119528477-3');
+    </script>
+
+</head>
+
+<body>
+
+    <% include ../partails/subHeader.ejs %>
+    <div class="container">
+        <div class="row">
+            <% if(currentUser.memberShip == "free") { %>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/courseOne/<%= currentUser.username %>">
+                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
+                            <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/instruction/<%= currentUser.username%>">
+                        <img class="card-img-top" id="TestOne" src="../image/one.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
+                            <p class="card-text">اختبار تجريبي لجميع المهارات</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% } %>
+            <% if(currentUser.memberShip == "ProPlus"){ %>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/courseTwo/<%= currentUser.username %>">
+                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
+                            <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/Quizzes/<%= currentUser.username %>">
+                        <img class="card-img-top" id="QuizImage" src="../image/Quiz.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات القصيرة</h5>
+                            <p class="card-text">اختبارات قصيرة حسب المهار</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/instruction/<%= currentUser.username%>">
+                        <img class="card-img-top" id="TestOne" src="../image/one.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
+                            <p class="card-text">اختبار تجريبي لجميع المهارات</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <% } %>
+            <% if(currentUser.memberShip == "goldPlus") { %>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/courseTwo/<%= currentUser.username %>">
+                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
+                            <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/Quizzes/<%= currentUser.username %>">
+                        <img class="card-img-top" id="QuizImage" src="../image/Quiz.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات القصيرة</h5>
+                            <p class="card-text">اختبارات قصيرة حسب المهارة</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/trainingExamsPage/<%= currentUser.username%>">
+                        <img class="card-img-top" id="ExamImage" src="../image/Exam.png" alt="first test">
+                        <div class="card-body">
+                            <hr>
+                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات التجريبية</h5>
+                            <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% } %>
+
+        </div>
+        <script type="text/javascript">
+        </script>
+        <% include ../partails/footer.ejs %>
+</body>
+
+</html>

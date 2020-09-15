@@ -1,0 +1,69 @@
+/*nav style and body*/
+
+body {
+	font-family: 'Cairo', sans-serif;
+}
+
+nav {
+	direction: rtl;
+}
+
+li {
+	padding-left: 15px;
+}
+ 
+ /* End of nav style and body*/
+
+.card  {
+	width: 250px;
+	text-align: center;
+	margin: 30px 0 30px 50px ;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+}
+
+
+
+
+.card a {
+	padding: 0 25px 0 25px;
+    margin: 5px 0 0 0 ;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.card a:hover{
+	text-decoration: none;
+}
+ 
+#CourseImagese {
+	max-width: 80%;
+	height: auto;
+	margin-top: 23px;
+	margin-left: 15px;
+	margin-right: 25px;
+	margin-bottom: 5px;
+ }
+
+ #TestOne {
+	max-width: 50%;
+	height:auto;
+	margin-top: 15px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+
+#QuizImage {
+   
+   max-width: 95%;
+   height: auto;
+   margin-top: 10px;
+
+}
+
+#ExamImage {
+	max-width: 90%;
+	height: auto;
+	margin-top: 15px;
+}

@@ -4,47 +4,38 @@
 <head>
     <title>التعليمات</title>
     <% include ../partails/head.ejs %>
-        <link rel="stylesheet" type="text/css" href="../stylesheets/instruction.css">
-        <link rel="icon" href="/image/circleLogo.png">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
+    <link rel="stylesheet" type="text/css" href="../stylesheets/instruction.css">
+    <link rel="icon" href="/image/circleLogo.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-            gtag('config', 'UA-119528477-3');
-        </script>
+        gtag('config', 'UA-119528477-3');
+    </script>
 
 </head>
 
 <body>
 
     <div class="container">
-        <!-- <h3 class="h3 mb-3 font-weight-normal text-center d-none d-md-block" id="title" style="color: red;">تعليمات الاختبار</h3> -->
         <h3 class="h3 mb-3 font-weight-normal text-center" id="title" style="color: red;">تعليمات الاختبار</h3>
         <div class="row col-sm-12">
-            <!-- <div class="col-md-12 text-center d-none d-md-block"> -->
-                <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center">
                 <h4>١- عدد الأسئلة هي ١٠٠</h4>
-                <h4>٢- زمن الإختبار ساعتان و نصف</h4>
-                <h4>٣- مع بداية كل مقطع صوتي توجد <strong style="color: red;">٢٠</strong> ثانية فارغة تسمح لك بقراءة الأسئلة حول المقطع</h4>
-                <h4>٤- عند دخولك الاختبار سيتم احتساب المحاولة لذا يجب أن تكون مستعد قبل الدخول</h4>
+                <h4>٢- زمن الاختبار ساعتان و نصف</h4>
+                <h4>٣- عند دخولك الاختبار سيتم احتساب المحاولة لذا يجب أن تكون مستعد قبل الدخول</h4>
             </div>
-            <!--  <div class="col-sm-6 d-block d-sm-none">
-                    <h4>نأسف</h4>
-                    <h4>يلزمك شاشة آكبر لأداء الاختبار</h4>
-                    <a href="/test" class="btn btn-primary btn-lg">صفحة الأختبارات</a>
-                </div> -->
         </div>
         <div class="row">
-            <!-- <div class="col-md-12 text-center d-none d-md-block"> -->
-             <div class="col-md-12 text-center">
-                <a href="/test" class="btn btn-primary btn-lg">صفحة الإختبارات</a>
-                <a href="/testOne/<%= userInfo.username %>" class="btn btn-success btn-lg">ابدأ الاختبار</a>
+            <div class="col-md-12 text-center">
+                <a href="/myBag" class="btn btn-primary btn-lg">حقيبتي</a>
+                <a href="/Exam/examOne/<%= userInfo.username %>" class="btn btn-success btn-lg">ابدأ الاختبار</a>
             </div>
         </div>
     </div>

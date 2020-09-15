@@ -1,5 +1,5 @@
-body {
-	
+html, body {
+	    overflow-x: hidden;
 }
 .jumbotron{
 	text-align: center;
@@ -22,7 +22,7 @@ body {
     text-transform: uppercase;
     z-index: 2;
     padding: 2px 5px;
-    font-size: 9px;
+    font-size: 12px;
     border-radius: 2px;
     right: 10px;
     font-weight: 700;
@@ -43,7 +43,9 @@ body {
 	justify-content: space-around;
 }
 
- @media screen and (max-width: 759px){
+/* @media screen and (max-width: 759px){*/
+
+
 .one {
 	grid-row: 2/3
 }
@@ -57,11 +59,11 @@ body {
 .grid-container > div {
 	text-align: center;
 }
-}
+/*}*/
 
 /*desktop */
 
-@media screen and (min-width: 760px) {
+/*@media screen and (min-width: 760px) {*/
 
 .grid-container {
 	margin-top: 70px;
@@ -82,6 +84,11 @@ body {
  margin-top: 150px;
  margin-bottom: 100px;
 
+}
+
+#computer-section img {
+	max-width: 100%;
+	height: auto;
 }
 
 #text {
@@ -124,7 +131,14 @@ body {
 .carousel-control-next-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23808080' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
+/*}*/
+h6 {
+	color: red;
+}
 
+#discount {
+	text-decoration: line-through;
+}
 /* For desktop: */
 
 

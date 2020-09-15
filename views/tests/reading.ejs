@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="/image/circleLogo.png">
+    <% include ../partails/head.ejs %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/grammar.css">
+    <title>Reading| سامبلز </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119528477-3');
+    </script>
+
+</head>
+
+<body>
+
+    <% include ../partails/subHeader.ejs %>
+    <div class="container">
+        <div class="row">
+             <div class="col-md-4">
+                 <div class="card">
+                    <a href="/reading/quizOne/<%= currentUser.username %>">
+                    <img class="card-img-top" src="../image/OneBlue.png">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">Quiz One</h5> 
+                    </div>
+                </a>
+                </div>
+            </div> 
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="/reading/quizTwo/<%= currentUser.username %>">
+                    <img class="card-img-top" id="Reading"  src="../image/TwoBlue.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;"> Quiz Two</h5>
+                    </div>
+                     </a>
+                </div>
+            </div>
+             <div class="col-md-4">
+                <div class="card">
+                    <a href="/reading/quizThree/<%= currentUser.username%>">
+                    <img class="card-img-top" id="Grammar" src="../image/ThreeBlue.png" alt="first test">
+                    <div class="card-body">
+                        <hr>
+                        <h5 class="card-title" style="padding-bottom: 32px;">Quiz Three</h5>
+                    </div>
+                     </a>
+                </div>
+            </div>
+
+    </div>
+</div>
+    <script type="text/javascript">
+</script>
+<% include ../partails/footer.ejs %>
+</body>
+</html>

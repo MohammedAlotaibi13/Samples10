@@ -16,8 +16,11 @@
                   <li class="nav-item">
                       <a class="nav-link" href="/signIn">اختبار تجريبي</a>
                   </li>
-                  <% } else { %>
+                  <%  } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
                   <a class="nav-link" href="/test">اختبار تجريبي</a>
+
+                  <%  } else { %>
+                  <a class="nav-link" href="/myBag">حقيبتي</a>
                   <% } %>
                   <li class="nav-item">
                       <a class="nav-link" href="#price">الأسعار</a>
@@ -39,7 +42,7 @@
                           <a class="dropdown-item" href="/logout">خروج</a>
                       </div>
                   </li>
-                  <% if(currentUser.memberShip == "free" || currentUser.memberShip == "Pro") { %>
+                  <% if(currentUser.memberShip == "free" || currentUser.memberShip == "ProPlus" || currentUser.memberShip == "Pro") { %>
                   <li class="nav-item">
                       <a href="/pay/<%= currentUser.id %>" class="nav-link  btn btn-outline-success" id="upgradeButton">ترقية العضوية </a>
                       <% } %>

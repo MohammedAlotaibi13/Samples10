@@ -24,8 +24,7 @@ router.post("/register", function(req, res) {
     var password = req.body.password;
     var confirmPassword = req.body.confirm;
     var gender = req.body.gender;
-
-
+    var userName = username.replace(/\s+/g, '')
 
     //validatation 
     req.checkBody('email', 'الرجاء كتابة الإيمل  ').notEmpty()
@@ -49,10 +48,10 @@ router.post("/register", function(req, res) {
                     } else {
                         if (doc) {
                             req.flash("error", "إيميل مسجل سابقاً")
-                            return  res.redirect("back")
+                            return res.redirect("back")
                         } else {
                             var newUser = new User()
-                            newUser.username = username;
+                            newUser.username = userName;
                             newUser.email = email;
                             newUser.active = false
                             newUser.password = newUser.hashPassword(password)
@@ -60,20 +59,20 @@ router.post("/register", function(req, res) {
                             newUser.save(function(error, user) {
                                 if (error) {
                                     req.flash("error", "اسم مستخدم مسجل سابقاً")
-                                  return  res.redirect("back")
+                                    return res.redirect("back")
                                 } else {
                                     var token = new Verification()
                                     token.userId = newUser.id;
                                     token.token = crypto.randomBytes(16).toString('hex')
                                     token.save(function(error) {
                                         if (error) {
-                                           return  res.redirect("back")
+                                            return res.redirect("back")
                                         }
                                     })
                                     mailChimp(email, username, gender)
 
                                     var transporter = nodemailer.createTransport({
-                                        name:  "www.samples10.com",
+                                        name: "www.samples10.com",
                                         host: "smtp.gmail.com",
                                         port: 465,
                                         secure: true,
@@ -82,7 +81,7 @@ router.post("/register", function(req, res) {
                                             user: "info@samples10.com",
                                             serviceClient: key.client_id,
                                             privateKey: key.private_key,
-    
+
                                         },
                                     })
                                     //
@@ -97,13 +96,13 @@ router.post("/register", function(req, res) {
                                             return res.status(500).send({
                                                 error: error
                                             })
-                                        }    
-                                    // res.status(200).send("A verification email has been sent to" + newUser.email + ".")
-                                     req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-                                     res.redirect("back")
+                                        }
+                                        // res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                                        req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
+                                        res.redirect("back")
                                     })
 
-                                    
+
                                 }
                             });
                         }
@@ -116,30 +115,30 @@ router.post("/register", function(req, res) {
 
 router.get("/conformation/:token", function(req, res) {
     Verification.findOne({
-        token: req.params.token
-    })
-    .exec()
-    .then(user => {
-        if(!user) {
-            req.flash('error', 'صلاحية الرابط انتهت');
-            return res.redirect("/redendVerification");
-        }
-        User.findById(user.userId)
+            token: req.params.token
+        })
         .exec()
-        .then(foundUser => {
-            foundUser.active = true;
-            return foundUser.save();
-        }).then(result => {
-            req.flash("success", "تم تنشيط الحساب بنجاح")
-            res.redirect("/signIn")
+        .then(user => {
+            if (!user) {
+                req.flash('error', 'صلاحية الرابط انتهت');
+                return res.redirect("/redendVerification");
+            }
+            User.findById(user.userId)
+                .exec()
+                .then(foundUser => {
+                    foundUser.active = true;
+                    return foundUser.save();
+                }).then(result => {
+                    req.flash("success", "تم تنشيط الحساب بنجاح")
+                    res.redirect("/signIn")
+                }).catch(err => {
+                    req.flash("error", "Prpblem with the server");
+                    return res.redirect("back")
+                })
         }).catch(err => {
             req.flash("error", "Prpblem with the server");
             return res.redirect("back")
         })
-    }).catch(err => {
-        req.flash("error", "Prpblem with the server");
-        return res.redirect("back")
-    })
 });
 
 router.get("/redendVerification", function(req, res) {
@@ -165,9 +164,9 @@ router.post("/redendVerification", function(req, res) {
                 }
             })
             var transporter = nodemailer.createTransport({
-                name:  "www.samples10.com",
+                name: "www.samples10.com",
                 host: "smtp.gmail.com",
-                 port: 465,
+                port: 465,
                 secure: true,
                 auth: {
                     type: "OAuth2",
@@ -185,14 +184,14 @@ router.post("/redendVerification", function(req, res) {
             transporter.sendMail(mailOptions, function(error) {
                 if (error) {
                     return res.status(500).send({
-                     
+
                     })
                 }
-               
+
             })
 
             req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-           res.redirect("back")
+            res.redirect("back")
         }
     })
 })
@@ -204,12 +203,13 @@ router.get("/signIn", function(req, res) {
 // logIn logic
 
 router.post("/signIn", passport.authenticate('local', {
-    successRedirect: '/test',
+    successRedirect: '/',
     failureRedirect: '/signIn',
     failureFlash: true
 }), function(req, res) {
 
 });
+
 
 
 // logout 
@@ -219,9 +219,6 @@ router.get("/logout", function(req, res) {
 });
 
 // for spring test 
-router.get("/Ispring" , function(req , res){
-    res.render("users/Ispring")
-})
 
 
 router.get("/google", passport.authenticate("google", {
@@ -266,7 +263,7 @@ router.post("/forgot", function(req, res) {
         },
         function(token, user, done) {
             var smtpTransport = nodemailer.createTransport({
-                name:  "www.samples10.com",
+                name: "www.samples10.com",
                 host: "smtp.gmail.com",
                 port: 465,
                 secure: true,
@@ -349,7 +346,7 @@ router.post("/reset/:token", function(req, res) {
         },
         function(user, done) {
             var smtpTransport = nodemailer.createTransport({
-                name:  "www.samples10.com",
+                name: "www.samples10.com",
                 host: "smtp.gmail.com",
                 port: 465,
                 secure: true,
@@ -364,7 +361,7 @@ router.post("/reset/:token", function(req, res) {
                 to: user.email,
                 from: 'info@samples10.com',
                 subject: 'تم تغير كلمة المرور',
-                text: 'Hello,\n\n' +
+                text: 'مرحباً,\n\n' +
                     'هذه رسالة تاكيدية ان كلمة المرور للحساب ' + user.email + ' تم تغييرها.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {

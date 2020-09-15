@@ -8,7 +8,11 @@
     <link rel="icon" href="/image/circleLogo.png">
 
     <!-- Mailchimp integration -->
- <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/3643025a90919e057831480f2/d5cdd3337aea40cb469e9cfbf.js");</script>
+    <script id="mcjs">
+        ! function(c, h, i, m, p) {
+            m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p)
+        }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/3643025a90919e057831480f2/d5cdd3337aea40cb469e9cfbf.js");
+    </script>
 </head>
 
 <body>
@@ -27,24 +31,24 @@
             <div class="form-group row">
                 <div class="col-sm-10">
                     <% if(foundPayment.memberShip == "Pro") { %>
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">79</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">165</label>
                 </div>
                 <label for="inputPassword3" class="col-sm-2 col-form-label"> : السعر <label>
             </div>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label"> 45 يوم </label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"> 30 يوم </label>
                 </div>
-                <label class="col-sm-2 col-form-label"> : مدة الحساب </label>
+                <label class="col-sm-2 col-form-label"> : صلاحية الحساب </label>
             </div>
             <div class="form-group row">
         </form>
         <div class="col-md-10">
             <div>
-                <label for="inputEmail3" class="col-sm-2 col-form-label"> 15 </label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"> الدورة التدريبية</label>
             </div>
         </div>
-        <label class="col-sm-2 col-form-label">: المحاولات</label>
+        <label class="col-sm-2 col-form-label">: الباقة تشمل</label>
     </div>
     <% } else { %>
     <label for="inputEmail3" class="col-sm-2 col-form-label">99</label>
@@ -53,35 +57,36 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label"> 99 يوم </label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"> 65 يوم </label>
                 </div>
-                <label class="col-sm-2 col-form-label"> : مدة الحساب </label>
+                <label class="col-sm-2 col-form-label"> : صلاحية الحساب </label>
             </div>
             <div class="form-group row">
                 </form>
                 <div class="col-md-10">
                     <div>
-                        <label for="inputEmail3" class="col-sm-2 col-form-label"> 30 </label>
+                        <label for="inputEmail3" class="col-sm-2 col-form-label"> الدورة التدريبية + خمس اختبارات تجريبية </label>
                     </div>
                 </div>
-                <label class="col-sm-2 col-form-label">: المحاولات</label>
+                <label class="col-sm-2 col-form-label">: الباقة تشمل</label>
             </div>
             <% } %>
             </div>
             <% if(foundPayment.paymentWay == "DebitCard") { %>
             <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
-                            <script>
-                    var wpwlOptions = {
-                        style: "card"
-                    }
-                </script>
+            <script>
+                var wpwlOptions = {
+                    style: "card"
+                }
+            </script>
             <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
-            <form action="https://www.samples10.com/success/<%= currentUser.id %>/<%= foundPayment.memberShip %>" class="paymentWidgets" data-brands=" MADA"></form>
+            <form action="https://www.samples10.com/success/<%= currentUser.id %>/<%= foundPayment.memberShip %>" class="paymentWidgets" data-brands="MADA"></form>
             <% } else { %>
             <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الحسابات البنكية</h3>
             <div class="container">
 
                 <p class="text-right">جميع الحسابات بأسم محمد عائض العتيبي</p>
+                <p class="text-right">بعد إتمام الحوالة يرجى مراستلنا عالى هذا <a href="/message" style="text-decoration: underline;">الرابط</a></p>
                 <p class="text-right">سيتم تفعيل الحساب في حال استقبال الحوالة مباشرةً</p>
                 <table class="table table-bordered">
                     <thead>

@@ -116,7 +116,7 @@ router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, function(req, res
         } else {
             if (req.params.memberShip == "Pro") {
                 generateCheckoutId({
-                    amount: '79',
+                    amount: '165',
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {
@@ -147,34 +147,34 @@ router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, function(req, res
 })
 
 function resultRequest(resourcePath, callback) {
-  var path = resourcePath;
-  path += '?entityId=' + process.env.ENTITYID
+    var path = resourcePath;
+    path += '?entityId=' + process.env.ENTITYID
 
-  const url = `https://oppwa.com${path}`;
+    const url = `https://oppwa.com${path}`;
 
-  axios
-    .get(url, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:    process.env.AUTHORIZATIONTOKE,
-      },
-    })
-    .then(function(response) {
-      // handle success
+    axios
+        .get(url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization:    process.env.AUTHORIZATIONTOKE,
+            },
+        })
+        .then(function(response) {
+            // handle success
 
-      try {
-        resDate = JSON.parse(response);
-      } catch (e) {
-        resData = response;
-        console.log(resData.data.id);
-      }
+            try {
+                resDate = JSON.parse(response);
+            } catch (e) {
+                resData = response;
+                console.log(resData.data.id);
+            }
 
-      return callback(resData.data);
-    })
-    .catch(function(error) {
-      // handle error
-      console.log(error);
-    });
+            return callback(resData.data);
+        })
+        .catch(function(error) {
+            // handle error
+            console.log(error);
+        });
 }
 
 
@@ -195,16 +195,16 @@ router.get("/success/:id/:memberShip", function(req, res) {
                     console.log(error)
                 } else {
                     if (req.params.memberShip == "Pro") {
-                        userInfo.memberShip = "Pro"
-                        userInfo.numberOfAttempts = 70
-                        userInfo.accountExpiration = Date.now() + 3888000000 // 45 days
+                        userInfo.memberShip = "ProPlus"
+                        userInfo.numberOfAttempts = 1000
+                        userInfo.accountExpiration = Date.now() + 2592000000 // 30 days
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     } else {
-                        userInfo.memberShip = "gold"
-                        userInfo.numberOfAttempts = 150
-                        userInfo.accountExpiration = Date.now() + 8553600000 // 99 days
+                        userInfo.memberShip = "goldPlus"
+                        userInfo.numberOfAttempts = 1000
+                        userInfo.accountExpiration = Date.now() + 5616000000 // 99 days
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
@@ -260,15 +260,15 @@ router.get("/message", function(req, res) {
 router.post("/send", function(req, res) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        name:  "www.samples10.com",
+        name: "www.samples10.com",
         host: "smtp.gmail.com",
         port: 465,
-        secure: true,// true for 465, false for other ports
+        secure: true, // true for 465, false for other ports
         auth: {
-           type: "OAuth2",
-           user: "info@samples10.com",
-           serviceClient: key.client_id,
-           privateKey: key.private_key,
+            type: "OAuth2",
+            user: "info@samples10.com",
+            serviceClient: key.client_id,
+            privateKey: key.private_key,
         },
         // this only for localhost 
     });
