@@ -40,193 +40,6 @@ router.get("/myBag", middleware.isLoggedIn, function(req, res) {
     res.render("tests/myBag")
 });
 
-router.get("/testOne/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-
-            // res.render("tests/testOne");
-            res.render("tests/TestOne/index");
-        }
-    });
-});
-
-router.get("/testTwo/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testTwo");
-            res.render("tests/TestTwo/index");
-        }
-
-    })
-});
-
-router.get("/testThree/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testThree");
-            res.render("tests/TestThree/index");
-        }
-
-    })
-});
-
-router.get("/testFour/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testFour");
-            res.render("tests/TestFour/index");
-        }
-    })
-});
-
-router.get("/testFive/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testFive");
-            res.render("tests/TestFive/index");
-        }
-    })
-});
-
-router.get("/testSix/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testSix");
-            res.render("tests/TestSix/index");
-        }
-    })
-});
 
 router.get("/testSeven/:username", middleware.isLoggedIn, function(req, res) {
     User.findOne({
@@ -496,7 +309,7 @@ router.get("/listening/quizOne/:username", middleware.isLoggedIn, function(req, 
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/listening/quizOne");
+            res.render("tests/Quizzes/listening/quizOne/index");
         }
     })
 });
@@ -520,7 +333,7 @@ router.get("/listening/quizTwo/:username", middleware.isLoggedIn, function(req, 
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/listening/quizTwo");
+            res.render("tests/Quizzes/listening/quizTwo/index");
         }
     })
 });
@@ -545,7 +358,7 @@ router.get("/listening/quizThree/:username", middleware.isLoggedIn, function(req
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/listening/quizThree");
+            res.render("tests/Quizzes/listening/quizThree/index");
         }
     })
 });
@@ -569,7 +382,7 @@ router.get("/reading/quizOne/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/reading/quizOne");
+            res.render("tests/Quizzes/reading/quizOne/index");
         }
     })
 });
@@ -593,7 +406,7 @@ router.get("/reading/quizTwo/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/reading/quizTwo");
+            res.render("tests/Quizzes/reading/quizTwo/index");
         }
     })
 });
@@ -617,7 +430,7 @@ router.get("/reading/quizThree/:username", middleware.isLoggedIn, function(req, 
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/reading/quizThree");
+            res.render("tests/Quizzes/reading/quizThree/index");
         }
     })
 });
@@ -642,7 +455,7 @@ router.get("/grammar/quizOne/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/grammar/quizOne");
+            res.render("tests/Quizzes/grammar/quizOne/index");
         }
     })
 });
@@ -667,7 +480,7 @@ router.get("/grammar/quizTwo/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/grammar/quizTwo");
+            res.render("tests/Quizzes/grammar/quizTwo/index");
         }
     })
 });
@@ -692,7 +505,7 @@ router.get("/grammar/quizThree/:username", middleware.isLoggedIn, function(req, 
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/grammar/quizThree");
+            res.render("tests/Quizzes/grammar/quizThree/index");
         }
     })
 });
@@ -717,7 +530,7 @@ router.get("/writing/quizOne/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/writing/quizOne");
+            res.render("tests/Quizzes/writing/quizOne/index");
         }
     })
 });
@@ -742,7 +555,7 @@ router.get("/writing/quizTwo/:username", middleware.isLoggedIn, function(req, re
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/writing/quizTwo");
+            res.render("tests/Quizzes/writing/quizTwo/index");
         }
     })
 });
@@ -767,7 +580,7 @@ router.get("/writing/quizThree/:username", middleware.isLoggedIn, function(req, 
             console.log(error)
         } else {
 
-            res.render("tests/Quizzes/writing/quizThree");
+            res.render("tests/Quizzes/writing/quizThree/index");
         }
     })
 });
@@ -816,7 +629,7 @@ router.get("/Exam/examOne/:username", middleware.isLoggedIn, function(req, res) 
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examOne");
+            res.render("tests/Exams/examOne/index");
         }
     })
 });
@@ -842,7 +655,7 @@ router.get("/Exam/examTwo/:username", middleware.isLoggedIn, function(req, res) 
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examTwo");
+            res.render("tests/Exams/examTwo/index");
         }
     })
 });
@@ -867,7 +680,7 @@ router.get("/Exam/examThree/:username", middleware.isLoggedIn, function(req, res
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examThree");
+            res.render("tests/Exams/examThree/index");
         }
     })
 });
@@ -892,7 +705,7 @@ router.get("/Exam/examFour/:username", middleware.isLoggedIn, function(req, res)
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examFour");
+            res.render("tests/Exams/examFour/index");
         }
     })
 });
@@ -917,7 +730,7 @@ router.get("/Exam/examFive/:username", middleware.isLoggedIn, function(req, res)
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examFive");
+            res.render("tests/Exams/examFive/index");
         }
     })
 });
@@ -942,7 +755,7 @@ router.get("/Exam/examSix/:username", middleware.isLoggedIn, function(req, res) 
             console.log(error)
         } else {
 
-            res.render("tests/Exams/examSix");
+            res.render("tests/Exams/examSix/index");
         }
     })
 });
