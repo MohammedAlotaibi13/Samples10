@@ -54,7 +54,7 @@
                 </div>
             </div>
             <% } %>
-            <% if(currentUser.memberShip == "ProPlus"){ %>
+            <% if(currentUser.memberShip == "ProPlus" || currentUser.memberShip == "Pro" ){ %>
             <div class="col-md-4">
                 <div class="card">
                     <a href="/courseTwo/<%= currentUser.username %>">
@@ -93,7 +93,7 @@
             </div>
 
             <% } %>
-            <% if(currentUser.memberShip == "goldPlus") { %>
+            <% if(currentUser.memberShip == "goldPlus" ||  currentUser.memberShip == "gold") { %>
             <div class="col-md-4">
                 <div class="card">
                     <a href="/courseTwo/<%= currentUser.username %>">

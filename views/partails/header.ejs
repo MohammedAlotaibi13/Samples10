@@ -14,11 +14,8 @@
                   </li>
                   <% if(!currentUser) { %>
                   <li class="nav-item">
-                      <a class="nav-link" href="/signIn">اختبار تجريبي</a>
+                      <a class="nav-link" href="/signIn">حقيبتي</a>
                   </li>
-                  <%  } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-                  <a class="nav-link" href="/test">اختبار تجريبي</a>
-
                   <%  } else { %>
                   <a class="nav-link" href="/myBag">حقيبتي</a>
                   <% } %>

@@ -30,7 +30,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set( 'useUnifiedTopology', true )
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE);
 mongoose.set('useFindAndModify', false);
 
 app.use(express.static("public"));

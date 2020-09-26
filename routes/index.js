@@ -195,14 +195,14 @@ router.get("/success/:id/:memberShip", function(req, res) {
                     console.log(error)
                 } else {
                     if (req.params.memberShip == "Pro") {
-                        userInfo.memberShip = "ProPlus"
+                        userInfo.memberShip = "Pro"
                         userInfo.numberOfAttempts = 1000
                         userInfo.accountExpiration = Date.now() + 2592000000 // 30 days
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     } else {
-                        userInfo.memberShip = "goldPlus"
+                        userInfo.memberShip = "gold"
                         userInfo.numberOfAttempts = 1000
                         userInfo.accountExpiration = Date.now() + 5616000000 // 99 days
                         userInfo.save()

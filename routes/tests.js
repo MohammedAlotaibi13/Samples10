@@ -41,129 +41,6 @@ router.get("/myBag", middleware.isLoggedIn, function(req, res) {
 });
 
 
-router.get("/testSeven/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testSeven");
-            res.render("tests/TestSeven/index");
-        }
-    })
-});
-
-router.get("/testEight/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testEight");
-            res.render("tests/TestEight/index");
-        }
-    })
-});
-
-router.get("/testNine/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testNine");
-            res.render("tests/TestNine/index");
-        }
-    })
-});
-
-router.get("/testTen/:username", middleware.isLoggedIn, function(req, res) {
-    User.findOne({
-        username: req.params.username,
-        accountExpiration: {
-            $gt: Date.now()
-        },
-        numberOfAttempts: {
-            $gt: 0
-        }
-    }, function(error, userInfo) {
-        if (!userInfo) {
-            req.flash("error", "انتهت عضوية الحساب او استنفذت عدد محاولات الإختبار  ")
-            res.redirect("/test")
-        } else if (error) {
-            req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
-            res.redirect("/test")
-            console.log(error)
-        } else {
-            if (userInfo.numberOfAttempts > 0) {
-                userInfo.numberOfAttempts -= 1
-                userInfo.save()
-            } else {
-                userInfo.numberOfAttempts = 0
-                userInfo.save()
-            }
-            // res.render("tests/testTen");
-            res.render("tests/TestTen/index");
-        }
-    })
-});
 
 
 //  New features and Course 
@@ -779,7 +656,7 @@ router.get("/courseOne/:username", middleware.isLoggedIn, function(req, res) {
             console.log(error)
         } else {
 
-            res.render("tests/course");
+            res.render("tests/CourseFree/index");
         }
     })
 })
@@ -803,7 +680,7 @@ router.get("/courseTwo/:username", middleware.isLoggedIn, function(req, res) {
             console.log(error)
         } else {
 
-            res.render("tests/paidCourse");
+            res.render("tests/CoursePaid/index");
         }
     })
 })

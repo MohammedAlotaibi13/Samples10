@@ -32,8 +32,6 @@
             <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للاختبار من خلال الدورة التدريبية و مجموعة متعددة من الاختبارات التجريبية <br>المحاكاة من اختبار ستيب</p>
             <% if(!currentUser) { %>
             <a class="btn btn-success btn-lg" href="/register" role="button">ابدأ الآن</a>
-            <% } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-            <a class="btn btn-success btn-lg" href="/test" role="button">ابدأ الآن</a>
             <% } else { %>
             <a class="btn btn-success btn-lg" href="/myBag" role="button">ابدأ الآن</a>
             <% } %>
@@ -56,8 +54,6 @@
                 </p>
                 <% if(!currentUser) { %>
                 <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
-                <% } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-                <a href="/test" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
                 <%  } else {    %>
                 <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
                 <% } %>
@@ -80,8 +76,6 @@
                 </p>
                 <% if(!currentUser) { %>
                 <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
-                <% } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-                <a href="/test" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
                 <%  } else {    %>
                 <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
                 <% } %>
@@ -167,8 +161,6 @@
                         <p class="card-text"> الدورة التدريبية <br> صلاحية الحساب 30 يوم <br></p>
                         <% if(!currentUser) { %>
                         <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <% } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-                        <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
                         <% } else {  %>
                         <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
                         <%  } %>
@@ -186,8 +178,6 @@
                         <p class="card-text">الدورة التدريبية<br> خمس اختبارات تجريية مختلفة <br> صلاحية الحساب 65 يوم</p>
                         <% if(!currentUser) { %>
                         <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <% } else if(currentUser.memberShip == "Pro" || currentUser.memberShip == "gold") { %>
-                        <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
                         <% } else {  %>
                         <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
                         <%  } %>

@@ -203,7 +203,7 @@ router.get("/signIn", function(req, res) {
 // logIn logic
 
 router.post("/signIn", passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/myBag',
     failureRedirect: '/signIn',
     failureFlash: true
 }), function(req, res) {
