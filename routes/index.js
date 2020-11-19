@@ -13,7 +13,6 @@ var key = require("./key.json")
 
 router.get("/", function(req, res) {
     res.render("landingPage");
-    
 })
 
 router.get("/about", function(req, res) {
