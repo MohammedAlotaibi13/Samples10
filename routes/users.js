@@ -53,7 +53,7 @@ router.post("/register", function(req, res) {
                             var newUser = new User()
                             newUser.username = userName;
                             newUser.email = email;
-                            newUser.active = false
+                            newUser.active = true
                             newUser.password = newUser.hashPassword(password)
                             newUser.gender = gender;
                             newUser.save(function(error, user) {
@@ -71,37 +71,39 @@ router.post("/register", function(req, res) {
                                     })
                                     mailChimp(email, username, gender)
 
-                                    var transporter = nodemailer.createTransport({
-                                        name: "www.samples10.com",
-                                        host: "smtp.gmail.com",
-                                        port: 465,
-                                        secure: true,
-                                        auth: {
-                                            type: "OAuth2",
-                                            user: "info@samples10.com",
-                                            serviceClient: key.client_id,
-                                            privateKey: key.private_key,
+                                    req.flash("success", "تم التسجيل بنجاح ، يمكنك تسجيل الدخول الآن")
+                                    res.redirect("/signIn")
 
-                                        },
-                                    })
-                                    //
-                                    var mailOptions = {
-                                        to: newUser.email,
-                                        from: "info@samples10.com",
-                                        subject: "تنشيط الحساب",
-                                        text: 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttps:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
-                                    }
-                                    transporter.sendMail(mailOptions, function(error, sent) {
-                                        if (error) {
-                                            return res.status(500).send({
-                                                error: error
-                                            })
-                                        }
-                                        // res.status(200).send("A verification email has been sent to" + newUser.email + ".")
-                                        req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
-                                        res.redirect("back")
-                                    })
+                                    // var transporter = nodemailer.createTransport({
+                                    //     name: "www.samples10.com",
+                                    //     host: "smtp.gmail.com",
+                                    //     port: 465,
+                                    //     secure: true,
+                                    //     auth: {
+                                    //         type: "OAuth2",
+                                    //         user: "info@samples10.com",
+                                    //         serviceClient: key.client_id,
+                                    //         privateKey: key.private_key,
 
+                                    //     },
+                                    // })
+                                    // //
+                                    // var mailOptions = {
+                                    //     to: newUser.email,
+                                    //     from: "info@samples10.com",
+                                    //     subject: "تنشيط الحساب",
+                                    //     text: 'مرحباً\n\n' + 'الرجاء الضغط على الرابط لتأكيد الحساب \nhttps:\/\/' + req.headers.host + '\/conformation\/' + token.token + '.\n'
+                                    // // }
+                                    // transporter.sendMail(mailOptions, function(error, sent) {
+                                    //     if (error) {
+                                    //         return res.status(500).send({
+                                    //             error: error
+                                    //         })
+                                    //     }
+                                    //     // res.status(200).send("A verification email has been sent to" + newUser.email + ".")
+                                    //     req.flash("success", "تم إرسال رسالة تنشيط الى الإيميل المسجل")
+                                    //     res.redirect("back")
+                                    // })
 
                                 }
                             });

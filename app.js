@@ -27,11 +27,12 @@ const axios = require('axios');
 
 // dataa
 mongoose.set('useNewUrlParser', true);
-mongoose.set( 'useUnifiedTopology', true )
+mongoose.set( 'useUnifiedTopology', true)
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.DATABASE);
-mongoose.set('useFindAndModify', false);
+
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
