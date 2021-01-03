@@ -287,7 +287,7 @@ router.post("/forgot", function(req, res) {
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 console.log('mail sent');
-                req.flash("success", "تم إرسال الرسالة الى بريدك")
+                req.flash("success", "تم إرسال الرسالة الى بريدك، قد تجد الرسالة في قسم البريد الغير مرغوب فيه")
                 done(err, 'done');
             });
         }
