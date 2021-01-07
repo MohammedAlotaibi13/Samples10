@@ -5,6 +5,7 @@ var Verification = require("../models/Verification")
 var passport = require("passport");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+var bcrypt = require('bcrypt');
 var async = require("async");
 var GoogleStrategy = require("passport-google-oauth20")
 var request = require("request")
@@ -18,7 +19,8 @@ router.get("/register", function(req, res) {
 });
 
 
-router.post("/register", function(req, res) {
+
+router.post("/register",  function(req, res) {
     var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
@@ -73,6 +75,8 @@ router.post("/register", function(req, res) {
 
                                     req.flash("success", "تم التسجيل بنجاح ، يمكنك تسجيل الدخول الآن")
                                     res.redirect("/signIn")
+
+
 
                                     // var transporter = nodemailer.createTransport({
                                     //     name: "www.samples10.com",
@@ -287,7 +291,7 @@ router.post("/forgot", function(req, res) {
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 console.log('mail sent');
-                req.flash("success", "تم إرسال الرسالة الى بريدك، قد تجد الرسالة في قسم البريد الغير مرغوب فيه")
+                req.flash("success", "تم إرسال الرسالة الى بريدك، قد تجد الرسالة في قسم البريد الغير هام")
                 done(err, 'done');
             });
         }
@@ -324,13 +328,13 @@ router.post("/reset/:token", function(req, res) {
                 resetPasswordExpiration: {
                     $gt: Date.now()
                 }
-            }, function(err, user) {
+            },  function(err, user) {
                 if (!user) {
                     req.flash('error', 'كلمة المرور غير صالحة أو انتهت صلاحيتها');
                     return res.redirect('back');
                 }
                 if (req.body.password === req.body.confirm) {
-                    user.setPassword(req.body.password, function(err) {
+                        user.password = user.hashPassword(req.body.password)
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpiration = undefined;
 
@@ -339,7 +343,6 @@ router.post("/reset/:token", function(req, res) {
                                 done(err, user);
                             });
                         });
-                    })
                 } else {
                     req.flash("error", "كلمة المرور غير متطابقة");
                     return res.redirect('back');

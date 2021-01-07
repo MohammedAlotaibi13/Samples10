@@ -23,6 +23,7 @@ var querystring = require('querystring');
 var GoogleStrategy = require("passport-google-oauth20");
 var request = require("request")
 const axios = require('axios');
+var bcrypt = require('bcrypt');
 
 
 // dataa
