@@ -5,7 +5,6 @@ var Verification = require("../models/Verification")
 var passport = require("passport");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
-var bcrypt = require('bcrypt');
 var async = require("async");
 var GoogleStrategy = require("passport-google-oauth20")
 var request = require("request")

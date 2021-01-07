@@ -23,7 +23,7 @@ var querystring = require('querystring');
 var GoogleStrategy = require("passport-google-oauth20");
 var request = require("request")
 const axios = require('axios');
-var bcrypt = require('bcrypt');
+
 
 
 // dataa
@@ -33,7 +33,6 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE);
-
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
