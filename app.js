@@ -1,12 +1,11 @@
 var express = require("express");
 var app = express();
+const path = require('path')
 var passport = require("passport");
 var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
 var localStrategy = require("passport-local").Strategy;
 var User = require("./models/user");
 var passportLocalMongoose = require("passport-local-mongoose");
-var nodemailer = require("nodemailer");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var expressVlidator = require("express-validator");
@@ -15,67 +14,63 @@ var Payment = require("./models/payment");
 var users = require("./routes/users");
 var tests = require("./routes/tests");
 var index = require("./routes/index");
-var async = require("async");
 var session = require("express-session");
 var MongoStore = require('connect-mongo')(session);
-var https = require('https');
-var querystring = require('querystring');
-var GoogleStrategy = require("passport-google-oauth20");
-var request = require("request")
-const axios = require('axios');
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 
 
-// dataa
-mongoose.set('useNewUrlParser', true);
-mongoose.set( 'useUnifiedTopology', true)
-mongoose.set('useCreateIndex', true);
-mongoose.set('useFindAndModify', false);
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE);
 
-app.use(express.static("public"));
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json({
-    limit: "50mb"
-}))
-app.use(bodyParser.urlencoded({
-    limit: "50mb",
-    extended: true,
-    parameterLimit: 50000
-}));
+
+
+// Mongo Data
+mongoose.connect('mongodb://Mohammed:Mohammed1411@samples10-shard-00-00.lhbou.mongodb.net:27017,samples10-shard-00-01.lhbou.mongodb.net:27017,samples10-shard-00-02.lhbou.mongodb.net:27017/samples10?ssl=true&replicaSet=atlas-13tdgu-shard-0&authSource=admin&retryWrites=true&w=majority', {
+    'useNewUrlParser': true,
+    'useUnifiedTopology': true,
+    'useCreateIndex': true,
+    'useFindAndModify': false
+});
+app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
-app.use(session({
-    secret: "ilovemyself",
+
+app.use(express.urlencoded({ extended: true }));
+
+
+const sessionConfig = {
+    httpOnly: true,
+    secret: 'ilovemyself',
     resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection
-    }),
-    ttl: 3 * 24 * 60 * 60
-}));
+    saveUninitialized: true,
+    cookie: {
+        expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user.id)
 });
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(error, user) {
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (error, user) {
         done(null, user)
     })
 });
+
 passport.use(new localStrategy({
     usernameField: "email",
-    passwordField: "password"
-}, function(email, password, done) {
+    passwordField: "password",
+
+}, function (email, password, done) {
     User.findOne({
         email: email
-    }, function(error, doc) {
+    }, function (error, doc) {
         if (error) {
             done(error)
         } else {
@@ -104,49 +99,41 @@ passport.use(new localStrategy({
             }
         }
     });
-}))
-
-// passport.use( new GoogleStrategy ({
-
-//   // option for google creditional 
-//   callbackURL: "/google/redirect",
-//  clientID: "",
-//  clientSecret: ""
+}));
 
 
-// },(accessToken, refreshToke, profile, done) => {
-//   // check if we already have the same user 
-//   User.findOne({googleId: profile.id}).then((currentUser) => {
-//   if(currentUser){
-//     // already have the user
-//     try {
-//      done(null, currentUser)
-//     } catch (error){
-//       console.log(error)
-//     }
-//     } else {
-//      // create new user
-//       new User ({
-//     username: profile.displayName,
-//     googleId: profile.id,
-//     email: profile.emails[0].value,
-//     gender: profile.gender
-//   }).save().then((newUser) =>{
-//     try{
-//       done(null, newUser)
-//     } catch (error){
-//       console.log(error)
-//     }
 
-//   })
-//   }
+passport.use(new GoogleStrategy({
+    clientID: '55542658006-r5543l1p9rk20jme1htf8loel6gktfs7.apps.googleusercontent.com',
+    clientSecret: 'FOGMGCTO-T8jwRDfkIXnzsY2',
+    callbackURL: 'http://localhost:3000/auth/google/callback',
+    passReqToCallback: true
+},
+    function (request, accessToken, refreshToken, profile, done) {
+        User.findOne({ googleId: profile.id }, function (error, user) {
+            if (user) {
+                try {
+                    done(error, user)
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                const newUser = new User()
+                newUser.username = profile.displayName;
+                newUser.googleId = profile.id;
+                newUser.email = profile.emails[0].value;
+                newUser.gender = profile.gender;
+                newUser.save()
+                // // add mailchimp here
+                return done(null, newUser)
+            }
 
-//   })
+        });
+    }
+));
 
-// })
-// )
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -159,6 +146,6 @@ app.use(users);
 app.use(tests);
 app.use(index);
 
-app.listen(process.env.PORT || 3000, function() {
+app.listen(process.env.PORT || 3000, function () {
     console.log("app is starting");
 });

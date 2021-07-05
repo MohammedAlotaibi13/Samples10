@@ -1,15 +1,20 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
- var bcrypt = require("bcrypt-nodejs");
+var bcrypt = require("bcrypt-nodejs");
 
 
 
 var userSchema = new mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        trim: true
+    },
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        lowercase: true,
+        trim: true
     },
     password: String,
     gender: String,
@@ -17,12 +22,15 @@ var userSchema = new mongoose.Schema({
         type: String,
         default: "free"
     },
-    active: Boolean,
+    active: {
+        type: Boolean,
+        default: true
+    },
     googleId: String,
     accountExpiration: {
         type: Date,
         required: true,
-        default: Date.now() + 259200000
+        default: Date.now() + 259200000 // three days
     },
     numberOfAttempts: {
         type: Number,
@@ -41,11 +49,11 @@ var userSchema = new mongoose.Schema({
 
 });
 
-userSchema.methods.hashPassword = function(password) {
+userSchema.methods.hashPassword = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 }
 
-userSchema.methods.comparePassword = function(password, hash) {
+userSchema.methods.comparePassword = function (password, hash) {
     return bcrypt.compareSync(password, hash)
 }
 

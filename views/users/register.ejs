@@ -6,36 +6,52 @@
     <link rel="icon" href="/image/circleLogo.png">
     <meta name="descripiton" content="سجل معنا وتأكد من جاهزيتك لاختبار ستيبً">
     <% include ../partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/register.css">
+        <link rel="stylesheet" type="text/css" href="../stylesheets/register.css">
 </head>
 
 <body class="text-center">
     <div class="container">
-        <% if(error && error.length > 0) { %>
-        <div class="alert alert-danger " role="alert">
-            <%= error %>
-        </div>
-        <% } %>
-        <% if(success && success.length > 0) { %>
-        <div class="alert alert-success text-center">
-            <%= success %>
-        </div>
-        <% } %>
+        <% if(error && error.length> 0) { %>
+            <div class="alert alert-danger " role="alert">
+                <%= error %>
+            </div>
+            <% } %>
+                <% if(success && success.length> 0) { %>
+                    <div class="alert alert-success text-center">
+                        <%= success %>
+                    </div>
+                    <% } %>
     </div>
 
     <div class="grid-container">
         <div class="item-1">
             <h1 class="h3 mb-3 font-weight-normal">تسجيل</h1>
         </div>
-
-        <form method="post" action="/register">
+        <div class="item-3">
             <div class="form-group">
+                <a href="/auth/google" id="google-button"><img src="../image/googleButtunPurple.png" height="50"
+                        width="240"></a>
+
+            </div>
+        </div>
+        <div class="item-3">
+            <div class="form-group">
+                أو
+
+            </div>
+        </div>
+
+        <form method="post" action="/register" novalidate class="validated-form">
+            <div class="form-group mb-3">
                 <div class="item-2">
-                    <input type="email" class="form-control" placeholder="Email" name="email">
-                    <input type="text" class="form-control" placeholder="username" name="username">
-                    <input type="password" class="form-control" placeholder="Password" name="password" minlength="6" maxlength="16">
-                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirm" minlength="6" maxlength="16">
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="gender" required>
+                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    <input type="text" class="form-control" placeholder="username" name="username" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" minlength="6"
+                        maxlength="16" required>
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirm"
+                        minlength="6" maxlength="16" required>
+                    <select class="form-select" id="inlineFormCustomSelect" aria-label="Default select example"
+                        name="gender" required>
                         <option selected>Gender</option>
                         <option value="male">ذكر</option>
                         <option value="female">أنثى</option>
@@ -43,11 +59,11 @@
                 </div>
             </div>
             <div class="item-3">
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <input type="submit" class="btn btn-lg btn-success" id="sign-button" value="تسجيل">
                 </div>
             </div>
-            <div class="item-1">
+            <div class="item-1 mb-1">
                 <div class="form-group">
                     <a href="/signIn">تسجيل الدخول</a>
                 </div>
@@ -59,12 +75,11 @@
             </div>
         </form>
     </div>
-    <!-- Optional JavaScript -->
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+    <script src="/javascripts/validationForm.js"></script>
 
 </body>
 
