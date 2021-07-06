@@ -9,7 +9,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var expressVlidator = require("express-validator");
-var Test = require("./models/test");
 var Payment = require("./models/payment");
 var users = require("./routes/users");
 var tests = require("./routes/tests");

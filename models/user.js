@@ -36,10 +36,6 @@ var userSchema = new mongoose.Schema({
         type: Number,
         default: 5
     },
-    tests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Test"
-    }],
     payments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payment"

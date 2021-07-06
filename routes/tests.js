@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
-var Test = require("../models/test");
 var middleware = require("../middleware/index")
 const courses = require('../controller/course')
 const exams = require('../controller/exam')
@@ -15,7 +14,7 @@ router.get("/test", middleware.isLoggedIn, function (req, res) {
     res.render("tests/testPage")
 })
 
-router.get("/myBag", middleware.isLoggedIn, exams.renderToMyBagPage);
+router.get("/myBag", exams.renderToMyBagPage);
 
 
 //  quizzes 
