@@ -16,6 +16,8 @@ var index = require("./routes/index");
 var session = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const ExpressError = require('./utilities/ExpressError')
+const catchAsync = require('./utilities/catchAsync')
 
 
 
@@ -74,8 +76,8 @@ passport.use(new localStrategy({
             done(error)
         } else {
             if (doc) {
-                if (!doc.active) {
-                    return done(null, false, (error, "يجب عليك تأكيد الحساب اولاً"));
+                if (doc.password == null) {
+                    return done(null, false, (error, " Google الرجاء تسجيل الدخول من خلال "));
                 }
                 var valid = doc.comparePassword(password, doc.password)
                 if (valid) {
@@ -139,11 +141,25 @@ app.use(function (req, res, next) {
     next()
 });
 
+
+
+
 //  config routes
 
 app.use(users);
 app.use(tests);
 app.use(index);
+
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404));
+})
+
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err
+    if (!err.message) err.message = 'Oh something went wrong';
+    res.status(statusCode).render('error', { err });
+})
 
 app.listen(process.env.PORT || 3000, function () {
     console.log("app is starting");

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>تحويل خاطئ</title>
+	<meta name="descripiton" content="قريباًً">
+	<% include partails/head.ejs %>
+		<link rel="stylesheet" type="text/css" href="../stylesheets/app.css">
+		<link rel="icon" href="/image/circleLogo.png">
+</head>
+
+<body>
+	<% include partails/subHeader.ejs %>
+		<div class="container">
+			<div class="row">
+				<div class="col-6 offset-3">
+					<div class="alert alert-danger" role="alert">
+						<h4 class="alert-heading">
+							<%= err.message %>
+						</h4>
+					</div>
+				</div>
+			</div>
+
+
+			<% include partails/footer.ejs %>
+</body>
+
+</html>

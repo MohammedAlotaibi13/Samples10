@@ -10,11 +10,9 @@ const quizzes = require('../controller/quiz')
 
 router.get("/instruction/:username", middleware.isLoggedIn, exams.renderToInstructionPage)
 
-router.get("/test", middleware.isLoggedIn, function (req, res) {
-    res.render("tests/testPage")
-})
 
-router.get("/myBag", exams.renderToMyBagPage);
+
+router.get("/myBag", middleware.isLoggedIn, exams.renderToMyBagPage);
 
 
 //  quizzes 

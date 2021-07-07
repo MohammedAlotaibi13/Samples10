@@ -16,6 +16,7 @@ middlewareObj.registerValidation = function (req, res, next) {
   req.checkBody('email', 'الرجاء كتابة الإيمل  ').notEmpty()
   req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty()
   req.checkBody('password', 'الرجاء كتابة كلمة المرور  ').notEmpty()
+  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 })
   req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').notEmpty()
   req.checkBody('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password)
   req.getValidationResult()
