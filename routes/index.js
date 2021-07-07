@@ -30,7 +30,7 @@ router.delete("/profile/:id", middleware.isLoggedIn, indexes.deleteAccount);
 
 router.get("/message", indexes.renderToMessagePage);
 
-router.post("/send", indexes.sendMessage)
+router.post("/send", middleware.sendMessageValidation, indexes.sendMessage)
 
 // payment pages 
 router.post("/pay/:id", middleware.isLoggedIn, payments.createPaymentId)

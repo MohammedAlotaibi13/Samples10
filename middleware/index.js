@@ -95,12 +95,11 @@ middlewareObj.isGoldMember = catchAsync(async (req, res, next) => {
 })
 
 
-middlewareObj.registerValidation = function (req, res, next) {
-  req.checkBody('email', 'الرجاء كتابة الإيمل  ').notEmpty()
-  req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty()
-  req.checkBody('password', 'الرجاء كتابة كلمة المرور  ').notEmpty()
-  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 })
-  req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').notEmpty()
+middlewareObj.registerValidation = (req, res, next) => {
+  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
+  req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty().trim().escape()
+  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().escape()
+  req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().escape()
   req.checkBody('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password)
   req.getValidationResult()
     .then(function (result) {
@@ -114,5 +113,74 @@ middlewareObj.registerValidation = function (req, res, next) {
       }
     })
 }
+
+
+middlewareObj.logInValidation = (req, res, next) => {
+  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
+  req.checkBody('password', 'الإيميل أو كلمة المرور غير صحيحة').isLength({ min: 5 }).trim().escape()
+  req.getValidationResult()
+    .then(function (result) {
+      if (result.isEmpty() === false) {
+        result.array().forEach((error) => {
+          req.flash("error", error.msg)
+        });
+        return res.redirect("back");
+      } else {
+        return next()
+      }
+    })
+}
+
+
+middlewareObj.sendMessageValidation = (req, res, next) => {
+  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
+  req.checkBody('subject', 'الرجاء كتابة عنوان الموضوع').escape()
+  req.checkBody('message', 'الرجاء كتابة الرسالة').escape()
+
+  req.getValidationResult()
+    .then(function (result) {
+      if (result.isEmpty() === false) {
+        result.array().forEach((error) => {
+          req.flash("error", error.msg)
+        });
+        return res.redirect("back");
+      } else {
+        return next()
+      }
+    })
+}
+
+middlewareObj.forgetPasswordValidation = (req, res, next) => {
+  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
+  req.getValidationResult()
+    .then(function (result) {
+      if (result.isEmpty() === false) {
+        result.array().forEach((error) => {
+          req.flash("error", error.msg)
+        });
+        return res.redirect("back");
+      } else {
+        return next()
+      }
+    })
+}
+
+middlewareObj.validationCreatingNewPassword = (req, res, next) => {
+  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().escape()
+  req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().escape()
+  req.checkBody('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password);
+  req.getValidationResult()
+    .then(function (result) {
+      if (result.isEmpty() === false) {
+        result.array().forEach((error) => {
+          req.flash("error", error.msg)
+        });
+        return res.redirect("back");
+      } else {
+        return next()
+      }
+    })
+}
+
 
 module.exports = middlewareObj;

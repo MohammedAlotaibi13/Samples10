@@ -18,6 +18,7 @@ var MongoStore = require('connect-mongo')(session);
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
 const catchAsync = require('./utilities/catchAsync')
+const mongooseSanitize = require('express-mongo-sanitize')
 
 
 
@@ -39,6 +40,7 @@ app.use(flash());
 app.use(expressVlidator());
 
 app.use(express.urlencoded({ extended: true }));
+app.use(mongooseSanitize())
 
 
 const sessionConfig = {

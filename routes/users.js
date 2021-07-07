@@ -15,7 +15,7 @@ router.post("/register", middleware.registerValidation, catchAsync(user.createUs
 
 router.get("/signIn", user.renderToSignInPage);
 
-router.post("/signIn", passport.authenticate('local', {
+router.post("/signIn", middleware.logInValidation, passport.authenticate('local', {
     failureRedirect: '/signIn',
     failureFlash: true
 }), user.signInUser);
@@ -27,11 +27,11 @@ router.get("/logout", user.logOutUser);
 // forget Passward
 router.get("/forgot", user.renderToForgetPage);
 
-router.post("/forgot", catchAsync(user.sendNewPassowrd));
+router.post("/forgot", middleware.forgetPasswordValidation, catchAsync(user.sendNewPassowrd));
 
 router.get("/reset/:token", user.renderToWriteNewPassword);
 
-router.post("/reset/:token", catchAsync(user.createNewPassword));
+router.post("/reset/:token", middleware.validationCreatingNewPassword, catchAsync(user.createNewPassword));
 
 router.get('/auth/google',
     passport.authenticate('google', {
