@@ -4,81 +4,81 @@
 <head>
     <link rel="icon" href="/image/circleLogo.png">
     <% include ../partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/Quizzes.css">
-    <title>الاختبارات القصيرة | سامبلز </title>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/Quizzes.css">
+        <title>الاختبارات القصيرة | سامبلز </title>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-        gtag('config', 'UA-119528477-3');
-    </script>
+            gtag('config', 'UA-119528477-3');
+        </script>
 
 </head>
 
 <body>
 
     <% include ../partails/subHeader.ejs %>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/listening/<%= currentUser.username %>">
-                        <img class="card-img-top" id="Listening" src="../image/Listening.png">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title" style="padding-bottom: 32px;">Listening</h5>
-                        </div>
-                    </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="/listening/<%= currentUser.id %>">
+                            <img class="card-img-top" id="Listening" src="../image/Listening.png">
+                            <div class="card-body">
+                                <hr>
+                                <h5 class="card-title" style="padding-bottom: 32px;">Listening</h5>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/reading/<%= currentUser.username %>">
-                        <img class="card-img-top" id="Reading" src="../image/Reading.png" alt="first test">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title" style="padding-bottom: 32px;"> Reading</h5>
-                        </div>
-                    </a>
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="/reading/<%= currentUser.id %>">
+                            <img class="card-img-top" id="Reading" src="../image/Reading.png" alt="first test">
+                            <div class="card-body">
+                                <hr>
+                                <h5 class="card-title" style="padding-bottom: 32px;"> Reading</h5>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/grammar/<%= currentUser.username%>">
-                        <img class="card-img-top" id="Grammar" src="../image/Grammar.png" alt="first test">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title" style="padding-bottom: 32px;">Grammar</h5>
-                        </div>
-                    </a>
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="/grammar/<%= currentUser.id%>">
+                            <img class="card-img-top" id="Grammar" src="../image/Grammar.png" alt="first test">
+                            <div class="card-body">
+                                <hr>
+                                <h5 class="card-title" style="padding-bottom: 32px;">Grammar</h5>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/writing/<%= currentUser.username %>">
-                        <img class="card-img-top" id="Writing" src="../image/Writing.png">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title" style="padding-bottom: 32px;">Writing</h5>
-                        </div>
-                    </a>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="/writing/<%= currentUser.id %>">
+                            <img class="card-img-top" id="Writing" src="../image/Writing.png">
+                            <div class="card-body">
+                                <hr>
+                                <h5 class="card-title" style="padding-bottom: 32px;">Writing</h5>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-    </script>
-    <% include ../partails/footer.ejs %>
+        <script type="text/javascript">
+        </script>
+        <% include ../partails/footer.ejs %>
 </body>
 
 </html>

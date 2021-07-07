@@ -1,7 +1,9 @@
 var middlewareObj = {}
 var expressVlidator = require("express-validator");
+const User = require('../models/user')
+const catchAsync = require('../utilities/catchAsync')
 
-middlewareObj.isLoggedIn = function (req, res, next) {
+middlewareObj.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next()
   } else {
@@ -10,6 +12,87 @@ middlewareObj.isLoggedIn = function (req, res, next) {
     res.redirect("/signIn");
   }
 }
+
+middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id)
+  await User.findOne({
+    _id: id,
+    $or: [
+      { memberShip: 'Pro' },
+      { memberShip: 'gold' },
+      { memberShip: 'free' }
+    ],
+    accountExpiration: {
+      $gt: Date.now()
+    }
+  }, function (error, userInfo) {
+    console.log(userInfo)
+    if (!userInfo) {
+      req.flash("error", "انتهت عضوية الحساب")
+      res.redirect("/myBag")
+    } else if (error) {
+      req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/myBag")
+      next()
+    } else {
+      next()
+    }
+  });
+
+})
+middlewareObj.isProMember = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id)
+  await User.findOne({
+    _id: id,
+    $or: [
+      { memberShip: 'Pro' },
+      { memberShip: 'gold' }
+    ],
+    accountExpiration: {
+      $gt: Date.now()
+    }
+  }, function (error, userInfo) {
+    console.log(userInfo)
+    if (!userInfo) {
+      req.flash("error", "انتهت عضوية الحساب")
+      res.redirect("/myBag")
+    } else if (error) {
+      req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/myBag")
+      next()
+    } else {
+      next()
+    }
+  });
+
+})
+
+middlewareObj.isGoldMember = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id)
+  await User.findOne({
+    _id: id,
+    memberShip: 'gold',
+    accountExpiration: {
+      $gt: Date.now()
+    }
+  }, function (error, userInfo) {
+    console.log(userInfo)
+    if (!userInfo) {
+      req.flash("error", "انتهت عضوية الحساب")
+      res.redirect("/myBag")
+    } else if (error) {
+      req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/myBag")
+      next()
+    } else {
+      next()
+    }
+  });
+
+})
 
 
 middlewareObj.registerValidation = function (req, res, next) {

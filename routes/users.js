@@ -4,12 +4,14 @@ var passport = require("passport");
 var middleware = require("../middleware/index")
 var user = require('../controller/user');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const catchAsync = require('../utilities/catchAsync')
+
 
 
 
 router.get("/register", user.renderToRegisterPage);
 
-router.post("/register", middleware.registerValidation, user.createUser)
+router.post("/register", middleware.registerValidation, catchAsync(user.createUser))
 
 router.get("/signIn", user.renderToSignInPage);
 
@@ -25,11 +27,11 @@ router.get("/logout", user.logOutUser);
 // forget Passward
 router.get("/forgot", user.renderToForgetPage);
 
-router.post("/forgot", user.sendNewPassowrd);
+router.post("/forgot", catchAsync(user.sendNewPassowrd));
 
 router.get("/reset/:token", user.renderToWriteNewPassword);
 
-router.post("/reset/:token", user.createNewPassword);
+router.post("/reset/:token", catchAsync(user.createNewPassword));
 
 router.get('/auth/google',
     passport.authenticate('google', {
