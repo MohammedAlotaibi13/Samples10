@@ -9,7 +9,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var expressVlidator = require("express-validator");
-var Payment = require("./models/payment");
 var users = require("./routes/users");
 var tests = require("./routes/tests");
 var index = require("./routes/index");
@@ -19,6 +18,9 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
 const catchAsync = require('./utilities/catchAsync')
 const mongooseSanitize = require('express-mongo-sanitize')
+const redirectSSL = require('redirect-ssl')
+const timeout = require('connect-timeout');
+
 
 
 
@@ -33,6 +35,7 @@ mongoose.connect('mongodb://Mohammed:Mohammed1411@samples10-shard-00-00.lhbou.mo
     'useFindAndModify': false
 });
 app.set('view engine', 'ejs')
+app.use(timeout('10s'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride("_method"));
@@ -150,8 +153,8 @@ app.use(function (req, res, next) {
     next()
 });
 
-
-
+// use only in production 
+//app.use(redirectSSL)
 
 //  config routes
 
@@ -169,7 +172,11 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh something went wrong';
     res.status(statusCode).render('error', { err });
 })
+app.use(haltOnTimeout)
 
+function haltOnTimeout(req, res, next) {
+    if (!req.timeout) next()
+}
 app.listen(process.env.PORT || 3000, function () {
     console.log("app is starting");
 });

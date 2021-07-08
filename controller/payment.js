@@ -2,7 +2,9 @@ var Payment = require("../models/payment");
 var User = require("../models/user");
 const paymentGate = require('./paymentGate')
 
-
+module.exports.rendertoPaymentPage = (req, res) => {
+    res.render("payment/payPage");
+}
 module.exports.createPaymentId = async (req, res) => {
     await User.findById(req.params.id, function (error, foundUser) {
         if (error) {
@@ -97,7 +99,7 @@ module.exports.getPaymentStatus = (req, res) => {
                     } else {
                         userInfo.memberShip = "gold"
                         userInfo.numberOfAttempts = 1000
-                        userInfo.accountExpiration = Date.now() + 5616000000 // 99 days
+                        userInfo.accountExpiration = Date.now() + 5616000000 // 65 days 
                         userInfo.save()
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");

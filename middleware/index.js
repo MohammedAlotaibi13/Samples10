@@ -15,7 +15,6 @@ middlewareObj.isLoggedIn = (req, res, next) => {
 
 middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  console.log(id)
   await User.findOne({
     _id: id,
     $or: [
@@ -27,14 +26,12 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
       $gt: Date.now()
     }
   }, function (error, userInfo) {
-    console.log(userInfo)
     if (!userInfo) {
       req.flash("error", "انتهت عضوية الحساب")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
       res.redirect("/myBag")
-      next()
     } else {
       next()
     }
@@ -43,25 +40,23 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
 })
 middlewareObj.isProMember = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  console.log(id)
   await User.findOne({
     _id: id,
     $or: [
       { memberShip: 'Pro' },
-      { memberShip: 'gold' }
+      { memberShip: 'gold' },
+      { memberShip: 'admin' }
     ],
     accountExpiration: {
       $gt: Date.now()
     }
   }, function (error, userInfo) {
-    console.log(userInfo)
     if (!userInfo) {
       req.flash("error", "انتهت عضوية الحساب")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
       res.redirect("/myBag")
-      next()
     } else {
       next()
     }
@@ -71,17 +66,37 @@ middlewareObj.isProMember = catchAsync(async (req, res, next) => {
 
 middlewareObj.isGoldMember = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  console.log(id)
   await User.findOne({
     _id: id,
-    memberShip: 'gold',
+    $or: [
+      { memberShip: 'gold' },
+      { memberShip: 'admin' }
+    ],
     accountExpiration: {
       $gt: Date.now()
     }
   }, function (error, userInfo) {
-    console.log(userInfo)
     if (!userInfo) {
       req.flash("error", "انتهت عضوية الحساب")
+      res.redirect("/myBag")
+    } else if (error) {
+      req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/myBag")
+    } else {
+      next()
+    }
+  });
+
+})
+
+middlewareObj.isadmin = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  await User.findOne({
+    _id: id,
+    memberShip: 'admin'
+  }, function (error, userInfo) {
+    if (!userInfo) {
+      req.flash("error", "You dont have permission to this page")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -93,6 +108,7 @@ middlewareObj.isGoldMember = catchAsync(async (req, res, next) => {
   });
 
 })
+
 
 
 middlewareObj.registerValidation = (req, res, next) => {

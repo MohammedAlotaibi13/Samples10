@@ -31,13 +31,17 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/profile/<%= currentUser.id %>">الحساب</a>
                                 <a class="dropdown-item" href="/logout">خروج</a>
+                                <% if(currentUser.memberShip=="admin" ) { %>
+                                    <a class="dropdown-item" href="/admin/<%= currentUser.id %>/findEmail">admin</a>
+
+                                    <% } %>
                             </div>
                         </li>
-                        <% if(currentUser.memberShip=="free" || currentUser.memberShip=="Pro" ||
-                            currentUser.memberShip=="ProPlus" ) { %>
+                        <% if(currentUser.memberShip=="free" || currentUser.memberShip=="Pro" ) { %>
                             <li class="nav-item">
                                 <a href="/pay/<%= currentUser.id %>" class="nav-link  btn btn-outline-success"
-                                    id="upgradeButton">ترقية العضوية </a>
+                                    id="upgradeButton">ترقية
+                                    العضوية </a>
                                 <% } %>
                             </li>
                             <% } %>

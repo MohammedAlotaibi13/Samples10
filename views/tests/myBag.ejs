@@ -103,7 +103,7 @@
                             </div>
 
                             <% } %>
-                                <% if(currentUser.memberShip=="gold" ) { %>
+                                <% if(currentUser.memberShip=="gold" || currentUser.memberShip=="admin" ) { %>
                                     <div class="col-md-4">
                                         <div class="card">
                                             <a href="/courseTwo/<%= currentUser.id %>">

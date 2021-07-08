@@ -41,7 +41,10 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/profile/<%= currentUser.id %>">الحساب</a></li>
                                 <li><a class="dropdown-item" href="/logout">خروج</a></li>
+                                <% if(currentUser.memberShip=='admin' ) { %>
+                                    <a class="dropdown-item" href="/admin/<%= currentUser.id %>/findEmail">admin</a>
 
+                                    <% } %>
                             </ul>
                         </li>
                         <% if(currentUser.memberShip=="free" || currentUser.memberShip=="Pro" ) { %>
