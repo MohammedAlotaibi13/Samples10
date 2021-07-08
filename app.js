@@ -44,14 +44,21 @@ app.use(mongooseSanitize())
 
 
 const sessionConfig = {
+    name: 'samples10',
     httpOnly: true,
     secret: 'ilovemyself',
     resave: false,
     saveUninitialized: true,
+    //secure: true,  //only work in https not localhost
     cookie: {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
         maxAge: 1000 * 60 * 60 * 24 * 7
-    }
+    },
+    store: new MongoStore({
+        url: 'mongodb://Mohammed:Mohammed1411@samples10-shard-00-00.lhbou.mongodb.net:27017,samples10-shard-00-01.lhbou.mongodb.net:27017,samples10-shard-00-02.lhbou.mongodb.net:27017/samples10?ssl=true&replicaSet=atlas-13tdgu-shard-0&authSource=admin&retryWrites=true&w=majority',
+        secret: 'ilovemyself',
+        touchAfter: 24 * 3600
+    })
 }
 
 app.use(session(sessionConfig));
