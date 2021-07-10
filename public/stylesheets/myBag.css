@@ -1,4 +1,3 @@
-/*nav style and body*/
 
 body {
 	font-family: 'Cairo', sans-serif;
@@ -12,8 +11,6 @@ li {
 	padding-left: 15px;
 }
  
- /* End of nav style and body*/
-
 .card  {
 	width: 250px;
 	text-align: center;
@@ -23,8 +20,6 @@ li {
 }
 
 
-
-
 .card a {
 	padding: 0 25px 0 25px;
     margin: 5px 0 0 0 ;
@@ -32,10 +27,6 @@ li {
     text-decoration: none;
 }
 
-.card a:hover{
-	text-decoration: none;
-}
- 
 #CourseImagese {
 	max-width: 80%;
 	height: auto;

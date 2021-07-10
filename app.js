@@ -20,6 +20,7 @@ const catchAsync = require('./utilities/catchAsync')
 const mongooseSanitize = require('express-mongo-sanitize')
 const redirectSSL = require('redirect-ssl')
 const timeout = require('connect-timeout');
+const compression = require('compression')
 
 
 
@@ -44,6 +45,7 @@ app.use(expressVlidator());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(mongooseSanitize())
+app.use(compression())
 
 
 const sessionConfig = {

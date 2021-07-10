@@ -11,20 +11,12 @@ li {
 	padding-left: 15px;
 }
  
- /* End of nav style and body*/
-
-  /*Footer style */
-
-
 a {
 	text-decoration : none;
 	color: inherit;
 
 }
 
-#upgradeButton:hover {
- color: white
-}
 
 .footer-link li{
 	list-style-type: none;

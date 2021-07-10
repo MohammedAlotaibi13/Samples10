@@ -3,198 +3,194 @@
 
 <head>
     <% include partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/landingPage.css">
-    <meta name="google-site-verification" content="h_oCGO9ZZGMihaFmSmb1K58LuJJDcHKL5chn3qqN3mk" />
-    <title>اختبار ستيب تجريبي | سامبلز </title>
-    <meta name="description" content="أبدأ اختبارك التجريبي الآن واكتشف نقاط الضعف والقوى لديك في جميع المهارات ">
-    <link rel="icon" href="/image/circleLogo.png">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+        <link rel="stylesheet" type="text/css" href="../stylesheets/landingPage.css">
+        <meta name="google-site-verification" content="h_oCGO9ZZGMihaFmSmb1K58LuJJDcHKL5chn3qqN3mk" />
+        <title>اختبار ستيب تجريبي | سامبلز </title>
+        <meta name="description" content="أبدأ اختبارك التجريبي الآن واكتشف نقاط الضعف والقوى لديك في جميع المهارات ">
+        <link rel="icon" href="/image/circleLogo.png">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-        gtag('config', 'UA-119528477-3');
-    </script>
+            gtag('config', 'UA-119528477-3');
+        </script>
 
-
-    <!-- Heat Map -->
- <script>
-(function(h,e,a,t,m,p) {
-m=e.createElement(a);m.async=!0;m.src=t;
-p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
-})(window,document,'script','https://u.heatmap.it/log.js');
-</script>
 </head>
 
 <body>
     <% include partails/header.ejs %>
 
-    <div class="jumbotron ">
+        <div class="jumbotron ">
+            <div class="container">
+
+                <h1 class="display-5">ستيب معنا أسهل </h1>
+                <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للاختبار من خلال الدورة
+                    التدريبية و مجموعة متعددة من الاختبارات التجريبية <br>المحاكاة من اختبار ستيب</p>
+                <% if(!currentUser) { %>
+                    <a class="btn btn-success btn-lg" href="/register" role="button">ابدأ الآن</a>
+                    <% } else { %>
+                        <a class="btn btn-success btn-lg" href="/myBag" role="button">ابدأ الآن</a>
+                        <% } %>
+            </div>
+        </div>
+
+
+        <!-- Course section -->
         <div class="container">
+            <div class="row" id="computer-section">
 
-            <h1 class="display-5">ستيب معنا أسهل </h1>
-            <p class="lead" style="text-align: center;" class="col-md-4">أكسر الخوف وتهيئ للاختبار من خلال الدورة التدريبية و مجموعة متعددة من الاختبارات التجريبية <br>المحاكاة من اختبار ستيب</p>
-            <% if(!currentUser) { %>
-            <a class="btn btn-success btn-lg" href="/register" role="button">ابدأ الآن</a>
-            <% } else { %>
-            <a class="btn btn-success btn-lg" href="/myBag" role="button">ابدأ الآن</a>
-            <% } %>
-        </div>
-    </div>
+                <div class="col-md-9">
+                    <img src="../image/Course.png" width="542" height="278" alt="our test">
+                </div>
 
-
-    <!-- Course section -->
-    <div class="container">
-        <div class="row" id="computer-section">
-
-            <div class="col-md-9">
-                <img src="../image/Course.png" width="542" height="278" alt="our test">
-            </div>
-
-            <div class=" col-md-3" id="text">
-                <h3>تعلم</h3>
-                <p id="text">المهارات التي يقيسها اختبار ستيب و كيفية تطويرها من خلال
-                    <br>تمارين متنوعة في دورة<br>اختبار ستيب دليلك التفصيلي لتحقيق الدرجة المطلوبة
-                </p>
-                <% if(!currentUser) { %>
-                <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
-                <%  } else {    %>
-                <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
-                <% } %>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <!-- computer section -->
-    <div class="container">
-        <div class="row" id="computer-section">
-
-            <div class="col-md-9">
-                <img src="../image/MultipleChoice.png" width="542" height="278" alt="our test">
-            </div>
-
-            <div class=" col-md-3" id="text">
-                <h3>لاتتردد</h3>
-                <p id="text">ابدأ اختبارك الأول مجاناً
-                    <br>وتعرف على جوانب القوة والضعف <br>لديك قبل دخولك الاختبار
-                </p>
-                <% if(!currentUser) { %>
-                <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
-                <%  } else {    %>
-                <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
-                <% } %>
-            </div>
-        </div>
-    </div>
-    <hr>
-
-
-
-    <!-- Carousel section begin -->
-    <div class="container" id="test-information">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3> آراء المشتركين</h3>
-            </div>
-        </div>
-    </div>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-            <li data-target="#myCarousel" data-slide-to="4"></li>
-        </ol>
-        <div class="carousel-inner text-center" role="listbox">
-            <div class="carousel-item active">
-                <h5>حصلت على درجة ٨٥ يرجع الفضل بعد الله إلى موقعكم مشكورين</h5>
-                <p>Soud Alsaawi</p>
-            </div>
-            <div class="carousel-item ">
-                <h5>بعد الاشتراك معكم ارتفعت درجتي 12 درجة، اختباراتكم نفعتني الحمدلله </h5>
-                <p>ناصر الجهني</p>
-            </div>
-            <div class="carousel-item">
-                <h5> ما تتخيلو قد أيش استفدت من الاختبارات، حقيقي ما يفي حقكم الا الدعاء، مررررة شكراً </h5>
-                <p>Sara Aljuhani</p>
-            </div>
-            <div class="carousel-item">
-                <h5>موقع جميل و مفيد استفدت من كثيراً واشكركم على الجهود الممتازة</h5>
-                <p>ابراهيم محمد</p>
-            </div>
-            <div class="carousel-item">
-                <h5>أشكركم على موقعكم و أسعاركم المنافسة، وعلى جهودكم المبذولة شكراً لكم من القلب والله </h5>
-                <p>جابر</p>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only" id="buttonSlider">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    <!-- Carousel section End -->
-
-    <hr>
-
-    <!-- Price section -->
-    <div class="container" id="price">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card text-center" id="cards-price">
-                    <h3 class="card-header">Free</h3>
-                    <div class="card-body">
-                        <h4 class="card-title">0 SR</h4>
-                        <h6>تشمل</h6>
-                        <p class="card-text">اختبار واحد <br> صلاحية الحساب 3 أيام</p>
-                        <a href="/register" class="btn btn-lg btn-block btn-outline-primary">سجل مجاناً</a>
-                    </div>
+                <div class=" col-md-3" id="text">
+                    <h3>تعلم</h3>
+                    <p id="text">المهارات التي يقيسها اختبار ستيب و كيفية تطويرها من خلال
+                        <br>تمارين متنوعة في دورة<br>اختبار ستيب دليلك التفصيلي لتحقيق الدرجة المطلوبة
+                    </p>
+                    <% if(!currentUser) { %>
+                        <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
+                        <% } else { %>
+                            <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ التعلم</a>
+                            <% } %>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card text-center" id="cards-price">
-                    <!-- <div class="hot">عرض خاص</div> -->
-                    <h3 class="card-header">Pro</h3>
-                    <div class="card-body">
-                        <h4 class="card-title">165 SR</h4>
-                        <h6>تشمل</h6>
-                        <p class="card-text"> الدورة التدريبية <br> صلاحية الحساب 30 يوم <br></p>
-                        <% if(!currentUser) { %>
-                        <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <% } else {  %>
-                        <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <%  } %>
-                    </div>
+        </div>
+        <hr>
+        <!-- computer section -->
+        <div class="container">
+            <div class="row" id="computer-section">
+
+                <div class="col-md-9">
+                    <img src="../image/MultipleChoice.png" width="542" height="278" alt="our test">
+                </div>
+
+                <div class=" col-md-3" id="text">
+                    <h3>لاتتردد</h3>
+                    <p id="text">ابدأ اختبارك الأول مجاناً
+                        <br>وتعرف على جوانب القوة والضعف <br>لديك قبل دخولك الاختبار
+                    </p>
+                    <% if(!currentUser) { %>
+                        <a href="/register" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
+                        <% } else { %>
+                            <a href="/myBag" class="btn btn-success btn-lg" id="start-exam-button">ابدأ الاختبار</a>
+                            <% } %>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card text-center" id="cards-price">
-                  <!--   <div class="hot">عرض خاص خصم %50</div> -->
-                    <h3 class="card-header">Gold</h3>
-                    <div class="card-body">
-                        <h4>199 SR</h4>
-                        <h6>تشمل</h6>
-                        <p class="card-text">الدورة التدريبية<br> خمس اختبارات تجريية مختلفة <br> صلاحية الحساب 65 يوم</p>
-                        <% if(!currentUser) { %>
-                        <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <% } else {  %>
-                        <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                        <%  } %>
+        </div>
+        <hr>
+
+
+
+        <!-- Carousel section begin -->
+        <div class="container" id="test-information">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3> آراء المشتركين</h3>
+                </div>
+            </div>
+        </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner text-center" role="listbox">
+                <div class="carousel-item active">
+                    <h5>حصلت على درجة ٨٥ يرجع الفضل بعد الله إلى موقعكم مشكورين</h5>
+                    <p>Soud Alsaawi</p>
+                </div>
+                <div class="carousel-item ">
+                    <h5>بعد الاشتراك معكم ارتفعت درجتي 12 درجة، اختباراتكم نفعتني الحمدلله </h5>
+                    <p>ناصر الجهني</p>
+                </div>
+                <div class="carousel-item">
+                    <h5> ما تتخيلو قد أيش استفدت من الاختبارات، حقيقي ما يفي حقكم الا الدعاء، مررررة شكراً </h5>
+                    <p>Sara Aljuhani</p>
+                </div>
+                <div class="carousel-item">
+                    <h5>موقع جميل و مفيد استفدت من كثيراً واشكركم على الجهود الممتازة</h5>
+                    <p>ابراهيم محمد</p>
+                </div>
+                <div class="carousel-item">
+                    <h5>أشكركم على موقعكم و أسعاركم المنافسة، وعلى جهودكم المبذولة شكراً لكم من القلب والله </h5>
+                    <p>جابر</p>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only" id="buttonSlider">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- Carousel section End -->
+
+        <hr>
+
+        <!-- Price section -->
+        <div class="container" id="price">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-center" id="cards-price">
+                        <h3 class="card-header">Free</h3>
+                        <div class="card-body">
+                            <h4 class="card-title">0 SR</h4>
+                            <h6>تشمل</h6>
+                            <p class="card-text">اختبار واحد <br> صلاحية الحساب 3 أيام</p>
+                            <a href="/register" class="btn btn-lg btn-block btn-outline-primary">سجل مجاناً</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center" id="cards-price">
+                        <!-- <div class="hot">عرض خاص</div> -->
+                        <h3 class="card-header">Pro</h3>
+                        <div class="card-body">
+                            <h4 class="card-title">165 SR</h4>
+                            <h6>تشمل</h6>
+                            <p class="card-text"> الدورة التدريبية <br> صلاحية الحساب 30 يوم <br></p>
+                            <% if(!currentUser) { %>
+                                <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                <% } else { %>
+                                    <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك
+                                        الآن</a>
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center" id="cards-price">
+                        <!--   <div class="hot">عرض خاص خصم %50</div> -->
+                        <h3 class="card-header">Gold</h3>
+                        <div class="card-body">
+                            <h4>199 SR</h4>
+                            <h6>تشمل</h6>
+                            <p class="card-text">الدورة التدريبية<br> خمس اختبارات تجريية مختلفة <br> صلاحية الحساب 65
+                                يوم</p>
+                            <% if(!currentUser) { %>
+                                <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                <% } else { %>
+                                    <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك
+                                        الآن</a>
+                                    <% } %>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <% include partails/footer.ejs %>
+        <% include partails/footer.ejs %>
 </body>
 
 </html>
