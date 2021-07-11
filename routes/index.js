@@ -28,6 +28,8 @@ router.get("/about", indexes.renderToAboutPage);
 
 router.get("/termsAndCondition", indexes.renderToTermsAndCondition)
 
+router.get('/FAQ', indexes.renderToFaqPage)
+
 
 router.get("/blog", indexes.renderToBlogPage)
 

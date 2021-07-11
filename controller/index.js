@@ -6,6 +6,10 @@ module.exports.renderToLandingPage = (req, res) => {
     res.render("landingPage");
 }
 
+module.exports.renderToFaqPage = (req, res) => {
+    res.render('FAQPage')
+}
+
 module.exports.renderToAboutPage = (req, res) => {
     res.render("whoWeAre");
 }
