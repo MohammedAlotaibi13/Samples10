@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const mailChimp = require('./mailChimp')
 var nodemailer = require("nodemailer");
-var key = require("../routes/key.json")
 var async = require("async");
 var crypto = require("crypto");
 
@@ -99,8 +98,8 @@ module.exports.sendNewPassowrd = (req, res) => {
                 auth: {
                     type: "OAuth2",
                     user: "info@samples10.com",
-                    serviceClient: key.client_id,
-                    privateKey: key.private_key,
+                    serviceClient: process.env.GOOGLECLIENTID,
+                    privateKey: process.env.GOOGLEPRIVATEKEY,
                 },
             });
             var mailOptions = {
@@ -181,8 +180,8 @@ module.exports.createNewPassword = (req, res) => {
                 auth: {
                     type: "OAuth2",
                     user: "info@samples10.com",
-                    serviceClient: key.client_id,
-                    privateKey: key.private_key,
+                    serviceClient: process.env.GOOGLECLIENTID,
+                    privateKey: process.env.GOOGLEPRIVATEKEY,
                 },
             });
             var mailOptions = {

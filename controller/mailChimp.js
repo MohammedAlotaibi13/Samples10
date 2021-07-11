@@ -16,8 +16,7 @@ module.exports.saveUserInmailChimp = function (email, username, gender) {
         url: "https://us19.api.mailchimp.com/3.0/lists/5080ca4d5f",
         method: 'POST',
         headers: {
-            // Authorization: process.env.MAILCHIMPAPI
-            Authorization: 'auth b9da814936e125ac4963237dd0bfca1a-us19'
+            Authorization: process.env.MAILCHIMPAPI
         },
         body: postData
     }

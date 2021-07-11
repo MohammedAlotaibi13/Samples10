@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 var express = require("express");
 var app = express();
 const path = require('path')
@@ -29,7 +32,7 @@ const compression = require('compression')
 
 
 // Mongo Data
-mongoose.connect('mongodb://Mohammed:Mohammed1411@samples10-shard-00-00.lhbou.mongodb.net:27017,samples10-shard-00-01.lhbou.mongodb.net:27017,samples10-shard-00-02.lhbou.mongodb.net:27017/samples10?ssl=true&replicaSet=atlas-13tdgu-shard-0&authSource=admin&retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASE, {
     'useNewUrlParser': true,
     'useUnifiedTopology': true,
     'useCreateIndex': true,
@@ -51,7 +54,7 @@ app.use(compression())
 const sessionConfig = {
     name: 'samples10',
     httpOnly: true,
-    secret: 'ilovemyself',
+    secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
     //secure: true,  //only work in https not localhost
@@ -60,8 +63,8 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     },
     store: new MongoStore({
-        url: 'mongodb://Mohammed:Mohammed1411@samples10-shard-00-00.lhbou.mongodb.net:27017,samples10-shard-00-01.lhbou.mongodb.net:27017,samples10-shard-00-02.lhbou.mongodb.net:27017/samples10?ssl=true&replicaSet=atlas-13tdgu-shard-0&authSource=admin&retryWrites=true&w=majority',
-        secret: 'ilovemyself',
+        url: process.env.DATABASE,
+        secret: process.env.SESSIONSECRET,
         touchAfter: 24 * 3600
     })
 }
@@ -119,8 +122,8 @@ passport.use(new localStrategy({
 
 
 passport.use(new GoogleStrategy({
-    clientID: '55542658006-r5543l1p9rk20jme1htf8loel6gktfs7.apps.googleusercontent.com',
-    clientSecret: 'FOGMGCTO-T8jwRDfkIXnzsY2',
+    clientID: process.env.GOOGLEAUTHCLINETID,
+    clientSecret: process.env.GOOGLEAUTHCLIENTSECRET,
     callbackURL: 'http://localhost:3000/auth/google/callback',
     passReqToCallback: true
 },
