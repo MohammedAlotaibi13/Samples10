@@ -15,6 +15,7 @@ const expressVlidator = require("express-validator");
 const users = require("./routes/users");
 const tests = require("./routes/tests");
 const index = require("./routes/index");
+const mailChimp = require('./controller/mailChimp')
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
@@ -121,44 +122,45 @@ passport.use(new localStrategy({
 
 
 
-// passport.use(new GoogleStrategy({
-//     clientID: process.env.GOOGLEAUTHCLINETID,
-//     clientSecret: process.env.GOOGLEAUTHCLIENTSECRET,
-//     callbackURL: 'https://www.samples10.com/auth/google/callback',
-//     passReqToCallback: true
-// },
-//     function (request, accessToken, refreshToken, profile, done) {
-//         User.findOne({ googleId: profile.id }, function (error, user) {
-//             if (user) {
-//                 try {
-//                     done(error, user)
-//                 } catch (error) {
-//                     console.log(error)
-//                 }
-//             } else {
-//                 User.findOne({ email: profile.emails[0].value }, function (error, user) {
-//                     if (user) {
-//                         try {
-//                             done(error, user)
-//                         } catch (error) {
-//                             console.log(error)
-//                         }
-//                     } else {
-//                         const newUser = new User()
-//                         newUser.username = profile.displayName;
-//                         newUser.googleId = profile.id;
-//                         newUser.email = profile.emails[0].value;
-//                         newUser.gender = profile.gender;
-//                         newUser.save()
-//                         // // add mailchimp here
-//                         return done(null, newUser)
-//                     }
-//                 })
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLEAUTHCLINETID,
+    clientSecret: process.env.GOOGLEAUTHCLIENTSECRET,
+    callbackURL: 'https://www.samples10.com/auth/google/callback',
+    passReqToCallback: true
+},
+    function (request, accessToken, refreshToken, profile, done) {
+        User.findOne({ googleId: profile.id }, function (error, user) {
+            if (user) {
+                try {
+                    done(error, user)
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                User.findOne({ email: profile.emails[0].value }, function (error, user) {
+                    if (user) {
+                        try {
+                            done(error, user)
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    } else {
+                        const newUser = new User()
+                        newUser.username = profile.displayName;
+                        newUser.googleId = profile.id;
+                        newUser.email = profile.emails[0].value;
+                        newUser.gender = profile.gender;
+                        newUser.save()
+                        // // add mailchimp here
+                        mailChimp.saveUserInmailChimp(profile.emails[0].value, profile.displayName, profile.gender)
+                        return done(null, newUser)
+                    }
+                })
 
-//             }
-//         });
-//     }
-// ));
+            }
+        });
+    }
+));
 
 
 app.use(function (req, res, next) {
