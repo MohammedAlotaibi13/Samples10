@@ -1,8 +1,8 @@
 const User = require("../models/user");
 const mailChimp = require('./mailChimp')
-var nodemailer = require("nodemailer");
-var async = require("async");
-var crypto = require("crypto");
+const nodemailer = require("nodemailer");
+const async = require("async");
+const crypto = require("crypto");
 
 
 module.exports.renderToRegisterPage = (req, res) => {
@@ -17,7 +17,7 @@ module.exports.createUser = async (req, res, next) => {
         } else {
             if (!userFound) {
                 try {
-                    var newUser = new User()
+                    const newUser = new User()
                     newUser.username = username;
                     newUser.email = email;
                     newUser.active = true

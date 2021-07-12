@@ -1,13 +1,12 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var paymentSchema = new mongoose.Schema({
-   userId: String, 
+const paymentSchema = new mongoose.Schema({
+   userId: String,
    email: String,
    memberShip: String,
-   paymentWay: String, 
-   sharedOpinion: {type: Boolean , default: false},
+   paymentWay: String,
    timeOfPayment: Date,
    status: String
 })
 
-module.exports = mongoose.model( "Payment" , paymentSchema)
+module.exports = mongoose.model("Payment", paymentSchema)

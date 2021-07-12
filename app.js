@@ -1,23 +1,23 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 const path = require('path')
-var passport = require("passport");
-var mongoose = require("mongoose");
-var localStrategy = require("passport-local").Strategy;
-var User = require("./models/user");
-var passportLocalMongoose = require("passport-local-mongoose");
-var methodOverride = require("method-override");
-var flash = require("connect-flash");
-var expressVlidator = require("express-validator");
-var users = require("./routes/users");
-var tests = require("./routes/tests");
-var index = require("./routes/index");
-var session = require("express-session");
-var MongoStore = require('connect-mongo')(session);
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const passport = require("passport");
+const mongoose = require("mongoose");
+const localStrategy = require("passport-local").Strategy;
+const User = require("./models/user");
+const passportLocalMongoose = require("passport-local-mongoose");
+const methodOverride = require("method-override");
+const flash = require("connect-flash");
+const expressVlidator = require("express-validator");
+const users = require("./routes/users");
+const tests = require("./routes/tests");
+const index = require("./routes/index");
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
 const catchAsync = require('./utilities/catchAsync')
 const mongooseSanitize = require('express-mongo-sanitize')
@@ -57,7 +57,7 @@ const sessionConfig = {
     secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
-    //secure: true,  //only work in https not localhost
+    secure: true,  //only work in https not localhost
     cookie: {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
         maxAge: 1000 * 60 * 60 * 24 * 7
@@ -121,34 +121,44 @@ passport.use(new localStrategy({
 
 
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLEAUTHCLINETID,
-    clientSecret: process.env.GOOGLEAUTHCLIENTSECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback',
-    passReqToCallback: true
-},
-    function (request, accessToken, refreshToken, profile, done) {
-        User.findOne({ googleId: profile.id }, function (error, user) {
-            if (user) {
-                try {
-                    done(error, user)
-                } catch (error) {
-                    console.log(error)
-                }
-            } else {
-                const newUser = new User()
-                newUser.username = profile.displayName;
-                newUser.googleId = profile.id;
-                newUser.email = profile.emails[0].value;
-                newUser.gender = profile.gender;
-                newUser.save()
-                // // add mailchimp here
-                return done(null, newUser)
-            }
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.GOOGLEAUTHCLINETID,
+//     clientSecret: process.env.GOOGLEAUTHCLIENTSECRET,
+//     callbackURL: 'https://www.samples10.com/auth/google/callback',
+//     passReqToCallback: true
+// },
+//     function (request, accessToken, refreshToken, profile, done) {
+//         User.findOne({ googleId: profile.id }, function (error, user) {
+//             if (user) {
+//                 try {
+//                     done(error, user)
+//                 } catch (error) {
+//                     console.log(error)
+//                 }
+//             } else {
+//                 User.findOne({ email: profile.emails[0].value }, function (error, user) {
+//                     if (user) {
+//                         try {
+//                             done(error, user)
+//                         } catch (error) {
+//                             console.log(error)
+//                         }
+//                     } else {
+//                         const newUser = new User()
+//                         newUser.username = profile.displayName;
+//                         newUser.googleId = profile.id;
+//                         newUser.email = profile.emails[0].value;
+//                         newUser.gender = profile.gender;
+//                         newUser.save()
+//                         // // add mailchimp here
+//                         return done(null, newUser)
+//                     }
+//                 })
 
-        });
-    }
-));
+//             }
+//         });
+//     }
+// ));
 
 
 app.use(function (req, res, next) {
@@ -159,7 +169,7 @@ app.use(function (req, res, next) {
 });
 
 // use only in production 
-//app.use(redirectSSL)
+app.use(redirectSSL)
 
 //  config routes
 

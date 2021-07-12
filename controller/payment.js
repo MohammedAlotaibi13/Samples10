@@ -26,7 +26,6 @@ module.exports.createPaymentId = async (req, res) => {
                 } else {
                     foundUser.payments.push(paymentInfo)
                     foundUser.save()
-                    console.log(paymentInfo)
                 }
 
                 res.redirect('/checkout/' + paymentInfo.id + "/" + req.body.memberShipPicker)
@@ -48,7 +47,6 @@ module.exports.checkOutPage = async (req, res) => {
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {
-                        console.log(result)
                         res.render("payment/checkoutPage", {
                             checkoutId: result.id,
                             foundPayment: foundPayment
@@ -80,12 +78,12 @@ module.exports.renderToPaymentResultPage = (req, res) => {
 
 module.exports.getPaymentStatus = (req, res) => {
     // Check checkout status
-    paymentGate.resultRequest(req.query.resourcePath, (response) => {
-        console.log(response.result.code)
+    paymentGate.resultRequest(req.query.resourcePath, async (response) => {
+
         // Check that result code match pattern from https://gate2play.docs.oppwa.com/reference/resultCodes
         if (response.result.code && /^(000\.000\.|000\.100\.1|000\.[36])/.test(response.result.code)) {
             // Create Payment instance here
-            User.findById(req.params.id, function (error, userInfo) {
+            await User.findById(req.params.id, function (error, userInfo) {
                 if (error) {
                     console.log(error)
                 } else {

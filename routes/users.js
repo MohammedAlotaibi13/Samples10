@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
-var middleware = require("../middleware/index")
-var user = require('../controller/user');
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+const middleware = require("../middleware/index")
+const user = require('../controller/user');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const catchAsync = require('../utilities/catchAsync')
 
 

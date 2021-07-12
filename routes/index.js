@@ -1,8 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var User = require("../models/user");
-var Payment = require("../models/payment");
-var middleware = require("../middleware/index")
+const express = require("express");
+const router = express.Router();
+const User = require("../models/user");
+const Payment = require("../models/payment");
+const middleware = require("../middleware/index")
 const indexes = require('../controller/index')
 const payments = require('../controller/payment')
 const admin = require('../controller/admin')
@@ -51,7 +51,7 @@ router.post("/pay/:id", middleware.isLoggedIn, catchAsync(payments.createPayment
 
 router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, payments.checkOutPage)
 
-router.get("/paymentResult", catchAsync(payments.renderToPaymentResultPage))
+router.get("/paymentResult", payments.renderToPaymentResultPage)
 
 router.get("/success/:id/:memberShip", payments.getPaymentStatus)
 

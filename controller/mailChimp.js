@@ -26,7 +26,6 @@ module.exports.saveUserInmailChimp = function (email, username, gender) {
             console.log(err)
         } else {
             if (response.statusCode == 200) {
-                console.log("done")
             } else {
                 console.log(response.statusCode)
             }

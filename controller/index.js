@@ -1,5 +1,5 @@
-var User = require("../models/user");
-var nodemailer = require("nodemailer")
+const User = require("../models/user");
+const nodemailer = require("nodemailer")
 
 
 module.exports.renderToLandingPage = (req, res) => {

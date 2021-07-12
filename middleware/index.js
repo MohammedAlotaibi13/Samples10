@@ -1,5 +1,5 @@
 var middlewareObj = {}
-var expressVlidator = require("express-validator");
+const expressVlidator = require("express-validator");
 const User = require('../models/user')
 const catchAsync = require('../utilities/catchAsync')
 

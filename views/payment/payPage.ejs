@@ -3,61 +3,57 @@
 
 <head>
     <% include ../partails/head.ejs %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
-    <title>نوع الباقة</title>
-    <link rel="icon" href="/image/circleLogo.png">
-    <script type="text/javascript">
-        function isChecked() {
-            var terms = document.getElementById("terms").checked;
-            if (terms == false) {
-                alert("الرجاء الموافقة على الشروط والأحكام")
-                return false
-            } else {
-                return true;
+        <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
+        <title>نوع الباقة</title>
+        <link rel="icon" href="/image/circleLogo.png">
+        <script type="text/javascript">
+            function isChecked() {
+                var terms = document.getElementById("terms").checked;
+                if (terms == false) {
+                    alert("الرجاء الموافقة على الشروط والأحكام")
+                    return false
+                } else {
+                    return true;
+                }
             }
-        }
-    </script>
-    <!-- Mailchimp integration -->
-    <script id="mcjs">
-        ! function(c, h, i, m, p) {
-            m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p)
-        }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/3643025a90919e057831480f2/d5cdd3337aea40cb469e9cfbf.js");
-    </script>
+        </script>
 </head>
 
 <body>
     <% include ../partails/subHeader.ejs %>
 
-    <div class="grid-container">
-        <div class="item-1">
-            <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
+        <div class="grid-container">
+            <div class="item-1">
+                <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
+            </div>
+
+            <form method="post" onsubmit=" return isChecked()"" action=" /pay/<%=currentUser.id %>">
+                <div class="form-group">
+                    <div class="item-2 mb-3">
+                        <select class="form-select mb-2" name="memberShipPicker" required>
+                            <option value="Gold">Gold (199 SR)</option>
+                            <option value="Pro">Pro (165 SR)</option>
+                        </select>
+                        <select class="form-select mb-2" name="paymntMethod" required>
+                            <option value="DebitCard">طريقة الدفع</option>
+                            <option value="DebitCard">بطاقة مدى البنكية</option>
+                            <option value="BankTransfer">تحويل بنكي</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="text-right" id="checkbox">
+                        <input type="checkbox" name="terms" value="terms" id="terms"> أوافق على <a href="#"
+                            onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط
+                            والأحكام</a><br>
+                    </div>
+                    <div class="item-3">
+                        <input type="submit" class="btn btn-success form-control" value="دفع" id="payButton">
+                    </div>
+                </div>
+            </form>
         </div>
 
-        <form method="post" onsubmit=" return isChecked()"" action=" /pay/<%= currentUser.id %>">
-            <div class="form-group">
-                <div class="item-2">
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="memberShipPicker" required>
-                        <option value="Gold">Gold (199 SR)</option>
-                        <option value="Pro">Pro (165 SR)</option>
-                    </select>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="paymntMethod" required>
-                        <option value="DebitCard">طريقة الدفع</option>
-                        <option value="DebitCard">بطاقة مدى البنكية</option>
-                        <option value="BankTransfer">تحويل بنكي</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="text-right" id="checkbox">
-                    <input type="checkbox" name="terms" value="terms" id="terms"> أوافق على <a href="#" onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط والأحكام</a><br>
-                </div>
-                <div class="item-3">
-                    <input type="submit" class="btn btn-success form-control" value="دفع">
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <% include ../partails/footer.ejs %>
+        <% include ../partails/footer.ejs %>
 
 </body>

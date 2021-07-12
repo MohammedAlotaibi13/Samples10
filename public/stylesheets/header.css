@@ -18,6 +18,9 @@ a {
 
 }
 
+#upgradeButton:hover {
+	color: white
+   }
 
 .footer-link li{
 	list-style-type: none;
