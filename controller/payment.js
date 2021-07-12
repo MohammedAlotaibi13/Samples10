@@ -1,5 +1,5 @@
-var Payment = require("../models/payment");
-var User = require("../models/user");
+const Payment = require("../models/payment");
+const User = require("../models/user");
 const paymentGate = require('./paymentGate')
 
 module.exports.rendertoPaymentPage = (req, res) => {

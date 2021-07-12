@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const nodemailer = require("nodemailer")
+const key = require('./key.json')
 
 
 module.exports.renderToLandingPage = (req, res) => {
@@ -66,8 +67,8 @@ module.exports.sendMessage = async (req, res) => {
         auth: {
             type: "OAuth2",
             user: "info@samples10.com",
-            serviceClient: process.env.GOOGLECLIENTID,
-            privateKey: process.env.GOOGLEPRIVATEKEY,
+            serviceClient: key.client_id,
+            privateKey: key.private_key,
         },
         // this only for localhost 
     });

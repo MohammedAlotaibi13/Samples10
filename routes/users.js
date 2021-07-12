@@ -27,11 +27,11 @@ router.get("/logout", user.logOutUser);
 // forget Passward
 router.get("/forgot", user.renderToForgetPage);
 
-router.post("/forgot", middleware.forgetPasswordValidation, catchAsync(user.sendNewPassowrd));
+router.post("/forgot", middleware.forgetPasswordValidation, user.sendNewPassowrd);
 
 router.get("/reset/:token", user.renderToWriteNewPassword);
 
-router.post("/reset/:token", middleware.validationCreatingNewPassword, catchAsync(user.createNewPassword));
+router.post("/reset/:token", middleware.validationCreatingNewPassword, user.createNewPassword);
 
 router.get('/auth/google',
     passport.authenticate('google', {
