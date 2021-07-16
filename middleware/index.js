@@ -20,7 +20,8 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
     $or: [
       { memberShip: 'Pro' },
       { memberShip: 'gold' },
-      { memberShip: 'free' }
+      { memberShip: 'free' },
+      { memberShip: 'admin' }
     ],
     accountExpiration: {
       $gt: Date.now()
