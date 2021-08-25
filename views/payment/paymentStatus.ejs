@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include ../partails/head.ejs %>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-119528477-3');
+  </script>
+  <% include ../partails/head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/paymentStatus.css">
     <title>نتيجة الطلب</title>
     <link rel="icon" href="/image/circleLogo.png">
     <!-- Mailchimp integration -->
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/3643025a90919e057831480f2/d5cdd3337aea40cb469e9cfbf.js");</script>
-  </head>
-  <body>
-   <% include ../partails/subHeader.ejs %>
-   <div class="grid-container">
-     <div class="form-group row">
+    <script
+      id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/3643025a90919e057831480f2/d5cdd3337aea40cb469e9cfbf.js");</script>
+</head>
+
+<body>
+  <% include ../partails/subHeader.ejs %>
+    <div class="grid-container">
+      <div class="form-group row">
         <div class="col-md-6">
-            <a href="/myBag" class="btn btn-success">حقيبتي</a>
+          <a href="/myBag" class="btn btn-success">حقيبتي</a>
         </div>
         <div class="col-md-6">
-            <a href="/profile/<%= currentUser.id %>" class="btn btn-primary">الحساب</a>
+          <a href="/profile/<%= currentUser.id %>" class="btn btn-primary">الحساب</a>
         </div>
       </div>
-   </div>
+    </div>
 
 
- <% include ../partails/footer.ejs %>
+    <% include ../partails/footer.ejs %>
 </body>
