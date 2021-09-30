@@ -3,44 +3,16 @@
 
 <head>
 
+
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119528477-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-119528477-3');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KZHK7WQ');</script>
-    <!-- End Google Tag Manager -->
 
     <% include ../partails/head.ejs %>
         <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
         <title>نوع الباقة</title>
         <link rel="icon" href="/image/circleLogo.png">
-        <script type="text/javascript">
-            function isChecked() {
-                var terms = document.getElementById("terms").checked;
-                if (terms == false) {
-                    alert("الرجاء الموافقة على الشروط والأحكام")
-                    return false
-                } else {
-                    return true;
-                }
-            }
-        </script>
+
 
 </head>
 
@@ -66,8 +38,10 @@
                             </option>
                             <option value="Pro">Pro (165 SR)</option>
                         </select>
-                        <select class="form-select mb-2" name="paymntMethod" id="paymntMethod" required>
-                            <option value="DebitCard">بطاقة مدى
+                        <select class="form-select mb-2 " name="paymntMethod" id="paymntMethod" required>
+                            <option value="DebitCard" data-left="This is the left section"
+                                data-right="This is the right section"
+                                data-subtitle="This is the section under the title">بطاقة مدى
                                 البنكية
                             </option>
                             <option value="BankTransfer">تحويل بنكي</option>
@@ -87,6 +61,8 @@
             </form>
         </div>
 
-        <% include ../partails/footer.ejs %>
+        <script type="text/javascript" src="/javascripts/payPage.js"></script>
 
+
+        <% include ../partails/footer.ejs %>
 </body>
