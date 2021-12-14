@@ -55,7 +55,7 @@ module.exports.checkOutPage = async (req, res) => {
                 })
             } else {
                 paymentGate.generateCheckoutId({
-                    amount: '199',
+                    amount: '99',
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {
