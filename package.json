@@ -10,7 +10,7 @@
   "author": "Mohammed Alotaibi",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "bcrypt": "^2.0.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
