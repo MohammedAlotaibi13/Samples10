@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <% if(currentUser.memberShip=="free" ) { %>
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="card">
                             <a href="/courseOne/<%= currentUser.id %>">
                                 <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png"
@@ -54,7 +54,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-4">
                         <div class="card">
@@ -70,10 +70,11 @@
                     </div>
                     <% } %>
                         <% if( currentUser.memberShip=="Pro" ){ %>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="card">
-                                    <a href="/courseTwo/<%= currentUser.id %>">
-                                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png">
+                                    <a href="/courseOne/<%= currentUser.id %>">
+                                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png"
+                                            alt="first test">
                                         <div class="card-body">
                                             <hr>
                                             <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
@@ -81,29 +82,17 @@
                                         </div>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-4">
                                 <div class="card">
-                                    <a href="/Quizzes/<%= currentUser.id %>">
-                                        <img class="card-img-top" id="QuizImage" src="../image/Quiz.png"
+                                    <a href="/trainingExamsPage/<%= currentUser.id%>">
+                                        <img class="card-img-top" id="ExamImage" src="../image/Exam.png"
                                             alt="first test">
                                         <div class="card-body">
                                             <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات القصيرة
-                                            </h5>
-                                            <p class="card-text">اختبارات قصيرة حسب المهار</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <a href="/instruction/<%= currentUser.id%>">
-                                        <img class="card-img-top" id="TestOne" src="../image/one.png" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
-                                            <p class="card-text">اختبار تجريبي لجميع المهارات</p>
+                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات
+                                                التجريبية</h5>
+                                            <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
                                         </div>
                                     </a>
                                 </div>
@@ -158,6 +147,9 @@
             </div>
             <script type="text/javascript">
             </script>
+            <!-- whatsApp widget -->
+            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+            <div class="elfsight-app-94449513-5f73-4186-9bda-5125b199883e"></div>
             <% include ../partails/footer.ejs %>
 </body>
 

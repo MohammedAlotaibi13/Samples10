@@ -25,16 +25,19 @@ module.exports.updateUserData = async (req, res) => {
                 res.redirect("back");
             } else if (req.body.accountExpiration == 'ThreeDays') {
                 user.accountExpiration = Date.now() + 259200000 // 3 days
+                user.numberOfAttempts = 1
                 user.save()
                 req.flash("success", " تم التحديث بنجاح")
                 res.redirect("back")
             } else if (req.body.accountExpiration == 'oneWeek') {
                 user.accountExpiration = Date.now() + 604800000 // 7 days
+                user.numberOfAttempts = 2
                 user.save()
                 req.flash("success", " تم التحديث بنجاح")
                 res.redirect("back")
             } else if (req.body.accountExpiration == 'oneMonth') {
                 user.accountExpiration = Date.now() + 2592000000 // 30 days
+                user.numberOfAttempts = 3
                 user.save()
                 req.flash("success", " تم التحديث بنجاح")
                 res.redirect("back")

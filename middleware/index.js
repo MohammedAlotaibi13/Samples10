@@ -25,15 +25,20 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
     ],
     accountExpiration: {
       $gt: Date.now()
+    }, numberOfAttempts: {
+      $gt: 0
     }
   }, function (error, userInfo) {
     if (!userInfo) {
-      req.flash("error", "انتهت عضوية الحساب")
+      req.flash("error", "انتهت عضوية الحساب او استنفدت عدد محاولات الاختبار")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
       res.redirect("/myBag")
     } else {
+      let numberOfAttempt = userInfo.numberOfAttempts
+      userInfo.numberOfAttempts = numberOfAttempt - 1
+      userInfo.save()
       next()
     }
   });

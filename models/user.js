@@ -30,11 +30,11 @@ var userSchema = new mongoose.Schema({
     accountExpiration: {
         type: Date,
         required: true,
-        default: Date.now() + 259200000 // three days
+        default: Date.now() + 86400000 // 24 hour
     },
     numberOfAttempts: {
         type: Number,
-        default: 5
+        default: 1
     },
     payments: [{
         type: mongoose.Schema.Types.ObjectId,

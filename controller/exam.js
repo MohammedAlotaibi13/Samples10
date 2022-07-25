@@ -1,6 +1,4 @@
-
-
-
+const User = require("../models/user");
 
 module.exports.renderToMyBagPage = (req, res) => {
     res.render("tests/myBag")
@@ -11,13 +9,13 @@ module.exports.renderToAllExams = (req, res) => {
 
 
 module.exports.renderToInstructionPage = (req, res) => {
-
     res.render("tests/instructions")
 }
-module.exports.renderToExamOne = (req, res) => {
 
+module.exports.renderToExamOne = (req, res) => {
     res.render("tests/Exams/examOne/index");
 }
+
 
 module.exports.renderToExamTwo = (req, res) => {
     res.render("tests/Exams/examTwo/index");

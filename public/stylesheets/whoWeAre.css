@@ -1,11 +1,9 @@
+h3 {
+	padding-top: 45px;
+	color: green;
 
- h3 {
- 	padding-top: 45px;
-	 color:black;
-	 
- }
-
-.col-md-10 {
-	margin: 50px 0 50px 100px ;
 }
 
+.col-md-10 {
+	margin: 50px 0 50px 100px;
+}
