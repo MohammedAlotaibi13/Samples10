@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const app = express();
-const path = require('path')
+const path = require('path');
 const passport = require("passport");
 const mongoose = require("mongoose");
 const localStrategy = require("passport-local").Strategy;
@@ -171,7 +171,7 @@ app.use(function (req, res, next) {
 });
 
 // use only in production 
-app.use(redirectSSL)
+// app.use(redirectSSL)
 
 //  config routes
 

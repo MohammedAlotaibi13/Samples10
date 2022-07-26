@@ -236,85 +236,88 @@
 
         <hr>
         <!-- Price section -->
-
-        <div class="container">
-            <div class="container" id="priceSection">
+        <section id="price">
+            <div class="container">
+                <div class="container" id="priceSection">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3> اختر الباقة المناسبة لك</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h3> اختر الباقة المناسبة لك</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card text-center" id="cards-price">
-                        <h3 class="card-header">Free</h3>
-                        <div class="card-body">
+                    <div class="col-lg-4">
+                        <div class="card text-center" id="cards-price">
+                            <h3 class="card-header">Free</h3>
+                            <div class="card-body">
 
-                            <h4 class="card-title">0 SR</h4>
-                            <h6>تشمل</h6>
-                            <div dir="rtl">
-                                <ul class="card-text fa-ul">
-                                    <li><i class="fa fa-check"></i>اختبار واحد</li>
-                                    <li><i class="fa fa-check"></i>صلاحية الحساب 24 ساعة</li>
-                                </ul>
+                                <h4 class="card-title">0 SR</h4>
+                                <h6>تشمل</h6>
+                                <div dir="rtl">
+                                    <ul class="card-text fa-ul">
+                                        <li><i class="fa fa-check"></i>اختبار واحد</li>
+                                        <li><i class="fa fa-check"></i>صلاحية الحساب 24 ساعة</li>
+                                    </ul>
+                                </div>
+
+                                <a href="/register" class="btn btn-lg btn-block btn-outline-primary">سجل مجاناً</a>
                             </div>
-
-                            <a href="/register" class="btn btn-lg btn-block btn-outline-primary">سجل مجاناً</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card text-center" id="cards-price">
-                        <!-- <div class="hot">عرض خاص</div> -->
-                        <h3 class="card-header">Pro</h3>
-                        <div class="card-body">
+                    <div class="col-lg-4">
+                        <div class="card text-center" id="cards-price">
+                            <!-- <div class="hot">عرض خاص</div> -->
+                            <h3 class="card-header">Pro</h3>
+                            <div class="card-body">
 
-                            <h4 class="card-title">165 SR</h4>
-                            <h6>تشمل</h6>
-                            <div dir="rtl">
-                                <ul class="card-text fa-ul">
-                                    <li><i class="fa fa-check"></i>خمس اختبارات تجريية مختلفة</li>
-                                    <li><i class="fa fa-check"></i>صلاحية الحساب 30 يوم</li>
-                                </ul>
+                                <h4 class="card-title">165 SR</h4>
+                                <h6>تشمل</h6>
+                                <div dir="rtl">
+                                    <ul class="card-text fa-ul">
+                                        <li><i class="fa fa-check"></i>خمس اختبارات تجريية مختلفة</li>
+                                        <li><i class="fa fa-check"></i>صلاحية الحساب 30 يوم</li>
+                                    </ul>
+                                </div>
+                                <% if(!currentUser) { %>
+                                    <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                    <% } else { %>
+                                        <a href="/pay/<%= currentUser.id %>"
+                                            class="btn btn-lg btn-block btn-primary">اشترك
+                                            الآن</a>
+                                        <% } %>
                             </div>
-                            <% if(!currentUser) { %>
-                                <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                                <% } else { %>
-                                    <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك
-                                        الآن</a>
-                                    <% } %>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card text-center border-primary" id="cards-price">
-                        <!-- <div class="hot">عرض خاص خصم %50</div> -->
-                        <h3 class="card-header border-primary text-white bg-primary">Gold</h3>
-                        <div class="card-body">
-                            <!-- <h4 class="card-title"> <del>199</del> SR</h4> -->
-                            <h4 class="card-title"> 199 SR</h4>
+                    <div class="col-lg-4">
+                        <div class="card text-center border-primary" id="cards-price">
+                            <!-- <div class="hot">عرض خاص خصم %50</div> -->
+                            <h3 class="card-header border-primary text-white bg-primary">Gold</h3>
+                            <div class="card-body">
+                                <!-- <h4 class="card-title"> <del>199</del> SR</h4> -->
+                                <h4 class="card-title"> 199 SR</h4>
 
-                            <h6>تشمل</h6>
-                            <div dir="rtl">
-                                <ul class="card-text fa-ul">
-                                    <li><i class="fa fa-check"></i>الدورة التدريبية</li>
+                                <h6>تشمل</h6>
+                                <div dir="rtl">
+                                    <ul class="card-text fa-ul">
+                                        <li><i class="fa fa-check"></i>الدورة التدريبية</li>
 
-                                    <li><i class="fa fa-check"></i>خمس اختبارات تجريية مختلفة</li>
-                                    <li><i class="fa fa-check"></i>صلاحية الحساب 65 يوم</li>
-                                </ul>
+                                        <li><i class="fa fa-check"></i>خمس اختبارات تجريية مختلفة</li>
+                                        <li><i class="fa fa-check"></i>صلاحية الحساب 65 يوم</li>
+                                    </ul>
+                                </div>
+                                <% if(!currentUser) { %>
+                                    <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                    <% } else { %>
+                                        <a href="/pay/<%= currentUser.id %>"
+                                            class="btn btn-lg btn-block btn-primary">اشترك
+                                            الآن</a>
+                                        <% } %>
                             </div>
-                            <% if(!currentUser) { %>
-                                <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
-                                <% } else { %>
-                                    <a href="/pay/<%= currentUser.id %>" class="btn btn-lg btn-block btn-primary">اشترك
-                                        الآن</a>
-                                    <% } %>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         <script type="text/javascript" src="../javascripts/landingPage.js"></script>
         <!-- whatsApp widget -->
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
