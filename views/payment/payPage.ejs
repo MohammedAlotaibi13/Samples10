@@ -10,7 +10,7 @@
 
     <% include ../partails/head.ejs %>
         <link rel="stylesheet" type="text/css" href="../stylesheets/payPage.css">
-        <title>نوع الباقة</title>
+        <title>تفاصيل الاشتراك</title>
         <link rel="icon" href="/image/circleLogo.png">
 
 </head>
@@ -25,23 +25,38 @@
 
         <div class="grid-container">
             <div class="item-1">
-                <h3 class="h3 mb-3 font-weight-normal text-center" id="title">الدفع</h3>
+                <h3 class="h3 mb-3 font-weight-normal text-center" id="title">تفاصيل الاشتراك</h3>
             </div>
 
             <form method="post" onsubmit=" return isChecked()"" action=" /pay/<%=currentUser.id %>">
-                <div class="form-group">
-                    <div class="item-2 mb-3">
-                        <div id="memberShip"></div>
+                <div class="form-group" dir="rtl">
+                    <div class="mb-3">
+                        <label for="memberShipPicker">نوع الباقة:</label>
                         <select class="form-select mb-2" name="memberShipPicker" id="memberShipPicker" required>
                             <option value="Gold">
-                                Gold (199 SR)
+                                Gold
                             </option>
-                            <option value="Pro">Pro (165 SR)</option>
+                            <option value="Pro">Pro</option>
                         </select>
-                        <select class="form-select mb-2 " name="paymntMethod" id="paymntMethod" required>
+                        <!-- <label for="paymntMethod">طريقة الدفع:</label>
+
+                        <select class="form-select mb-2" name="paymntMethod" id="paymntMethod" required>
                             <option value="DebitCard">بطاقة مدى البنكية</option>
                             <option value="BankTransfer">تحويل بنكي</option>
-                        </select>
+                        </select> -->
+                    </div>
+                </div>
+                <div class="form-group" dir="rtl">
+                    <div class=" mb-3">
+                        <label for="couponInput"> لديك كوبون؟ الرجاء كتابته في الأسفل</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="رمز الكوبون" id="couponInput">
+                            <button class="btn btn-secondary" type="button">تفعيل </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total">المبلغ الإجمالي:</label>
+                        <input type="text" class="form-control" id="total" disabled>
                     </div>
                 </div>
                 <div class="form-group">
@@ -51,8 +66,12 @@
                             onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط
                             والأحكام</a><br>
                     </div>
-                    <div class="item-3">
-                        <input type="submit" class="btn btn-success form-control" value="دفع" id="payButton">
+
+                    <div>
+                        <input type="submit" class="btn btn-secondary iconMada" value="">
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-dark iconApple" value="">
                     </div>
                 </div>
             </form>
