@@ -9,6 +9,41 @@ function isChecked() {
 }
 
 
+var a = document.getElementById('memberShipPicker');
+var total = document.getElementById("total")
+var couponInput = document.getElementById('couponInput');
+
+a.addEventListener('change', function () {
+    if (this.value == "Gold") {
+        total.value = "SR 199"
+    } else {
+        total.value = "SR 169"
+    }
+}, false);
+
+
+couponInput.addEventListener('change', function () {
+    if (this.value == "" && a.value == "Gold") {
+        total.value = "SR 199"
+    } else if (this.value == "" && a.value == "Pro") {
+        total.value = "SR 169"
+    }
+}, false)
+
+
+function applyCoupon() {
+    if (couponInput.value == 'Welcome' && total.value == "SR 199") {
+        total.value = "SR 179"
+    } else if (couponInput.value == 'Welcome' && total.value == "SR 169") {
+        total.value = "SR 152"
+    } else if (couponInput.value == "") {
+        alert('No code to apply')
+    } else {
+        alert('Wrong Code')
+    }
+}
+
+
 //Google Tag Manager 
 (function (w, d, s, l, i) {
     w[l] = w[l] || []; w[l].push({

@@ -38,12 +38,6 @@
                             </option>
                             <option value="Pro">Pro</option>
                         </select>
-                        <!-- <label for="paymntMethod">طريقة الدفع:</label>
-
-                        <select class="form-select mb-2" name="paymntMethod" id="paymntMethod" required>
-                            <option value="DebitCard">بطاقة مدى البنكية</option>
-                            <option value="BankTransfer">تحويل بنكي</option>
-                        </select> -->
                     </div>
                 </div>
                 <div class="form-group" dir="rtl">
@@ -51,17 +45,16 @@
                         <label for="couponInput"> لديك كوبون؟ الرجاء كتابته في الأسفل</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="رمز الكوبون" id="couponInput">
-                            <button class="btn btn-secondary" type="button">تفعيل </button>
+                            <button class="btn btn-secondary" type="button" onclick="applyCoupon()">تفعيل </button>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="total">المبلغ الإجمالي:</label>
-                        <input type="text" class="form-control" id="total" disabled>
+                        <input type="text" class="form-control" id="total" disabled value="SR 199">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="text-right" id="checkbox">
-                        <!-- <p style="color: red;">عرض خاص خصم %50 على الباقة الذهبية، ينتهي العرض في 31 ديسمبر</p> -->
                         <input type="checkbox" name="terms" value="terms" id="terms"> أوافق على <a href="#"
                             onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط
                             والأحكام</a><br>
