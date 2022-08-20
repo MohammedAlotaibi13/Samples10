@@ -15,7 +15,7 @@ module.exports.createPaymentId = async (req, res) => {
                 userId: foundUser.id,
                 email: foundUser.email,
                 memberShip: req.body.memberShipPicker,
-                paymentWay: req.body.paymntMethod,
+                paymentWay: "DebitCard", //req.body.paymntMethod,
                 timeOfPayment: Date.now(),
                 status: "success",
             }, function (error, paymentInfo) {
