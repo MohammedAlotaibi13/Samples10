@@ -1,4 +1,5 @@
 const mailchimp = require("@mailchimp/mailchimp_marketing");
+const md5 = require('md5');
 
 mailchimp.setConfig({
     apiKey: process.env.MAILCHIMPAPI,
@@ -6,14 +7,13 @@ mailchimp.setConfig({
 });
 
 module.exports.saveUserInmailChimp = async function (email, username, gender) {
-    const response = await mailchimp.lists.addListMember('5080ca4d5f', {
+    const response = await mailchimp.lists.setListMember('5080ca4d5f', md5(email.toLowerCase()), {
         email_address: email,
-        status: 'subscribed',
+        status_if_new: 'subscribed',
         merge_fields: {
             UNAME: username,
             GENDER: gender
         }
-
     })
 }
 

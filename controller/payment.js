@@ -17,7 +17,7 @@ module.exports.createPaymentId = async (req, res) => {
                 memberShip: req.body.memberShipPicker,
                 paymentWay: "DebitCard", //req.body.paymntMethod,
                 timeOfPayment: Date.now(),
-                status: "success",
+                status: "abandoned",
             }, function (error, paymentInfo) {
                 if (error) {
                     console.log(error)

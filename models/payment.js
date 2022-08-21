@@ -6,7 +6,15 @@ const paymentSchema = new mongoose.Schema({
    memberShip: String,
    paymentWay: String,
    timeOfPayment: Date,
-   status: String
+   status: String,
+   abandonedCartCoupon: {
+      type: String,
+      default: 'abandonedCart'
+   },
+   abandonedCartCouponExpiration: {
+      type: Date,
+      default: Date.now() + 518400000 // 6 days
+   }
 })
 
 module.exports = mongoose.model("Payment", paymentSchema)

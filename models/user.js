@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
     accountExpiration: {
         type: Date,
         required: true,
-        default: Date.now() + 86400000 // 24 hour
+        default: Date.now() + 86400000 // 24 hours
     },
     numberOfAttempts: {
         type: Number,
@@ -40,6 +40,14 @@ var userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payment"
     }],
+    welcomeCoupon: {
+        type: String,
+        default: 'Welcome44E3'
+    },
+    welcomeCouponExpiration: {
+        type: Date,
+        default: Date.now() + 86400000 // 24 hours
+    },
     resetPasswordToken: String,
     resetPasswordExpiration: Date,
 
