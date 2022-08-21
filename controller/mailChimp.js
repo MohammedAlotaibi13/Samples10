@@ -1,34 +1,34 @@
-const request = require("request")
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
-module.exports.saveUserInmailChimp = function (email, username, gender) {
-    const data = {
-        members: [{
-            email_address: email,
-            status: 'subscribed',
-            merge_fields: {
-                UNAME: username,
-                GENDER: gender
-            }
-        }]
-    }
-    const postData = JSON.stringify(data)
-    const option = {
-        url: "https://us19.api.mailchimp.com/3.0/lists/5080ca4d5f",
-        method: 'POST',
-        headers: {
-            Authorization: process.env.MAILCHIMPAPI
-        },
-        body: postData
-    }
+mailchimp.setConfig({
+    apiKey: process.env.MAILCHIMPAPI,
+    server: 'us19'
+});
 
-    request(option, (err, response, body) => {
-        if (err) {
-            console.log(err)
-        } else {
-            if (response.statusCode == 200) {
-            } else {
-                console.log(response.statusCode)
-            }
+module.exports.saveUserInmailChimp = async function (email, username, gender) {
+    const response = await mailchimp.lists.addListMember('5080ca4d5f', {
+        email_address: email,
+        status: 'subscribed',
+        merge_fields: {
+            UNAME: username,
+            GENDER: gender
         }
+
     })
 }
+
+
+module.exports.savePaymentMailchimp = async function (email, userName, memberShip, paymentWay, paymentStatus) {
+    const response = await mailchimp.lists.addListMember('fec4fb2783', {
+        email_address: email,
+        status: 'subscribed',
+        merge_fields: {
+            UNAME: userName,
+            MEMBERSHIP: memberShip,
+            PAYMENTWAY: paymentWay,
+            PAYMENTSTA: paymentStatus
+
+        }
+    });
+}
+

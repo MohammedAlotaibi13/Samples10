@@ -12,6 +12,7 @@
   "author": "Mohammed Alotaibi",
   "license": "ISC",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.78",
     "async": "^2.6.3",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
