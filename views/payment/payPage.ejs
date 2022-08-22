@@ -66,11 +66,21 @@
                     <div>
                         <!-- <input type="submit" class="btn btn-dark iconApple" value=""> -->
                     </div>
+                    <div>
+
+                        <% if(!foundPayment) { %>
+                            <input type="text" id="welcomeCouponExpiration"
+                                value="<%= currentUser.welcomeCouponExpiration %>">
+                            <% } else { %>
+                                <input type="text" id="abandonedCouponExpiration"
+                                    value="<%= foundPayment.abandonedCartCouponExpiration%>">
+                                <% } %>
+                    </div>
                 </div>
             </form>
         </div>
 
-        <script type="text/javascript" src="/javascripts/payPage.js"></script>
+        <script type=" text/javascript" src="/javascripts/payPage.js"></script>
 
 
         <% include ../partails/footer.ejs %>

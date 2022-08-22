@@ -9,9 +9,9 @@ function isChecked() {
 }
 
 
+
 var a = document.getElementById('memberShipPicker');
 var total = document.getElementById("total")
-var couponInput = document.getElementById('couponInput');
 
 a.addEventListener('change', function () {
     if (this.value == "Gold") {
@@ -21,6 +21,7 @@ a.addEventListener('change', function () {
     }
 }, false);
 
+var couponInput = document.getElementById('couponInput');
 
 couponInput.addEventListener('change', function () {
     if (this.value == "" && a.value == "Gold") {
@@ -30,19 +31,49 @@ couponInput.addEventListener('change', function () {
     }
 }, false)
 
+var welcomeCouponExpiration = document.getElementById('welcomeCouponExpiration');
+var abandonedCouponExpiration = document.getElementById('abandonedCouponExpiration');
 
 function applyCoupon() {
-    if (couponInput.value == 'Welcome' && total.value == "SR 199") {
-        total.value = "SR 179"
-    } else if (couponInput.value == 'Welcome' && total.value == "SR 169") {
-        total.value = "SR 148"
-    } else if (couponInput.value == "") {
-        alert('No code to apply')
+
+
+    if (welcomeCouponExpiration && welcomeCouponExpiration.value) {
+        applyWelcomeCoupon()
+
     } else {
-        alert('Wrong Code')
+        applyAbandendCartCoupon()
     }
 }
 
+
+
+function applyWelcomeCoupon() {
+    var welcomeCouponExpirationInMiliesecond = Date.parse(welcomeCouponExpiration.value)
+
+    if (couponInput.value == 'Welcome' && Date.now() < welcomeCouponExpirationInMiliesecond) {
+        if (total.value == "SR 199") {
+            total.value = "SR 179"
+        } else if (total.value == "SR 165") {
+            total.value = "SR 148"
+        }
+    } else {
+        alert('رمز خاطئ أو منتهي الصلاحية')
+    }
+}
+
+function applyAbandendCartCoupon() {
+    var abandonedCartCouponExpirationInMilesecond = Date.parse(abandonedCouponExpiration.value)
+
+    if (couponInput.value == 'abandonedCart' && Date.now() < abandonedCartCouponExpirationInMilesecond) {
+        if (total.value == "SR 199") {
+            total.value = "SR 169"
+        } else {
+            total.value = "SR 140"
+        }
+    } else {
+        alert('رمز خاطئ أو منتهي الصلاحية')
+    }
+}
 
 //Google Tag Manager 
 (function (w, d, s, l, i) {

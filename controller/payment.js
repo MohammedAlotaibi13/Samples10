@@ -2,8 +2,20 @@ const Payment = require("../models/payment");
 const User = require("../models/user");
 const paymentGate = require('./paymentGate')
 
-module.exports.rendertoPaymentPage = (req, res) => {
-    res.render("payment/payPage");
+module.exports.rendertoPaymentPage = async (req, res) => {
+    await User.findById(req.params.id, function (error, foundUser) {
+        if (error) {
+            console.log(error)
+        } else {
+            Payment.findById(foundUser.payments[0], function (error, foundPayment) {
+                if (error) {
+                    console.log(error)
+                } else {
+                    res.render("payment/payPage", { foundPayment });
+                }
+            })
+        }
+    })
 }
 module.exports.createPaymentId = async (req, res) => {
     await User.findById(req.params.id, function (error, foundUser) {
