@@ -30,6 +30,7 @@ module.exports.createPaymentId = async (req, res) => {
                 paymentWay: "DebitCard", //req.body.paymntMethod,
                 timeOfPayment: Date.now(),
                 status: "abandoned",
+                price: req.body.total,
             }, function (error, paymentInfo) {
                 if (error) {
                     console.log(error)
@@ -54,7 +55,7 @@ module.exports.checkOutPage = async (req, res) => {
         } else {
             if (req.params.memberShip == "Pro") {
                 paymentGate.generateCheckoutId({
-                    amount: '165',
+                    amount: foundPayment.price,
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {
@@ -66,7 +67,7 @@ module.exports.checkOutPage = async (req, res) => {
                 })
             } else {
                 paymentGate.generateCheckoutId({
-                    amount: '199',
+                    amount: foundPayment.price,
                     merchantTransactionId: foundPayment.id,
                     email: foundPayment.email,
                     cb: (result) => {

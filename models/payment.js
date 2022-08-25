@@ -6,6 +6,7 @@ const paymentSchema = new mongoose.Schema({
    memberShip: String,
    paymentWay: String,
    timeOfPayment: Date,
+   price: String,
    status: String,
    abandonedCartCoupon: {
       type: String,

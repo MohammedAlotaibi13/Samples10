@@ -11,13 +11,13 @@ function isChecked() {
 
 
 var a = document.getElementById('memberShipPicker');
-var total = document.getElementById("total")
+var total = document.getElementById("total");
 
 a.addEventListener('change', function () {
     if (this.value == "Gold") {
-        total.value = "SR 199"
+        total.value = "199"
     } else {
-        total.value = "SR 165"
+        total.value = "165"
     }
 }, false);
 
@@ -25,9 +25,9 @@ var couponInput = document.getElementById('couponInput');
 
 couponInput.addEventListener('change', function () {
     if (this.value == "" && a.value == "Gold") {
-        total.value = "SR 199"
+        total.value = "199"
     } else if (this.value == "" && a.value == "Pro") {
-        total.value = "SR 165"
+        total.value = "165"
     }
 }, false)
 
@@ -50,11 +50,11 @@ function applyCoupon() {
 function applyWelcomeCoupon() {
     var welcomeCouponExpirationInMiliesecond = Date.parse(welcomeCouponExpiration.value)
 
-    if (couponInput.value == 'Welcome' && Date.now() < welcomeCouponExpirationInMiliesecond) {
-        if (total.value == "SR 199") {
-            total.value = "SR 179"
-        } else if (total.value == "SR 165") {
-            total.value = "SR 148"
+    if (couponInput.value == 'Samples10' && Date.now() < welcomeCouponExpirationInMiliesecond) {
+        if (total.value == "199") {
+            total.value = "179"
+        } else if (total.value == "165") {
+            total.value = "148"
         }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
@@ -64,11 +64,11 @@ function applyWelcomeCoupon() {
 function applyAbandendCartCoupon() {
     var abandonedCartCouponExpirationInMilesecond = Date.parse(abandonedCouponExpiration.value)
 
-    if (couponInput.value == 'abandonedCart' && Date.now() < abandonedCartCouponExpirationInMilesecond) {
-        if (total.value == "SR 199") {
-            total.value = "SR 169"
+    if (couponInput.value == 'Samples15' && Date.now() < abandonedCartCouponExpirationInMilesecond) {
+        if (total.value == "199") {
+            total.value = "169"
         } else {
-            total.value = "SR 140"
+            total.value = "140"
         }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
