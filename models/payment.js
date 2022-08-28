@@ -10,7 +10,7 @@ const paymentSchema = new mongoose.Schema({
    status: String,
    abandonedCartCoupon: {
       type: String,
-      default: 'abandonedCart'
+      default: 'Samples15'
    },
    abandonedCartCouponExpiration: {
       type: Date,

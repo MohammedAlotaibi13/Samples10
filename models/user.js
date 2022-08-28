@@ -42,7 +42,7 @@ var userSchema = new mongoose.Schema({
     }],
     welcomeCoupon: {
         type: String,
-        default: 'Welcome44E3'
+        default: 'Samples10'
     },
     welcomeCouponExpiration: {
         type: Date,
