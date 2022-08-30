@@ -11,23 +11,22 @@ nav {
 li {
 	padding-left: 15px;
 }
- 
- /* End of nav style and body*/
 
- .card  {
+/* End of nav style and body*/
+
+.card {
 	width: 250px;
 	text-align: center;
-	margin: 30px 0 30px 50px ;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
+	margin: 30px 0 30px 50px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
-.card a:hover{
+.card a:hover {
 	text-decoration: none;
 }
 
 .card img {
-	max-width: 100%;
-	height: auto;
-	margin-top: 10px;
+	margin-top: 0px;
+	margin-bottom: 50px;
 }

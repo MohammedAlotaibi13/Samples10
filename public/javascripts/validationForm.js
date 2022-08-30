@@ -18,3 +18,8 @@
             }, false)
         })
 })()
+
+
+function loading() {
+
+}
