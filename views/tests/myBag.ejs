@@ -42,47 +42,48 @@
         <div class="container">
             <div class="row">
                 <% if(currentUser.memberShip=="free" ) { %>
-                    <!-- <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="card">
-                            <a href="/courseOne/<%= currentUser.id %>">
-                                <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png"
+                            <a href="/trainingExamsPage/<%= currentUser.id%>">
+                                <img class="card-img-top" id="ExamImage" src="../image/Exam.svg" alt="Exams Page">
+                                <div class="card-body">
+                                    <hr>
+                                    <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات
+                                        التجريبية</h5>
+                                    <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" id="locked">
+                            <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
+                                <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
                                     alt="first test">
                                 <div class="card-body">
                                     <hr>
-                                    <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
+                                    <h5 class="card-title" style="padding-bottom: 32px;">الدورة
+                                        التدريبية</h5>
                                     <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
                                 </div>
                             </a>
                         </div>
-                    </div> -->
-
+                    </div>
                     <div class="col-md-4">
-                        <div class="card">
-                            <a href="/instruction/<%= currentUser.id%>">
-                                <img class="card-img-top" id="TestOne" src="../image/one.png" alt="first test">
+                        <div class="card" id="locked">
+                            <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
+                                <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg" alt="first test">
                                 <div class="card-body">
                                     <hr>
-                                    <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
-                                    <p class="card-text">اختبار تجريبي لجميع المهارات</p>
+                                    <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات
+                                        القصيرة</h5>
+                                    <p class="card-text">اختبارات قصيرة حسب المهارة</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                     <% } %>
                         <% if( currentUser.memberShip=="Pro" ){ %>
-                            <!-- <div class="col-md-4">
-                                <div class="card">
-                                    <a href="/courseOne/<%= currentUser.id %>">
-                                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.png"
-                                            alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الدورة التدريبية</h5>
-                                            <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div> -->
                             <div class="col-md-4">
                                 <div class="card">
                                     <a href="/trainingExamsPage/<%= currentUser.id%>">
@@ -93,6 +94,34 @@
                                             <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات
                                                 التجريبية</h5>
                                             <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id="locked">
+                                    <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
+                                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
+                                            alt="first test">
+                                        <div class="card-body">
+                                            <hr>
+                                            <h5 class="card-title" style="padding-bottom: 32px;">الدورة
+                                                التدريبية</h5>
+                                            <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" id="locked">
+                                    <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
+                                        <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
+                                            alt="first test">
+                                        <div class="card-body">
+                                            <hr>
+                                            <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات
+                                                القصيرة</h5>
+                                            <p class="card-text">اختبارات قصيرة حسب المهارة</p>
                                         </div>
                                     </a>
                                 </div>

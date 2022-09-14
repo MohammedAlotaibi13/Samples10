@@ -4,7 +4,7 @@ function isChecked() {
         alert("الرجاء الموافقة على الشروط والأحكام")
         return false
     } else {
-        return true;
+        spinnerButton()
     }
 }
 
@@ -75,6 +75,28 @@ function applyAbandendCartCoupon() {
     }
 }
 
+
+
+
+// spinner 
+
+function spinnerButton() {
+    $(document).ready(function () {
+        $("#payButton").click(function () {
+            // disable button
+            $(this).prop("disabled", true);
+            $(this).classList.add('btn btn-secondary');
+            // add spinner to button
+            $(this).html(
+                '<span class="spinner-border  mx-3  spinner-border-sm" role="status" aria-hidden="true"></span>   '
+            );
+            setTimeout(function () {
+                /*submit the form after 5 secs*/
+                document.getElementById('payForm').submit();
+            }, 2000)
+        });
+    });
+}
 //Google Tag Manager 
 (function (w, d, s, l, i) {
     w[l] = w[l] || []; w[l].push({

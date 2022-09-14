@@ -16,12 +16,12 @@ body {
 	justify-content: center;
 }
 
-.grid-container > div {
+.grid-container>div {
 	text-align: center;
 }
 
 #sign-button {
-	padding: 5px 160px 5px 160px ; 
+	padding: 5px 110px 5px 110px;
 	border-radius: 10px;
 }
 

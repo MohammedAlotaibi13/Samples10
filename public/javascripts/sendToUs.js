@@ -23,17 +23,17 @@
 
 function spinnerButton() {
     $(document).ready(function () {
-        $("#sign-button").click(function () {
+        $("#sendButton").click(function () {
             // disable button
             $(this).prop("disabled", true);
             // add spinner to button
             $(this).html(
-                '<span class="spinner-border  mx-3  spinner-border-sm" role="status" aria-hidden="true"></span>   '
+                '<span class="spinner-border  mx-3  spinner-border-sm" role="status" aria-hidden="true"></span>'
             );
             setTimeout(function () {
                 /*submit the form after 5 secs*/
-                document.getElementById('registerForm').submit();
-            }, 2500)
+                document.getElementById('messageForm').submit();
+            }, 2000)
         });
     });
 }
