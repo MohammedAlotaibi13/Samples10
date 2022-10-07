@@ -18,15 +18,29 @@ module.exports.saveUserInmailChimp = async function (email, username, gender) {
 }
 
 
-module.exports.savePaymentMailchimp = async function (email, userName, memberShip, paymentWay, paymentStatus) {
-    const response = await mailchimp.lists.addListMember('fec4fb2783', {
+module.exports.savePaymentMailchimp = async function (email, userName, memberShip, paymentStatus) {
+    const response = await mailchimp.lists.setListMember('fec4fb2783', md5(email.toLowerCase()), {
         email_address: email,
-        status: 'subscribed',
+        status_if_new: 'subscribed',
         merge_fields: {
             UNAME: userName,
             MEMBERSHIP: memberShip,
-            PAYMENTWAY: paymentWay,
             PAYMENTSTA: paymentStatus
+
+        }
+    });
+}
+
+module.exports.saveCheckOut = async function (email, userName, memberShip, purchaseTime, gender, price) {
+    const response = await mailchimp.lists.setListMember('b24419d2b5', md5(email.toLowerCase()), {
+        email_address: email,
+        status_if_new: 'subscribed',
+        merge_fields: {
+            UNAME: userName,
+            MEMBERSHIP: memberShip,
+            BUYTIME: purchaseTime,
+            GENDER: gender,
+            PRICE: price
 
         }
     });

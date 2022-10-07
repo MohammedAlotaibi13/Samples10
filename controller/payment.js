@@ -1,6 +1,7 @@
 const Payment = require("../models/payment");
 const User = require("../models/user");
 const paymentGate = require('./paymentGate')
+const mailChimp = require('./mailChimp')
 
 module.exports.rendertoPaymentPage = async (req, res) => {
     await User.findById(req.params.id, function (error, foundUser) {
@@ -17,31 +18,30 @@ module.exports.rendertoPaymentPage = async (req, res) => {
         }
     })
 }
+
 module.exports.createPaymentId = async (req, res) => {
+    const { memberShipPicker, total } = req.body
+
     await User.findById(req.params.id, function (error, foundUser) {
         if (error) {
             console.log(error)
             res.redirect("back")
         } else {
-            Payment.create({
-                userId: foundUser.id,
-                email: foundUser.email,
-                memberShip: req.body.memberShipPicker,
-                paymentWay: "DebitCard", //req.body.paymntMethod,
-                timeOfPayment: Date.now(),
-                status: "abandoned",
-                price: req.body.total,
-            }, function (error, paymentInfo) {
-                if (error) {
-                    console.log(error)
-                    return res.redirect("back")
-                } else {
-                    foundUser.payments.push(paymentInfo)
-                    foundUser.save()
-                }
-
-                res.redirect('/checkout/' + paymentInfo.id + "/" + req.body.memberShipPicker)
-            })
+            try {
+                const newPayment = new Payment;
+                newPayment.userId = foundUser.id;
+                newPayment.email = foundUser.email;
+                newPayment.memberShip = memberShipPicker;
+                newPayment.timeOfPayment = Date.now();
+                newPayment.price = total;
+                newPayment.save()
+                foundUser.payments.push(newPayment)
+                foundUser.save();
+                mailChimp.savePaymentMailchimp(foundUser.email, foundUser.username, memberShipPicker)
+                res.redirect('/checkout/' + newPayment.id + "/" + memberShipPicker)
+            } catch (e) {
+                console.log(e)
+            }
         }
     })
 }
@@ -104,6 +104,7 @@ module.exports.getPaymentStatus = (req, res) => {
                         userInfo.numberOfAttempts = 1000
                         userInfo.accountExpiration = Date.now() + 2592000000 // 30 days
                         userInfo.save()
+                        paymentGate.isPaid(userInfo.payments[0], userInfo.username, userInfo.gender)
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     } else {
@@ -111,6 +112,7 @@ module.exports.getPaymentStatus = (req, res) => {
                         userInfo.numberOfAttempts = 1000
                         userInfo.accountExpiration = Date.now() + 5616000000 // 65 days 
                         userInfo.save()
+                        paymentGate.isPaid(userInfo.payments[0], userInfo.username, userInfo.gender)
                         req.flash("success", " تم الدفع بنجاح")
                         res.redirect("/paymentResult");
                     }
@@ -129,3 +131,5 @@ module.exports.getPaymentStatus = (req, res) => {
     });
 
 }
+
+

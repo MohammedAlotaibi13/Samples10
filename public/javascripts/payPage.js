@@ -3,8 +3,6 @@ function isChecked() {
     if (terms == false) {
         alert("الرجاء الموافقة على الشروط والأحكام")
         return false
-    } else {
-        spinnerButton()
     }
 }
 
@@ -35,8 +33,6 @@ var welcomeCouponExpiration = document.getElementById('welcomeCouponExpiration')
 var abandonedCouponExpiration = document.getElementById('abandonedCouponExpiration');
 
 function applyCoupon() {
-
-
     if (welcomeCouponExpiration && welcomeCouponExpiration.value) {
         applyWelcomeCoupon()
 
@@ -85,7 +81,6 @@ function spinnerButton() {
         $("#payButton").click(function () {
             // disable button
             $(this).prop("disabled", true);
-            $(this).classList.add('btn btn-secondary');
             // add spinner to button
             $(this).html(
                 '<span class="spinner-border  mx-3  spinner-border-sm" role="status" aria-hidden="true"></span>   '
@@ -97,6 +92,11 @@ function spinnerButton() {
         });
     });
 }
+
+
+
+
+
 //Google Tag Manager 
 (function (w, d, s, l, i) {
     w[l] = w[l] || []; w[l].push({

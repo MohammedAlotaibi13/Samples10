@@ -4,10 +4,12 @@ const paymentSchema = new mongoose.Schema({
    userId: String,
    email: String,
    memberShip: String,
-   paymentWay: String,
    timeOfPayment: Date,
    price: String,
-   status: String,
+   status: {
+      type: String,
+      default: 'abandoned'
+   },
    abandonedCartCoupon: {
       type: String,
       default: 'Samples15'
