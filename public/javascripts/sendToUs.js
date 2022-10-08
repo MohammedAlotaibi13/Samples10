@@ -23,7 +23,7 @@
 
 function spinnerButton() {
     $(document).ready(function () {
-        $("#sendButton").click(function () {
+        $("#sendButton").one('click', function () {
             // disable button
             $(this).prop("disabled", true);
             // add spinner to button
