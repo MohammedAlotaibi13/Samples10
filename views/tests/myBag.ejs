@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <% if(currentUser.memberShip=="free" ) { %>
-                    <div class="col-md-4">
+                    <div class="col">
                         <div class="card">
                             <a href="/trainingExamsPage/<%= currentUser.id%>">
                                 <img class="card-img-top" id="ExamImage" src="../image/Exam.svg" alt="Exams Page">
@@ -53,7 +53,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col">
                         <div class="card" id="locked">
                             <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
                                 <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
@@ -67,7 +67,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col">
                         <div class="card" id="locked">
                             <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
                                 <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg" alt="first test">
@@ -82,7 +82,7 @@
                     </div>
                     <% } %>
                         <% if( currentUser.memberShip=="Pro" ){ %>
-                            <div class="col-md-4">
+                            <div class="col">
                                 <div class="card">
                                     <a href="/trainingExamsPage/<%= currentUser.id%>">
                                         <img class="card-img-top" id="ExamImage" src="../image/Exam.svg"
@@ -96,7 +96,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col">
                                 <div class="card" id="locked">
                                     <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
                                         <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
@@ -110,7 +110,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col">
                                 <div class="card" id="locked">
                                     <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
                                         <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
@@ -127,7 +127,7 @@
 
                             <% } %>
                                 <% if(currentUser.memberShip=="gold" || currentUser.memberShip=="admin" ) { %>
-                                    <div class="col-md-4">
+                                    <div class="col">
                                         <div class="card">
                                             <a href="/courseTwo/<%= currentUser.id %>">
                                                 <img class="card-img-top" id="CourseImagese"
@@ -141,7 +141,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col">
                                         <div class="card">
                                             <a href="/Quizzes/<%= currentUser.id %>">
                                                 <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
@@ -155,7 +155,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col">
                                         <div class="card">
                                             <a href="/trainingExamsPage/<%= currentUser.id%>">
                                                 <img class="card-img-top" id="ExamImage" src="../image/Exam.svg"
