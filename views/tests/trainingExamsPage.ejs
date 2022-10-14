@@ -21,13 +21,13 @@
 
 <body>
 
-    <% include ../partails/subHeader.ejs %>
+    <% include ../partails/headerMyBag.ejs %>
         <% if(currentUser.memberShip=="free" ) { %>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <a href="/instruction/<%= currentUser.id%>">
+                            <a href="/instruction/<%= currentUser.id%>" class="btn shadow-none">
                                 <img class="card-img-top" src="../image/one.svg" alt="first test">
                                 <div class="card-body">
                                     <hr>
@@ -38,10 +38,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Exam/examTwo/<%= currentUser.id %>" class="btn disabled">
-                                <img class="card-img-top" src="../image/two.svg" alt="first test">
-                                <div class="card-body">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
+                                <img class="card-img-top upgrade" src="../image/two.svg" alt="first test">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثاني</h5>
 
@@ -50,10 +50,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Exam/examThree/<%= currentUser.id %>" class="btn disabled">
-                                <img class="card-img-top" src="../image/three.svg" alt="first test">
-                                <div class="card-body">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
+                                <img class="card-img-top upgrade" src="../image/three.svg" alt="first test">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثالث</h5>
 
@@ -64,10 +64,10 @@
 
 
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Exam/examFour/<%= currentUser.id %>" class="btn disabled">
-                                <img class="card-img-top" src="../image/four.svg" alt="first test">
-                                <div class="card-body">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
+                                <img class="card-img-top upgrade" src="../image/four.svg" alt="first test">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الرابع</h5>
                                 </div>
@@ -75,10 +75,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Exam/examFive/<%= currentUser.id %>" class="btn disabled">
-                                <img class="card-img-top" src="../image/five.svg" alt="first test">
-                                <div class="card-body">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
+                                <img class="card-img-top upgrade" src="../image/five.svg" alt="first test">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الخامس</h5>
                                 </div>
@@ -86,10 +86,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Exam/examSix/<%= currentUser.id %>" class="btn disabled">
-                                <img class="card-img-top" src="../image/six.svg" alt="first test">
-                                <div class="card-body">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
+                                <img class="card-img-top upgrade" src="../image/six.svg" alt="first test">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الاختبار السادس</h5>
 

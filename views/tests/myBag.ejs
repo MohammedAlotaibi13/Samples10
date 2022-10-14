@@ -42,7 +42,7 @@
                 <% if(currentUser.memberShip=="free" ) { %>
                     <div class="col">
                         <div class="card">
-                            <a href="/trainingExamsPage/<%= currentUser.id%>">
+                            <a href="/trainingExamsPage/<%= currentUser.id%>" class="btn shadow-none">
                                 <img class="card-img-top" id="ExamImage" src="../image/Exam.svg" alt="Exams Page">
                                 <div class="card-body">
                                     <hr>
@@ -54,24 +54,27 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
+                        <div class="card">
+
+                            <a href="/pay/<%= currentUser.id %>" id="locked" class="btn shadow-none">
                                 <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
                                     alt="first test">
-                                <div class="card-body">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;">الدورة
                                         التدريبية</h5>
                                     <p class="card-text">الدورة التدريبية الخاصة باختبار ستيب</p>
                                 </div>
                             </a>
+
                         </div>
+
                     </div>
                     <div class="col">
-                        <div class="card" id="locked">
-                            <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
+                        <div class="card">
+                            <a href="/pay/<%= currentUser.id %>" id="locked" class="btn shadow-none">
                                 <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg" alt="first test">
-                                <div class="card-body">
+                                <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات
                                         القصيرة</h5>
@@ -97,11 +100,11 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card" id="locked">
-                                    <a href="/courseTwo/<%= currentUser.id %>" class="btn disabled">
+                                <div class="card">
+                                    <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
                                         <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
                                             alt="first test">
-                                        <div class="card-body">
+                                        <div class="card-body upgrade">
                                             <hr>
                                             <h5 class="card-title" style="padding-bottom: 32px;">الدورة
                                                 التدريبية</h5>
@@ -111,11 +114,11 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card" id="locked">
-                                    <a href="/Quizzes/<%= currentUser.id %>" class="btn disabled">
+                                <div class="card">
+                                    <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
                                         <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
                                             alt="first test">
-                                        <div class="card-body">
+                                        <div class="card-body upgrade">
                                             <hr>
                                             <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات
                                                 القصيرة</h5>
