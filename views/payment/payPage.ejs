@@ -76,10 +76,10 @@
 
                         <% if(!foundPayment) { %>
                             <input type="text" id="welcomeCouponExpiration"
-                                value="<%= currentUser.welcomeCouponExpiration %>">
+                                value="<%= currentUser.welcomeCouponExpiration %>" hidden>
                             <% } else { %>
                                 <input type="text" id="abandonedCouponExpiration"
-                                    value="<%= foundPayment.abandonedCartCouponExpiration%>">
+                                    value="<%= foundPayment.abandonedCartCouponExpiration%>" hidden>
                                 <% } %>
                     </div>
                 </div>
