@@ -10,7 +10,7 @@ const quizzes = require('../controller/quiz')
 
 // index
 
-router.get("/instruction/:id", middleware.isLoggedIn, exams.renderToInstructionPage)
+router.get("/instruction/:id", middleware.isLoggedIn, middleware.isFreeMemberWithoutDeduction, exams.renderToInstructionPage)
 
 
 
@@ -60,7 +60,7 @@ router.get("/writing/quizTwo/:id", middleware.isLoggedIn, middleware.isGoldMembe
 router.get("/writing/quizThree/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToWritingQuizThree);
 
 // exams Page
-router.get("/trainingExamsPage/:id", middleware.isLoggedIn, middleware.isFreeMember, exams.renderToAllExams);
+router.get("/trainingExamsPage/:id", middleware.isLoggedIn, exams.renderToAllExams);
 
 router.get("/Exam/examOne/:id", middleware.isLoggedIn, middleware.isFreeMember, exams.renderToExamOne);
 

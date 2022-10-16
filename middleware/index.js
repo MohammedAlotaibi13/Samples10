@@ -44,6 +44,36 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
   });
 
 })
+
+middlewareObj.isFreeMemberWithoutDeduction = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  await User.findOne({
+    _id: id,
+    $or: [
+      { memberShip: 'Pro' },
+      { memberShip: 'gold' },
+      { memberShip: 'free' },
+      { memberShip: 'admin' }
+    ],
+    accountExpiration: {
+      $gt: Date.now()
+    }, numberOfAttempts: {
+      $gt: 0
+    }
+  }, function (error, userInfo) {
+    if (!userInfo) {
+      req.flash("error", "انتهت عضوية الحساب او استنفدت عدد محاولات الاختبار")
+      res.redirect("/myBag")
+    } else if (error) {
+      req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
+      res.redirect("/myBag")
+    } else {
+      next()
+    }
+  });
+
+})
+
 middlewareObj.isProMember = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   await User.findOne({
