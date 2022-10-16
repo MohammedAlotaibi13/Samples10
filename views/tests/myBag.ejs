@@ -57,7 +57,7 @@
                         <div class="card">
 
                             <a href="/pay/<%= currentUser.id %>" id="locked" class="btn shadow-none">
-                                <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
+                                <img class="card-img-top upgrade" id="CourseImagese" src="../image/CourseImage.svg"
                                     alt="first test">
                                 <div class="card-body upgrade">
                                     <hr>
@@ -73,7 +73,8 @@
                     <div class="col">
                         <div class="card">
                             <a href="/pay/<%= currentUser.id %>" id="locked" class="btn shadow-none">
-                                <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg" alt="first test">
+                                <img class="card-img-top upgrade" id="QuizImage" src="../image/Quiz.svg"
+                                    alt="first test">
                                 <div class="card-body upgrade">
                                     <hr>
                                     <h5 class="card-title" style="padding-bottom: 32px;"> الاختبارات
@@ -102,8 +103,8 @@
                             <div class="col">
                                 <div class="card">
                                     <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
-                                        <img class="card-img-top" id="CourseImagese" src="../image/CourseImage.svg"
-                                            alt="first test">
+                                        <img class="card-img-top upgrade" id="CourseImagese"
+                                            src="../image/CourseImage.svg" alt="first test">
                                         <div class="card-body upgrade">
                                             <hr>
                                             <h5 class="card-title" style="padding-bottom: 32px;">الدورة
@@ -116,7 +117,7 @@
                             <div class="col">
                                 <div class="card">
                                     <a href="/pay/<%= currentUser.id %>" class="btn shadow-none" id="locked">
-                                        <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
+                                        <img class="card-img-top upgrade" id="QuizImage" src="../image/Quiz.svg"
                                             alt="first test">
                                         <div class="card-body upgrade">
                                             <hr>
@@ -132,7 +133,21 @@
                                 <% if(currentUser.memberShip=="gold" || currentUser.memberShip=="admin" ) { %>
                                     <div class="col">
                                         <div class="card">
-                                            <a href="/courseTwo/<%= currentUser.id %>">
+                                            <a href="/trainingExamsPage/<%= currentUser.id%>" class="btn shadow-none">
+                                                <img class="card-img-top" id="ExamImage" src="../image/Exam.svg"
+                                                    alt="first test">
+                                                <div class="card-body">
+                                                    <hr>
+                                                    <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات
+                                                        التجريبية</h5>
+                                                    <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card">
+                                            <a href="/courseTwo/<%= currentUser.id %>" class="btn shadow-none">
                                                 <img class="card-img-top" id="CourseImagese"
                                                     src="../image/CourseImage.svg" alt="first test">
                                                 <div class="card-body">
@@ -146,7 +161,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="card">
-                                            <a href="/Quizzes/<%= currentUser.id %>">
+                                            <a href="/Quizzes/<%= currentUser.id %>" class="btn shadow-none">
                                                 <img class="card-img-top" id="QuizImage" src="../image/Quiz.svg"
                                                     alt="first test">
                                                 <div class="card-body">
@@ -158,20 +173,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="card">
-                                            <a href="/trainingExamsPage/<%= currentUser.id%>">
-                                                <img class="card-img-top" id="ExamImage" src="../image/Exam.svg"
-                                                    alt="first test">
-                                                <div class="card-body">
-                                                    <hr>
-                                                    <h5 class="card-title" style="padding-bottom: 32px;">الاختبارات
-                                                        التجريبية</h5>
-                                                    <p class="card-text">خمس اختبارات تجريبية بمعاير اختبار ستيب</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+
                                     <% } %>
 
             </div>
