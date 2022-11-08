@@ -30,6 +30,7 @@ router.get("/termsAndCondition", indexes.renderToTermsAndCondition)
 
 router.get('/FAQ', indexes.renderToFaqPage)
 
+router.get('/loaderio-b07189484e71fc918da18b484a95db4c', indexes.renderToLoaderTest)
 
 router.get("/blog", indexes.renderToBlogPage)
 
