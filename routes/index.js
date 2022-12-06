@@ -32,8 +32,6 @@ router.get('/FAQ', indexes.renderToFaqPage)
 
 router.get('/loaderio-b07189484e71fc918da18b484a95db4c', indexes.renderToLoaderTest)
 
-// router.get('/.well-known/apple-developer-merchantid-domain-association.txt', indexes.renderToApplePage)
-
 router.get("/blog", indexes.renderToBlogPage)
 
 router.get("/app", indexes.renderToAppPage)
@@ -41,7 +39,6 @@ router.get("/app", indexes.renderToAppPage)
 router.get("/profile/:id", middleware.isLoggedIn, catchAsync(indexes.renderToProfilePage));
 
 router.delete("/profile/:id", middleware.isLoggedIn, catchAsync(indexes.deleteAccount));
-
 
 router.get("/message", indexes.renderToMessagePage);
 
