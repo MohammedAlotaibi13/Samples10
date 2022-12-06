@@ -33,18 +33,7 @@ module.exports.renderToLoaderTest = (req, res) => {
 }
 
 module.exports.renderToApplePage = (req, res, next) => {
-    var options = {
-        root: path.join(__dirname)
-    };
-
-    var fileName = 'apple-developer-merchantid-domain-association.txt';
-    res.sendFile(fileName, options, function (err) {
-        if (err) {
-            next(err);
-        } else {
-            console.log('Sent:', fileName);
-        }
-    });
+    res.render('apple-developer-merchantid-domain-association')
 }
 
 
