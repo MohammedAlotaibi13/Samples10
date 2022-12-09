@@ -235,5 +235,21 @@ middlewareObj.validationCreatingNewPassword = (req, res, next) => {
 }
 
 
+middlewareObj.verifyApplePay = (req, res, next) => {
+  var options = {
+    root: path.join(__dirname)
+  };
+
+  var fileName = 'apple-developer-merchantid-domain-association.txt';
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+      next();
+    }
+  });
+}
+
 
 module.exports = middlewareObj;

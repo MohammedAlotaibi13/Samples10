@@ -32,8 +32,20 @@ module.exports.renderToLoaderTest = (req, res) => {
     res.render("loaderio-b07189484e71fc918da18b484a95db4c");
 }
 
-module.exports.renderToApplePage = (req, res) => {
-    res.render(".well-known/apple-developer-merchantid-domain-association")
+module.exports.renderToApplePage = (req, res, next) => {
+    var options = {
+        root: path.join(__dirname)
+    };
+
+    var fileName = "../.well-known/apple-developer-merchantid-domain-association.txt";
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+            next()
+        }
+    });
 }
 
 
