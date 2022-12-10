@@ -28,27 +28,6 @@ module.exports.renderToAppPage = (req, res) => {
     res.render("app")
 }
 
-module.exports.renderToLoaderTest = (req, res) => {
-    res.render("loaderio-b07189484e71fc918da18b484a95db4c");
-}
-
-module.exports.renderToApplePage = (req, res, next) => {
-    var options = {
-        root: path.join(__dirname)
-    };
-
-    var fileName = "../.well-known/apple-developer-merchantid-domain-association.txt";
-    res.sendFile(fileName, options, function (err) {
-        if (err) {
-            next(err);
-        } else {
-            console.log('Sent:', fileName);
-            next()
-        }
-    });
-}
-
-
 module.exports.renderToProfilePage = async (req, res) => {
     await User.findById(req.params.id, function (error, foundUser) {
         if (error) {
