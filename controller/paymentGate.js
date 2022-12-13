@@ -51,6 +51,7 @@ module.exports.resultRequest = (resourcePath, callback) => {
 
     const url = `https://oppwa.com${path}`;
 
+
     axios
         .get(url, {
             headers: {

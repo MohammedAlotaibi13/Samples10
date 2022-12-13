@@ -149,11 +149,16 @@
                                     }
                                 }
                             }
+                            wpwlOptions.applePay = {
+                                merchantCapabilities: ["supports3DS"],
+                                supportedNetworks: ["masterCard", "visa", "mada"]
+                            }
                         </script>
                         <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
                         <form
-                            action="https://www.samples10.com/success/<%= currentUser.id %>/<%= foundPayment.memberShip %>"
-                            class="paymentWidgets" data-brands="MADA"></form>
+                            action="https://www.samples10.com//success/<%= currentUser.id %>/<%= foundPayment.memberShip %>"
+                            class="paymentWidgets" data-brands=" MADA APPLEPAY"></form>
+
 
                         <% include ../partails/footer.ejs %>
 
