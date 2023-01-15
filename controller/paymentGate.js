@@ -25,7 +25,8 @@ module.exports.generateCheckoutId = (obj) => {
     });
     var options = {
         port: 443,
-        host: 'oppwa.com',
+        // host: 'oppwa.com',
+        host: 'eu-test.oppwa.com',
         path: path,
         method: 'POST',
         headers: {
