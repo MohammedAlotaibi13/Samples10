@@ -33,11 +33,12 @@ var welcomeCouponExpiration = document.getElementById('welcomeCouponExpiration')
 var abandonedCouponExpiration = document.getElementById('abandonedCouponExpiration');
 
 function applyCoupon() {
-    if (welcomeCouponExpiration && welcomeCouponExpiration.value) {
-        applyWelcomeCoupon()
+    if (abandonedCouponExpiration && abandonedCouponExpiration.value) {
+        applyAbandendCartCoupon()
 
     } else {
-        applyAbandendCartCoupon()
+        applyWelcomeCoupon()
+
     }
 }
 
@@ -59,12 +60,19 @@ function applyWelcomeCoupon() {
 
 function applyAbandendCartCoupon() {
     var abandonedCartCouponExpirationInMilesecond = Date.parse(abandonedCouponExpiration.value)
+    var welcomeCouponExpirationInMiliesecond = Date.parse(welcomeCouponExpiration.value)
 
     if (couponInput.value == 'Samples15' && Date.now() < abandonedCartCouponExpirationInMilesecond) {
         if (total.value == "199") {
             total.value = "169"
-        } else {
+        } else if (total.value == "165") {
             total.value = "140"
+        }
+    } else if (couponInput.value == 'Samples10' && Date.now() < welcomeCouponExpirationInMiliesecond) {
+        if (total.value == "199") {
+            total.value = "179"
+        } else if (total.value == "165") {
+            total.value = "148"
         }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
