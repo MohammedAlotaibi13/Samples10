@@ -22,9 +22,10 @@
 <body>
 
     <% include ../partails/headerMyBag.ejs %>
-        <% if(currentUser.memberShip=="free" ) { %>
-            <div class="container">
-                <div class="row">
+        <div class="container">
+            <div class="row">
+                <% if(currentUser.memberShip=="free" ) { %>
+
                     <div class="col">
                         <div class="card">
                             <a href="/instruction/<%= currentUser.id%>" class="btn shadow-none">
@@ -97,92 +98,92 @@
                             </a>
                         </div>
                     </div>
-                </div>
             </div>
-            <% } %>
-                <% if(currentUser.memberShip=="gold" || currentUser.memberShip=="admin" || currentUser.memberShip=="Pro"
-                    ) { %>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examOne/<%= currentUser.id%>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/one.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
+        </div>
+        <% } %>
+            <% if(currentUser.memberShip=="gold" || currentUser.memberShip=="admin" || currentUser.memberShip=="Pro" ) {
+                %>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examOne/<%= currentUser.id%>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/one.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الأول</h5>
 
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examTwo/<%= currentUser.id %>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/two.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثاني</h5>
-
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examThree/<%= currentUser.id %>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/three.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثالث</h5>
-
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examFour/<%= currentUser.id %>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/four.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الرابع</h5>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examFive/<%= currentUser.id %>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/five.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الخامس</h5>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <a href="/Exam/examSix/<%= currentUser.id %>" class="btn shadow-none">
-                                        <img class="card-img-top" src="../image/six.svg" alt="first test">
-                                        <div class="card-body">
-                                            <hr>
-                                            <h5 class="card-title" style="padding-bottom: 32px;">الاختبار السادس</h5>
-
-                                        </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                        <% } %>
-                    </div>
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examTwo/<%= currentUser.id %>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/two.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثاني</h5>
 
-                    <script type="text/javascript">
-                    </script>
-                    <% include ../partails/footer.ejs %>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examThree/<%= currentUser.id %>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/three.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الثالث</h5>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examFour/<%= currentUser.id %>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/four.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الرابع</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examFive/<%= currentUser.id %>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/five.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار الخامس</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Exam/examSix/<%= currentUser.id %>" class="btn shadow-none">
+                                    <img class="card-img-top" src="../image/six.svg" alt="first test">
+                                    <div class="card-body">
+                                        <hr>
+                                        <h5 class="card-title" style="padding-bottom: 32px;">الاختبار السادس</h5>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+
+                <script type="text/javascript">
+                </script>
+                <% include ../partails/footer.ejs %>
 </body>
 
 </html>
