@@ -33,6 +33,7 @@
     "md5": "^2.3.0",
     "method-override": "^2.3.10",
     "mongoose": "^5.7.7",
+    "moyasar": "^0.5.1",
     "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
     "passport-google-oauth2": "^0.2.0",

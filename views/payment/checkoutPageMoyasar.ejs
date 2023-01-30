@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include ../partails/head.ejs %>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/checkoutPage.css">
+        <title>بيانات الدفع</title>
+        <link rel="icon" href="/image/circleLogo.svg">
+
+</head>
+
+<body>
+
+    <% include ../partails/headerMyBag.ejs %>
+
+
+
+        <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
+        <div class="mysr-form"></div>
+        <script>
+            var price = document.getElementById('price').innerHTML
+            var finalPrice = parseInt(price);
+
+            Moyasar.init({
+                element: '.mysr-form',
+                // Amount in the smallest currency unit.
+                // For example:
+                // 10 SAR = 10 * 100 Halalas
+                amount: 5000,
+                language: 'ar',
+                currency: 'SAR',
+                description: 'Coffee Order #1',
+                publishable_api_key: 'pk_test_cQzt7gg28SrL2H9VDFdSvFzPTscB9biM26x2uYJf',
+                callback_url: 'https://www.samples10.com/success',
+                methods: ['applepay'],
+                apple_pay: {
+                    country: 'SA',
+                    label: 'Samples Store',
+                    validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate',
+                },
+            });
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+        <% include ../partails/footer.ejs %>
+
+</body>

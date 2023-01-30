@@ -1,7 +1,10 @@
 const Payment = require("../models/payment");
 const User = require("../models/user");
 const paymentGate = require('./paymentGate')
-const mailChimp = require('./mailChimp')
+const mailChimp = require('./mailChimp');
+const { response } = require("express");
+var moyasar = new (require('moyasar'))('sk_test_5b6cukWbiY9S6Md1eeR2ZYkNeWxrZns8uGVkDvPU')
+
 
 module.exports.rendertoPaymentPage = async (req, res) => {
     await User.findById(req.params.id, function (error, foundUser) {
@@ -45,6 +48,8 @@ module.exports.createPaymentId = async (req, res) => {
         }
     })
 }
+
+
 
 
 module.exports.checkOutPage = async (req, res) => {
@@ -132,4 +137,45 @@ module.exports.getPaymentStatus = (req, res) => {
 
 }
 
+module.exports.chechOutMoyasar = async (req, res) => {
+    res.render('payment/checkoutPageMoyasar')
+
+}
+
+module.exports.getPaymentStatusMoyaser = async (req, res) => {
+    const status = req.query.status
+    const message = req.query.message
+    if (status == "failed") {
+        req.flash("error", message)
+        res.redirect("/paymentResult")
+    } else {
+        await User.findById(req.params.id, function (error, userInfo) {
+            if (error) {
+                console.log(error)
+                req.flash("error", "حدث خطأ، نأمل المحاولةمجدداً")
+                res.redirect("/paymentResult")
+            } else {
+                if (req.params.memberShip == "Pro") {
+                    userInfo.memberShip = "Pro"
+                    userInfo.numberOfAttempts = 1000
+                    userInfo.accountExpiration = Date.now() + 2592000000 // 30 days
+                    userInfo.save()
+                    paymentGate.isPaid(userInfo.payments[0], userInfo.username, userInfo.gender)
+                    req.flash("success", " تم الدفع بنجاح")
+                    res.redirect("/paymentResult");
+                } else {
+                    userInfo.memberShip = "gold"
+                    userInfo.numberOfAttempts = 1000
+                    userInfo.accountExpiration = Date.now() + 5616000000 // 65 days 
+                    userInfo.save()
+                    paymentGate.isPaid(userInfo.payments[0], userInfo.username, userInfo.gender)
+                    req.flash("success", " تم الدفع بنجاح")
+                    res.redirect("/paymentResult");
+                }
+
+            }
+        })
+    }
+
+}
 

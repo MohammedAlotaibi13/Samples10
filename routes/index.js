@@ -49,9 +49,18 @@ router.post("/pay/:id", middleware.isLoggedIn, catchAsync(payments.createPayment
 
 router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, payments.checkOutPage)
 
+
 router.get("/paymentResult", payments.renderToPaymentResultPage)
 
 router.get("/success/:id/:memberShip", payments.getPaymentStatus)
+
+router.get("/success", payments.getPaymentStatusMoyaser)
+router.get("/checkout/moyasar", middleware.isLoggedIn, payments.chechOutMoyasar)
+
+
+
+
+
 
 
 

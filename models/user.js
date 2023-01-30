@@ -34,7 +34,7 @@ var userSchema = new mongoose.Schema({
     },
     numberOfAttempts: {
         type: Number,
-        default: 3
+        default: 2
     },
     payments: [{
         type: mongoose.Schema.Types.ObjectId,
