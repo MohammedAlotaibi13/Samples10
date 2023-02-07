@@ -54,7 +54,7 @@ router.get("/paymentResult", payments.renderToPaymentResultPage)
 
 router.get("/success/:id/:memberShip", payments.getPaymentStatus)
 
-router.get("/success", payments.getPaymentStatusMoyaser)
+router.get("/succeses/:id/:membership", payments.getPaymentStatusMoyaser)
 router.get("/checkout/moyasar", middleware.isLoggedIn, payments.chechOutMoyasar)
 
 

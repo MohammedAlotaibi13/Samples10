@@ -22,16 +22,18 @@
 
             Moyasar.init({
                 element: '.mysr-form',
-                amount: 1000,
+                amount: 100,
                 currency: 'SAR',
                 language: 'ar',
                 description: 'Coffee Order #1',
                 publishable_api_key: 'pk_live_kpcWHbPzcKb87VJSc8ofv9yAyGUF1QwPcNz8oAfm',
-                callback_url: 'https://samples10.com/success',
-                methods: ['creditcard'],
-                supported_networks: [
-                    'mada'
-                ],
+                callback_url: 'https://www.samples10.com/succeses/<%=currentUser.id %>/Pro',
+                methods: ['applepay'],
+                apple_pay: {
+                    country: 'SA',
+                    label: 'Samples',
+                    validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate',
+                },
             });
 
         </script>
