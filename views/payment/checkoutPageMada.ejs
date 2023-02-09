@@ -81,15 +81,16 @@
             </form>
             <% } %>
 
-                <div class="form-group row">
-                    <div class="col">
-                        <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
+                <div class="form-group">
+                    <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
+
+                    <div class="col d-flex justify-content-center">
+
                         <div class="mysr-form"></div>
 
                     </div>
 
                 </div>
-
                 <script>
                     var price = document.getElementById('price').innerHTML;
                     var finalPrice = parseInt(price);
@@ -97,6 +98,7 @@
                     Moyasar.init({
                         element: '.mysr-form',
                         amount: finalPrice * 100,
+                        fixed_width: false,
                         currency: 'SAR',
                         language: 'ar',
                         description: '<%= foundPayment.memberShip %>',

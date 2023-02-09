@@ -81,8 +81,7 @@
             <% } %>
 
                 <div class="form-group row">
-                    <div class="col">
-                        <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
+                    <div class="col d-flex justify-content-center">
                         <div class="mysr-form"></div>
 
                     </div>
@@ -95,6 +94,7 @@
                         element: '.mysr-form',
                         amount: finalPrice * 100,
                         currency: 'SAR',
+                        fixed_width: false,
                         language: 'ar',
                         description: '<%= foundPayment.memberShip %>',
                         publishable_api_key: 'pk_live_aLoC1NrCeTkeVMbogq9WE4W9cHD7esp7p5Lpvemm',

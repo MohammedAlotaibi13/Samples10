@@ -51,29 +51,35 @@
                             onclick="window.open('/termsAndCondition' , 'myWindow' , 'height=400 width=400 top=100 , left=50' )">الشروط
                             والأحكام</a><br>
                     </div>
+                </div>
 
-                    <div>
-
-                        <button type="submit" class="btn btn-dark" id="iconApple" name="paymentMethod" value="applePay">
-                            استمرار للدفع</button>
-                    </div>
+                <div class="payButtons">
+                    <button type="submit" class="btn btn-dark" id="iconApple" name="paymentMethod" value="applePay">
+                        استمرار للدفع</button>
                     <div style="margin-top: 10px;">
                         <button type="submit" class="btn btn-dark" id="payButton" name="paymentMethod"
-                            value="mada">استمرار للدفع</button>
-                    </div>
-                    <div>
-
-                        <% if(!foundPayment) { %>
-                            <input type="text" id="welcomeCouponExpiration"
-                                value="<%= currentUser.welcomeCouponExpiration %>" hidden>
-                            <% } else { %>
-                                <input type="text" id="abandonedCouponExpiration"
-                                    value="<%= foundPayment.abandonedCartCouponExpiration%>" hidden>
-                                <input type="text" id="welcomeCouponExpiration"
-                                    value="<%= currentUser.welcomeCouponExpiration %>" hidden>
-                                <% } %>
+                            value="mada">استمرار
+                            للدفع</button>
                     </div>
                 </div>
+
+
+
+
+
+                <div>
+
+                    <% if(!foundPayment) { %>
+                        <input type="text" id="welcomeCouponExpiration"
+                            value="<%= currentUser.welcomeCouponExpiration %>" hidden>
+                        <% } else { %>
+                            <input type="text" id="abandonedCouponExpiration"
+                                value="<%= foundPayment.abandonedCartCouponExpiration%>" hidden>
+                            <input type="text" id="welcomeCouponExpiration"
+                                value="<%= currentUser.welcomeCouponExpiration %>" hidden>
+                            <% } %>
+                </div>
+
             </form>
         </div>
 
