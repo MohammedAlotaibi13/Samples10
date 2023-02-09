@@ -6,6 +6,7 @@ const paymentSchema = new mongoose.Schema({
    memberShip: String,
    timeOfPayment: Date,
    price: String,
+   paymentMethod: String,
    status: {
       type: String,
       default: 'abandoned'

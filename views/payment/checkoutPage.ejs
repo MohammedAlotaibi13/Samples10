@@ -76,7 +76,7 @@
                     </div>
                     <% } %>
                         <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الدفع</h3>
-
+                        <div class="mysr-form"></div>
                         <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
                         <style>
                             .wpwl-form-card {
@@ -112,6 +112,20 @@
                         </style>
 
                         <script>
+                            Moyasar.init({
+                                element: '.mysr-form',
+                                // Amount in the smallest currency unit.
+                                // For example:
+                                // 10 SAR = 10 * 100 Halalas
+                                // 10 KWD = 10 * 1000 Fils
+                                // 10 JPY = 10 JPY (Japanese Yen does not have fractions)
+                                amount: 1000,
+                                currency: 'SAR',
+                                description: 'Coffee Order #1',
+                                publishable_api_key: 'pk_live_aLoC1NrCeTkeVMbogq9WE4W9cHD7esp7p5Lpvemm',
+                                callback_url: 'https://1b0f-95-184-120-149.eu.ngrok.io/succeses/<%=currentUser.id %>/<%= foundPayment.memberShip %> ',
+                                methods: ['creditcard'],
+                            });
                             var wpwlOptions = {
                                 style: "card"
                             }
@@ -133,10 +147,10 @@
 
 
                         </script>
-                        <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
+                        <!-- <script src="https://oppwa.com/v1/paymentWidgets.js?checkoutId=<%= checkoutId %>"></script>
                         <form
                             action="https://www.samples10.com/success/<%=currentUser.id %>/<%= foundPayment.memberShip %>"
-                            class="paymentWidgets" data-brands="MADA"></form>
+                            class="paymentWidgets" data-brands="MADA"></form> -->
 
 
 
