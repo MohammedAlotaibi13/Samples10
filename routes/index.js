@@ -47,13 +47,10 @@ router.get("/pay/:id", middleware.isLoggedIn, payments.rendertoPaymentPage);
 
 router.post("/pay/:id", middleware.isLoggedIn, catchAsync(payments.createPaymentId))
 
-//router.get("/checkout/:id/:memberShip", middleware.isLoggedIn, payments.checkOutPage)
-
 router.get('/checkout/:id/:paymentMethod/:memberShip', middleware.isLoggedIn, payments.checkOutMoyasar)
 
 router.get("/paymentResult", payments.renderToPaymentResultPage)
 
-//router.get("/success/:id/:memberShip", payments.getPaymentStatus)
 
 router.get("/succeses/:id/:memberShip", payments.getPaymentStatusMoyasar)
 

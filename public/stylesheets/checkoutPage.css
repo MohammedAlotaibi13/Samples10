@@ -19,6 +19,10 @@
 	width: 20px;
 }
 
+#applePay {
+	margin-top: 25px;
+}
+
 @media screen and (min-width: 760px) {
 	.form-group {
 		margin: 30px 100px 18px 250px;
