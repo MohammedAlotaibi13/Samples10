@@ -23,6 +23,11 @@
 <script>
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
+        'event': 'log_in_website',
+        'user_id': '<%= currentUser.id %>'
+    })
+    window.dataLayer.push({
+        'event': 'google_login',
         'user_id': '<%= currentUser.id %>'
     })
 </script>
