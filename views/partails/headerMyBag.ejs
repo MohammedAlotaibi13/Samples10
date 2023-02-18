@@ -1,5 +1,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'user_id': '<%= currentUser.id %>'
+        })
+    </script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -66,4 +72,5 @@
                     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZHK7WQ" height="0" width="0"
                             style="display:none;visibility:hidden"></iframe></noscript>
                     <!-- End Google Tag Manager (noscript) -->
+
 </div>

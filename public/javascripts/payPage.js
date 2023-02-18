@@ -53,6 +53,14 @@ function applyWelcomeCoupon() {
         } else if (total.value == "165") {
             total.value = "148"
         }
+    } else if (couponInput.value == 'Saudi23') {
+        if (total.value == '199') {
+            total.value = '139'
+        } else if (total.value == '165') {
+            total.value = '115'
+        } else {
+            alert('حدث خطأ حاول مجدداً')
+        }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
     }
@@ -73,6 +81,15 @@ function applyAbandendCartCoupon() {
             total.value = "179"
         } else if (total.value == "165") {
             total.value = "148"
+        }
+
+    } else if (couponInput.value == 'Saudi23') {
+        if (total.value == '199') {
+            total.value = '139'
+        } else if (total.value == '165') {
+            total.value = '115'
+        } else {
+            alert('حدث خطأ حاول مجدداً')
         }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
