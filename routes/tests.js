@@ -63,6 +63,8 @@ router.get("/writing/quizThree/:id", middleware.isLoggedIn, middleware.isGoldMem
 router.get("/trainingExamsPage/:id", middleware.isLoggedIn, exams.renderToAllExams);
 
 router.get("/Exam/examOne/:id", middleware.isLoggedIn, middleware.isFreeMember, exams.renderToExamOne);
+router.post("/quizReport", exams.sendResultToMailchimp);
+
 
 router.get("/Exam/examTwo/:id", middleware.isLoggedIn, middleware.isProMember, exams.renderToExamTwo);
 

@@ -24,7 +24,7 @@ module.exports.createUser = async (req, res, next) => {
                     newUser.password = newUser.hashPassword(password)
                     newUser.gender = gender;
                     newUser.save()
-                    mailChimp.saveUserInmailChimp(email, username, gender)
+                    mailChimp.saveUserInmailChimp(email, username, gender, 1)
                     req.flash("success", "تم التسجيل بنجاح ، يمكنك تسجيل الدخول الآن")
                     res.redirect("/signIn")
                 } catch (e) {
@@ -47,6 +47,8 @@ module.exports.renderToSignInPage = (req, res) => {
 }
 
 module.exports.signInUser = (req, res) => {
+    const session = req.session
+    session.userId = req.user.id
     const redirectUrl = req.session.returnTo || '/myBag';
     delete req.session.returnTo;
     res.redirect(redirectUrl)
@@ -55,6 +57,7 @@ module.exports.signInUser = (req, res) => {
 
 
 module.exports.logOutUser = (req, res) => {
+    req.session.destroy();
     req.logout();
     res.redirect("/")
 }

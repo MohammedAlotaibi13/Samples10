@@ -40,7 +40,7 @@ module.exports.createPaymentId = async (req, res) => {
                 newPayment.save()
                 foundUser.payments.push(newPayment)
                 foundUser.save();
-                mailChimp.savePaymentMailchimp(foundUser.email, foundUser.username, memberShipPicker, 'abandoned')
+                mailChimp.savePaymentMailchimp(foundUser.email, foundUser.username, memberShipPicker, 'abandoned', total)
                 res.redirect('/checkout/' + newPayment.id + "/" + paymentMethod + '/' + memberShipPicker)
             } catch (e) {
                 console.log(e)

@@ -25,6 +25,8 @@ const mongooseSanitize = require('express-mongo-sanitize')
 const redirectSSL = require('redirect-ssl')
 const timeout = require('connect-timeout');
 const compression = require('compression')
+const cors = require('cors');
+const cookieParser = require('cookie-parser')
 
 
 
@@ -47,9 +49,13 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.use(expressVlidator());
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(cors());
 app.use(mongooseSanitize())
 app.use(compression())
+app.use(cookieParser());
+
 
 
 const sessionConfig = {
@@ -152,7 +158,7 @@ passport.use(new GoogleStrategy({
                         newUser.gender = profile.gender;
                         newUser.save()
                         // // add mailchimp here
-                        mailChimp.saveUserInmailChimp(profile.emails[0].value, profile.displayName, profile.gender)
+                        mailChimp.saveUserInmailChimp(profile.emails[0].value, profile.displayName, profile.gender, 1)
                         return done(null, newUser)
                     }
                 })
@@ -169,6 +175,8 @@ app.use(function (req, res, next) {
     res.locals.success = req.flash("success");
     next()
 });
+
+
 
 // use only in production 
 

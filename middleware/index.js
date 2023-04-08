@@ -2,6 +2,7 @@ var middlewareObj = {}
 const expressVlidator = require("express-validator");
 const User = require('../models/user')
 const catchAsync = require('../utilities/catchAsync')
+const mailChimp = require('../controller/mailChimp');
 
 middlewareObj.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -39,6 +40,7 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
       let numberOfAttempt = userInfo.numberOfAttempts
       userInfo.numberOfAttempts = numberOfAttempt - 1
       userInfo.save()
+      mailChimp.saveUserInmailChimp(userInfo.email, userInfo.username, userInfo.gender, 0)
       next()
     }
   });
@@ -232,24 +234,10 @@ middlewareObj.validationCreatingNewPassword = (req, res, next) => {
         return next()
       }
     })
+
 }
 
 
-middlewareObj.verifyApplePay = (req, res, next) => {
-  var options = {
-    root: path.join(__dirname)
-  };
-
-  var fileName = 'apple-developer-merchantid-domain-association.txt';
-  res.sendFile(fileName, options, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Sent:', fileName);
-      next();
-    }
-  });
-}
 
 
 module.exports = middlewareObj;
