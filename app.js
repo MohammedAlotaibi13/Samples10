@@ -17,7 +17,7 @@ const tests = require("./routes/tests");
 const index = require("./routes/index");
 const mailChimp = require('./controller/mailChimp')
 const session = require("express-session");
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
 const catchAsync = require('./utilities/catchAsync')
@@ -27,6 +27,7 @@ const timeout = require('connect-timeout');
 const compression = require('compression')
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
+
 
 
 
@@ -56,7 +57,12 @@ app.use(mongooseSanitize())
 app.use(compression())
 app.use(cookieParser());
 
-
+const mongoStore = MongoStore.create({
+    mongoUrl: process.env.DATABASE,
+    collectionName: 'sessions',
+    dbName: 'samples10',
+    touchAfter: 24 * 3600 // time period in seconds
+})
 
 const sessionConfig = {
     name: 'samples10',
@@ -64,16 +70,12 @@ const sessionConfig = {
     secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
+    store: mongoStore,
     secure: true,  //only work in https not localhost
     cookie: {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
         maxAge: 1000 * 60 * 60 * 24 * 7
     },
-    store: new MongoStore({
-        url: process.env.DATABASE,
-        secret: process.env.SESSIONSECRET,
-        touchAfter: 24 * 3600
-    })
 }
 
 app.use(session(sessionConfig));
@@ -180,7 +182,7 @@ app.use(function (req, res, next) {
 
 // use only in production 
 
-app.use(redirectSSL)
+//app.use(redirectSSL)
 
 
 //  config routes

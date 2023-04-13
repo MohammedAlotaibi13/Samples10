@@ -47,8 +47,6 @@ module.exports.renderToSignInPage = (req, res) => {
 }
 
 module.exports.signInUser = (req, res) => {
-    const session = req.session
-    session.userId = req.user.id
     const redirectUrl = req.session.returnTo || '/myBag';
     delete req.session.returnTo;
     res.redirect(redirectUrl)
