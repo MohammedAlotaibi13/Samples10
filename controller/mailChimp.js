@@ -62,5 +62,6 @@ module.exports.saveExamResult = async function (email, userName, timeSpent, tota
 
         }
     })
+
 }
 
