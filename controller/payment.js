@@ -88,7 +88,7 @@ module.exports.getPaymentStatusMoyasar = async (req, res) => {
                 req.flash("success", " تم الدفع بنجاح")
                 res.redirect("/paymentResult");
 
-            } else if (status === 'paid' && memberShip === 'Gold') {
+            } else if (status == 'paid' && memberShip == 'Gold') {
                 userInfo.memberShip = "gold"
                 userInfo.numberOfAttempts = 1000
                 userInfo.accountExpiration = Date.now() + 5616000000 // 65 days 
