@@ -34,31 +34,3 @@ li {
 	border-radius: 12px;
 	text-decoration: none;
 }
-
-
-
-#CourseImagese {
-	max-width: 65%;
-	margin-top: 10px;
-	margin-left: 15px;
-	margin-right: 25px;
-	margin-bottom: 5px;
-
-}
-
-
-
-
-#QuizImage {
-
-	max-width: 65%;
-	margin-top: 10px;
-
-
-}
-
-#ExamImage {
-	max-width: 65%;
-
-	margin-top: 10px;
-}
