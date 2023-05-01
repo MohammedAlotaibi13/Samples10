@@ -61,8 +61,12 @@ module.exports.sendResultToMailchimp = (req, res) => {
     var reading = parseInt(parse['quizReport']['groups']['group'][1]['_attributes'].awardedScore)
     var grammar = parseInt(parse['quizReport']['groups']['group'][2]['_attributes'].awardedScore)
 
-    mailChimp.saveExamResult(req.user.email, req.user.username, time, total, listening, reading, grammar)
-
-    res.send('done')
+    try {
+        mailChimp.saveExamResult(req.user.email, req.user.username, time, total, listening, reading, grammar)
+        res.status(200).send('done')
+    } catch (error) {
+        console.log("catch error", error)
+        res.status(400).send('email is not correct');
+    }
 
 }

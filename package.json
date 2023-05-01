@@ -46,6 +46,7 @@
     "redirect-ssl": "^3.0.0",
     "request": "^2.88.2",
     "session-mongoose": "^0.5.2",
+    "validator": "^13.9.0",
     "xml-js": "^1.6.11"
   }
 }

@@ -150,7 +150,7 @@ middlewareObj.isadmin = catchAsync(async (req, res, next) => {
 
 
 middlewareObj.registerValidation = (req, res, next) => {
-  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
+  req.checkBody('email', 'الرجاء كتابة الإيميل  ').isEmail().trim().escape().normalizeEmail()
   req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty().trim().escape()
   req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().escape()
   req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().escape()
