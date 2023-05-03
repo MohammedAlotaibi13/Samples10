@@ -1,5 +1,9 @@
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const md5 = require('md5');
+const validate = require('deep-email-validator');
+
+
+
 
 mailchimp.setConfig({
     apiKey: process.env.MAILCHIMPAPI,
@@ -65,3 +69,10 @@ module.exports.saveExamResult = async function (email, userName, timeSpent, tota
 
 }
 
+module.exports.isEmailValid = async function (email) {
+    return validate.validate({
+        email: email,
+        validateSMTP: false,
+
+    })
+}

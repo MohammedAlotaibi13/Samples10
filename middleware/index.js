@@ -147,8 +147,6 @@ middlewareObj.isadmin = catchAsync(async (req, res, next) => {
 
 })
 
-
-
 middlewareObj.registerValidation = (req, res, next) => {
   req.checkBody('email', 'الرجاء كتابة الإيميل  ').isEmail().trim().escape().normalizeEmail()
   req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty().trim().escape()

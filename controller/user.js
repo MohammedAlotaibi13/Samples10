@@ -5,40 +5,46 @@ const async = require("async");
 const crypto = require("crypto");
 
 
+
 module.exports.renderToRegisterPage = (req, res) => {
     res.render("users/register");
 }
 
 module.exports.createUser = async (req, res, next) => {
     const { email, password, username, gender } = req.body;
-    await User.findOne({ email: email }, function (error, userFound) {
-        if (error) {
-            console.log(error)
-        } else {
-            if (!userFound) {
-                try {
-                    const newUser = new User()
-                    newUser.username = username;
-                    newUser.email = email;
-                    newUser.active = true
-                    newUser.password = newUser.hashPassword(password)
-                    newUser.gender = gender;
-                    newUser.save()
-                    mailChimp.saveUserInmailChimp(email, username, gender, 1)
-                    req.flash("success", "تم التسجيل بنجاح ، يمكنك تسجيل الدخول الآن")
-                    res.redirect("/signIn")
-                } catch (e) {
-                    console.log(e)
-                }
+    const { valid, reason, validators } = await mailChimp.isEmailValid(email);
+    if (valid) {
+        await User.findOne({ email: email }, function (error, userFound) {
+            if (error) {
+                console.log(error)
             } else {
-                req.flash("error", "إيميل مسجل سابقاً")
-                return res.redirect("back")
+                if (!userFound) {
+                    try {
+                        const newUser = new User()
+                        newUser.username = username;
+                        newUser.email = email;
+                        newUser.active = true
+                        newUser.password = newUser.hashPassword(password)
+                        newUser.gender = gender;
+                        newUser.save()
+                        mailChimp.saveUserInmailChimp(email, username, gender, 1)
+                        req.flash("success", "تم التسجيل بنجاح ، يمكنك تسجيل الدخول الآن")
+                        res.redirect("/signIn")
+                    } catch (e) {
+                        console.log(e)
+                    }
+                } else {
+                    req.flash("error", "إيميل مسجل سابقاً")
+                    return res.redirect("back")
+                }
             }
-        }
 
 
-    })
+        })
 
+    }
+    req.flash("error", "الرجاء كتابة إيميل صحيح")
+    return res.redirect("back")
 }
 
 
