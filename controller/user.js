@@ -42,9 +42,11 @@ module.exports.createUser = async (req, res, next) => {
 
         })
 
+    } else {
+        req.flash("error", "الرجاء كتابة إيميل صحيح")
+        return res.redirect("back")
     }
-    req.flash("error", "الرجاء كتابة إيميل صحيح")
-    return res.redirect("back")
+
 }
 
 
