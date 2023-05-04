@@ -108,20 +108,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col text-start">
-                    <a href="/message" class="btn shadow-none">
-
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    كن قصة النجاح التالية و شاركنا نتيجتك في الاختبار
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
+                <div class="col">
+                    <div class="card">
+                        <% if(!currentUser) { %>
+                            <div class="card-header">اسمك</div>
+                            <% } else { %>
+                                <div class="card-header">
+                                    <%= currentUser.username %>
+                                </div>
+                                <% } %>
+                                    <div class="card-body">
+                                        <h5 class="card-title">الدرجة : ٩٠</h5>
+                                        <p class="card-text">
+                                            كن قصة النجاح التالية و شاركنا نتيجتك في الاختبار
+                                        </p>
+                                        <a href="/message" class="btn btn-primary">تواصل معنا</a>
+                                    </div>
+                    </div>
 
                 </div>
+
+
+
             </div>
         </div>
         <% include partails/footer.ejs %>

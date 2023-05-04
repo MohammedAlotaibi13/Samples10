@@ -23,3 +23,7 @@ h3 {
     padding: 45px;
     color: white;
 }
+
+.card-header {
+    background-color: white;
+}
