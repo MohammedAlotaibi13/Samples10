@@ -138,6 +138,9 @@ h2 {
 
 }
 
+#tesominal {
+	text-decoration: underline;
+}
 
 .fadeinLeft {
 	-webkit-animation: fadeinLeft 1.2s ease-in-out;

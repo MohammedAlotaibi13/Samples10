@@ -20,6 +20,10 @@ module.exports.renderToTermsAndCondition = (req, res) => {
     res.render("termsAndCondition")
 }
 
+module.exports.renderToTestominalPage = (req, res) => {
+    res.render("testominalPage")
+}
+
 module.exports.renderToBlogPage = (req, res) => {
     res.render("blog")
 }

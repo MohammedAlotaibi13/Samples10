@@ -27,6 +27,7 @@ router.get("/", indexes.renderToLandingPage)
 router.get("/about", indexes.renderToAboutPage);
 
 router.get("/termsAndCondition", indexes.renderToTermsAndCondition)
+router.get("/testominalPage", indexes.renderToTestominalPage)
 
 router.get('/FAQ', indexes.renderToFaqPage)
 

@@ -1,0 +1,25 @@
+h5 {
+    color: blue;
+
+}
+
+
+
+h3 {
+    padding-top: 45px;
+    color: green;
+}
+
+.card {
+    padding: 15px;
+    width: 240px;
+    text-align: center;
+    margin: 30px 0 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.bg-success {
+    padding: 45px;
+    color: white;
+}
