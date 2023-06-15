@@ -31,7 +31,7 @@ middlewareObj.isFreeMember = catchAsync(async (req, res, next) => {
     }
   }, function (error, userInfo) {
     if (!userInfo) {
-      req.flash("error", "انتهت عضوية الحساب او استنفدت عدد محاولات الاختبار")
+      req.flash("error", "انتهت عضوية الحساب ، يمكنك ترقية العضوية للأستمرار")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -64,7 +64,7 @@ middlewareObj.isFreeMemberWithoutDeduction = catchAsync(async (req, res, next) =
     }
   }, function (error, userInfo) {
     if (!userInfo) {
-      req.flash("error", "انتهت عضوية الحساب او استنفدت عدد محاولات الاختبار")
+      req.flash("error", "انتهت عضوية الحساب ، يمكنك ترقية العضوية للأستمرار")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")
@@ -90,7 +90,7 @@ middlewareObj.isProMember = catchAsync(async (req, res, next) => {
     }
   }, function (error, userInfo) {
     if (!userInfo) {
-      req.flash("error", "انتهت عضوية الحساب")
+      req.flash("error", "انتهت عضوية الحساب ، يمكنك ترقية العضوية للأستمرار")
       res.redirect("/myBag")
     } else if (error) {
       req.flash("error", "حدث خطأ الرجاء المحاولة مجدداً")

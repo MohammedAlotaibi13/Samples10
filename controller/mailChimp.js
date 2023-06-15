@@ -69,6 +69,20 @@ module.exports.saveExamResult = async function (email, userName, timeSpent, tota
 
 }
 
+
+module.exports.updateExamResult = async function (email, isPurchased) {
+    const response = await mailchimp.lists.setListMember('721e7820e4', md5(email.toLowerCase()), {
+        email_address: email,
+        status_if_new: 'subscribed',
+        merge_fields: {
+            ISPURCHASE: isPurchased
+        }
+
+    })
+}
+
+
+
 module.exports.isEmailValid = async function (email) {
     return validate.validate({
         email: email,

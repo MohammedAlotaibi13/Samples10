@@ -4,25 +4,25 @@ body {
 
 nav {
 	direction: rtl;
-	background-color: #e6e6e6	;
+	background-color: #e6e6e6;
 }
- 
+
 
 li {
 	padding-left: 15px;
 }
- 
+
 a {
-	text-decoration : none;
+	text-decoration: none;
 	color: inherit;
 
 }
 
 #upgradeButton:hover {
 	color: white
-   }
+}
 
-.footer-link li{
+.footer-link li {
 	list-style-type: none;
 	padding-top: 8px;
 }

@@ -1,17 +1,3 @@
-/*nav style and body*/
-
-body {
-	font-family: 'Cairo', sans-serif;
-}
-
-nav {
-	direction: rtl;
-}
-
-li {
-	padding-left: 15px;
-}
-
 /* End of nav style and body*/
 
 .card {
@@ -24,4 +10,24 @@ li {
 
 .card a:hover {
 	text-decoration: none;
+}
+
+
+#locked {
+	opacity: 0.6;
+}
+
+
+.upgrade {
+	position: absolute;
+	top: -7px;
+	background: #46458C;
+	color: #fff;
+	text-transform: uppercase;
+	z-index: 2;
+	padding: 2px 5px;
+	font-size: 12px;
+	border-radius: 2px;
+	right: 85px;
+	font-weight: 700;
 }

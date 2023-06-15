@@ -19,15 +19,15 @@ router.get("/myBag", middleware.isLoggedIn, exams.renderToMyBagPage);
 
 //  quizzes 
 
-router.get("/Quizzes/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToQuizzesPage);
+router.get("/Quizzes/:id", middleware.isLoggedIn, quizzes.renderToQuizzesPage);
 
-router.get("/listening/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToListeningQuizzes);
+router.get("/listening/:id", middleware.isLoggedIn, quizzes.renderToListeningQuizzes);
 
-router.get("/reading/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToReadingQuizzes);
+router.get("/reading/:id", middleware.isLoggedIn, quizzes.renderToReadingQuizzes);
 
-router.get("/writing/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToWritingQuizzes);
+router.get("/writing/:id", middleware.isLoggedIn, quizzes.renderToWritingQuizzes);
 
-router.get("/grammar/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToGrammarQuizzes);
+router.get("/grammar/:id", middleware.isLoggedIn, quizzes.renderToGrammarQuizzes);
 
 router.get("/listening/quizOne/:id", middleware.isLoggedIn, middleware.isGoldMember, quizzes.renderToListeningQuizeOne);
 
@@ -77,7 +77,7 @@ router.get("/Exam/examFive/:id", middleware.isLoggedIn, middleware.isProMember, 
 router.get("/Exam/examSix/:id", middleware.isLoggedIn, middleware.isProMember, exams.renderToExamSix);
 
 //course 
-
+router.get('/courseDetailes', middleware.isLoggedIn, courses.renderCourseDetailes)
 router.get("/courseOne/:id", middleware.isLoggedIn, middleware.isFreeMember, courses.renderTofreeCourse)
 
 router.get("/courseTwo/:id", middleware.isLoggedIn, middleware.isGoldMember, courses.renderToPaidCourse)

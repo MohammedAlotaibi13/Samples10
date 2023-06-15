@@ -1,32 +1,26 @@
-/*nav style and body*/
-
-body {
-	font-family: 'Cairo', sans-serif;
-}
-
-nav {
-	direction: rtl;
-}
-
-li {
-	padding-left: 15px;
-}
-
-/* End of nav style and body*/
-
 .card {
-	width: 240px;
+	width: 250px;
 	text-align: center;
-	margin: 30px 0 30px 30px;
+	margin: 30px 0 30px 50px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 #locked {
-	background: url('/image/locks.svg') center no-repeat;
-	background-size: 70% 70%;
+	opacity: 0.6;
 }
 
+
 .upgrade {
-	opacity: 0.4;
+	position: absolute;
+	top: -7px;
+	background: #46458C;
+	color: #fff;
+	text-transform: uppercase;
+	z-index: 2;
+	padding: 2px 5px;
+	font-size: 12px;
+	border-radius: 2px;
+	right: 85px;
+	font-weight: 700;
 }

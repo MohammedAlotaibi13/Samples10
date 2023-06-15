@@ -1,0 +1,114 @@
+.p-5 {
+    background-color: #BCCEF8;
+    color: #37306B;
+}
+
+h4 {
+    color: #37306B;
+}
+
+.bi-check2-square {
+    color: #0B2447;
+}
+
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.card-header {
+    background-color: #BCCEF8;
+    color: #0B2447;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.bi-check2-circle {
+    margin-left: 10px;
+    color: #0B2447;
+}
+
+
+
+#subscribeButton {
+    background-color: #BCCEF8;
+    color: #0B2447;
+}
+
+.card-text {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 75px;
+}
+
+.bi-hand-thumbs-up-fill {
+    color: #F2BE22;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.text-bg-primary {
+    color: #37306B !important;
+    background-color: #BCCEF8;
+}
+
+.fs-2 {
+    font-size: calc(1.370rem + .9vw) !important;
+}
+
+.testimonial {
+    padding: 35px 50px;
+    margin: 0 20px 30px;
+    border-radius: 0 70px 0 70px;
+    border: 5px solid #BCCEF8;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+.testimonial .pic {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.testimonial .pic img {
+    width: 100%;
+    height: auto;
+}
+
+.testimonial .title {
+    display: block;
+    margin: 0 0 7px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #37306B;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.testimonial .description {
+    font-size: 16px;
+    color: black;
+    line-height: 30px;
+}
+
+.owl-theme .owl-controls {
+    margin-top: 0;
+}
+
+.owl-theme .owl-controls .owl-page span {
+    background: #fff;
+    opacity: 0.8;
+    transition: all 0.3s ease 0s;
+}
+
+.owl-theme .owl-controls .owl-page.active span {
+    background: #BCCEF8;
+}

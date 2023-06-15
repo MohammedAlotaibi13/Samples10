@@ -13,6 +13,7 @@ module.exports.isPaid = async (paymentId, username, gender) => {
             foundPayment.save()
             mailChimp.saveCheckOut(foundPayment.email, username, foundPayment.memberShip, foundPayment.timeOfPayment, gender, foundPayment.price)
             mailChimp.savePaymentMailchimp(foundPayment.email, username, foundPayment.memberShip, "succeed", foundPayment.price)
+            mailChimp.updateExamResult(foundPayment.email, 'YES')
         }
     })
 
