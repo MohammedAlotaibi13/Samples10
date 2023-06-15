@@ -21,8 +21,12 @@
 
                     <div class="col">
                         <div class="card">
-                            <a href="/instruction/<%= currentUser.id%>" class="btn shadow-none">
+                            <a type="button" class="btn shadow-none" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
                                 <div class="card-body">
+
+
+
 
                                     <h5 class="card-title">الاختبار الأول</h5>
 
@@ -184,7 +188,27 @@
             </div>
             <% } %>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" dir="rtl">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">تنبيه</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        الرجاء التأكد من جاهزيتك قبل دخول الاختبار، لديك محاولة واحدة فقط لمدة ٢٤ ساعة
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الاختبار في وقت
+                            آخر</button>
+                        <a href="/Exam/examOne/<%= currentUser.id %>" class="btn btn-success btn">ابدأ الاختبار
+                            الآن</a>
 
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <% include ../partails/footer.ejs %>
 </body>

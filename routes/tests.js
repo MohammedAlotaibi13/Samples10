@@ -10,7 +10,6 @@ const quizzes = require('../controller/quiz')
 
 // index
 
-router.get("/instruction/:id", middleware.isLoggedIn, middleware.isFreeMemberWithoutDeduction, exams.renderToInstructionPage)
 
 
 
