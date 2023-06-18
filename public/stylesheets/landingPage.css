@@ -75,9 +75,15 @@ h6 {
 	color: red;
 }
 
+
+ul {
+	list-style-type: none;
+}
+
 .bi-check-lg {
 	margin-left: 10px;
 	color: green;
+
 }
 
 /* End of Price section */
@@ -148,6 +154,9 @@ h2 {
 	animation: fadeinLeft 1.2s ease-in-out;
 
 }
+
+
+
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes fadeinLeft {

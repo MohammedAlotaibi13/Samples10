@@ -120,7 +120,6 @@
                         <div class="feature col">
                             <div
                                 class="feature-icon d-inline-flex align-items-center justify-content-center bg-success bg-gradient text-white fs-2 mb-3">
-                                <!-- <i class="fa fa-puzzle-piece" aria-hidden="true"></i> -->
                                 <i class="bi bi-controller"></i>
                             </div>
                             <h3 class="counter">71</h3>
@@ -207,7 +206,7 @@
                                     </ul>
                                 </div>
 
-                                <a href="/register" class="btn btn-lg btn-block btn-outline-primary">سجل مجاناً</a>
+                                <a href="/register" class="btn btn-lg btn-block btn-outline-secondary">سجل مجاناً</a>
                             </div>
                         </div>
                     </div>
@@ -226,19 +225,19 @@
                                     </ul>
                                 </div>
                                 <% if(!currentUser) { %>
-                                    <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                    <a href="/register" class="btn btn-lg btn-block btn-secondary">اشترك الآن</a>
                                     <% } else { %>
                                         <a href="/pay/<%= currentUser.id %>"
-                                            class="btn btn-lg btn-block btn-primary">اشترك
+                                            class="btn btn-lg btn-block btn-secondary">اشترك
                                             الآن</a>
                                         <% } %>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card text-center border-primary" id="cards-price">
+                        <div class="card text-center border-secondary" id="cards-price">
                             <!-- <div class="hot">عرض خاص خصم %50</div> -->
-                            <h3 class="card-header border-primary text-white bg-primary">Gold</h3>
+                            <h3 class="card-header border-secondary text-white bg-secondary">Gold</h3>
                             <div class="card-body">
                                 <!-- <h4 class="card-title"> <del>199</del> SR</h4> -->
                                 <h4 class="card-title"> 199 SR</h4>
@@ -253,10 +252,10 @@
                                     </ul>
                                 </div>
                                 <% if(!currentUser) { %>
-                                    <a href="/register" class="btn btn-lg btn-block btn-primary">اشترك الآن</a>
+                                    <a href="/register" class="btn btn-lg btn-block btn-secondary">اشترك الآن</a>
                                     <% } else { %>
                                         <a href="/pay/<%= currentUser.id %>"
-                                            class="btn btn-lg btn-block btn-primary">اشترك
+                                            class="btn btn-lg btn-block btn-secondary">اشترك
                                             الآن</a>
                                         <% } %>
                             </div>
