@@ -33,13 +33,7 @@ var welcomeCouponExpiration = document.getElementById('welcomeCouponExpiration')
 var abandonedCouponExpiration = document.getElementById('abandonedCouponExpiration');
 
 function applyCoupon() {
-    if (abandonedCouponExpiration && abandonedCouponExpiration.value) {
-        applyAbandendCartCoupon()
-
-    } else {
-        applyWelcomeCoupon()
-
-    }
+    applyEidCoupoun()
 }
 
 
@@ -90,6 +84,21 @@ function applyAbandendCartCoupon() {
             total.value = '115'
         } else {
             alert('حدث خطأ حاول مجدداً')
+        }
+    } else {
+        alert('رمز خاطئ أو منتهي الصلاحية')
+    }
+}
+
+
+function applyEidCoupoun() {
+    if (couponInput.value == 'EID') {
+        if (total.value == '199') {
+            total.value = '149'
+        } else if (total.value == '165') {
+            total.value = '123'
+        } else {
+            alert('رمز خاطئ أو منتهي الصلاحية')
         }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')

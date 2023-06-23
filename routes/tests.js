@@ -76,7 +76,7 @@ router.get("/Exam/examFive/:id", middleware.isLoggedIn, middleware.isProMember, 
 router.get("/Exam/examSix/:id", middleware.isLoggedIn, middleware.isProMember, exams.renderToExamSix);
 
 //course 
-router.get('/courseDetailes', middleware.isLoggedIn, courses.renderCourseDetailes)
+router.get('/courseDetailes', courses.renderCourseDetailes)
 router.get("/courseOne/:id", middleware.isLoggedIn, middleware.isFreeMember, courses.renderTofreeCourse)
 
 router.get("/courseTwo/:id", middleware.isLoggedIn, middleware.isGoldMember, courses.renderToPaidCourse)
