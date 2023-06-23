@@ -33,7 +33,7 @@ var welcomeCouponExpiration = document.getElementById('welcomeCouponExpiration')
 var abandonedCouponExpiration = document.getElementById('abandonedCouponExpiration');
 
 function applyCoupon() {
-    applyEidCoupoun()
+    applyWelcomeCoupon()
 }
 
 
@@ -47,11 +47,11 @@ function applyWelcomeCoupon() {
         } else if (total.value == "165") {
             total.value = "148"
         }
-    } else if (couponInput.value == 'Saudi23') {
+    } else if (couponInput.value == 'EID') {
         if (total.value == '199') {
-            total.value = '139'
+            total.value = '149'
         } else if (total.value == '165') {
-            total.value = '115'
+            total.value = '123'
         } else {
             alert('حدث خطأ حاول مجدداً')
         }
@@ -91,19 +91,6 @@ function applyAbandendCartCoupon() {
 }
 
 
-function applyEidCoupoun() {
-    if (couponInput.value == 'EID') {
-        if (total.value == '199') {
-            total.value = '149'
-        } else if (total.value == '165') {
-            total.value = '123'
-        } else {
-            alert('رمز خاطئ أو منتهي الصلاحية')
-        }
-    } else {
-        alert('رمز خاطئ أو منتهي الصلاحية')
-    }
-}
 
 
 
