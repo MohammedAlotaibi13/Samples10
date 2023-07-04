@@ -47,6 +47,12 @@ function applyWelcomeCoupon() {
         } else if (total.value == "165") {
             total.value = "148"
         }
+    } else if (couponInput.value == "Samples15") {
+        if (total.value == "199") {
+            total.value = "169"
+        } else if (total.value == "165") {
+            total.value = "140"
+        }
     } else {
         alert('رمز خاطئ أو منتهي الصلاحية')
     }
