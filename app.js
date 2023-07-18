@@ -27,6 +27,7 @@ const timeout = require('connect-timeout');
 const compression = require('compression')
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
+const MemoryStore = require('memorystore')(session)
 
 
 
@@ -65,7 +66,9 @@ const sessionConfig = {
     secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
-    // store: mongoStore,
+    store: new MemoryStore({
+        checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     secure: true,  //only work in https not localhost
     cookie: {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
