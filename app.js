@@ -54,20 +54,35 @@ app.use(compression())
 app.use(cookieParser());
 
 
-const sessionConfig = {
-    name: 'samples10',
-    httpOnly: true,
-    secret: process.env.SESSIONSECRET,
-    resave: false,
-    saveUninitialized: true,
+// const mongoStore = MongoStore.create({
+//     mongoUrl: process.env.DATABASE,
+//     collectionName: 'sessions',
+//     dbName: 'samples10',
+// })
+
+// const sessionConfig = {
+//     name: 'samples10',
+//     httpOnly: true,
+//     secret: process.env.SESSIONSECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     store: mongoStore,
+//     secure: true,  //only work in https not localhost
+//     cookie: { maxAge: 86400000 },
+// }
+
+
+app.use(session({
+    cookie: { maxAge: 86400000 },
     store: new MemoryStore({
         checkPeriod: 86400000 // prune expired entries every 24h
     }),
-    secure: true,  //only work in https not localhost
-    cookie: { maxAge: 86400000 },
-}
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSIONSECRET
+}))
 
-app.use(session(sessionConfig));
+//app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function (user, done) {

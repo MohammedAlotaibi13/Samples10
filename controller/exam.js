@@ -45,8 +45,9 @@ module.exports.renderToExamSix = (req, res) => {
 }
 
 module.exports.sendResultToMailchimp = (req, res) => {
-    console.log(req)
-    console.log(req.body)
+
+    console.log(req.user.email)
+    console.log(req.user.username)
     //quizReport contains all the variables -> checkout dbg.js
     const quizReport = req.body;
     //detailed report in xml format
