@@ -4,12 +4,12 @@
 <head>
 	<title>Admin Page</title>
 	<meta name="descripiton" content="قريباًً">
-	<% include ../partails/head.ejs %>
+	<%- include ('../partails/head.ejs')%>
 		<link rel="icon" href="/image/circleLogo.png">
 </head>
 
 <body>
-	<%- include ('../partails/subHeader.ejs') %>
+	<%- include ('../partails/header.ejs') %>
 		<div class="container mt-5">
 			<form method="POST" action="/admin/<%- currentUser.id %>/dashboard?_method=PUT" novalidate
 				class="validated-form">
