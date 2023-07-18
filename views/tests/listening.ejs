@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="/image/circleLogo.svg">
-    <% include ../partails/head.ejs %>
+    <%- include ('../partails/head.ejs') %>
         <link rel="stylesheet" type="text/css" href="../stylesheets/grammar.css">
 
         <title>listening | سامبلز </title>
@@ -12,7 +12,7 @@
 
 <body>
 
-    <% include ../partails/headerMyBag.ejs %>
+    <%- include ('../partails/headerMyBag.ejs') %>
         <div class="container">
             <div class="row">
                 <% if(currentUser.memberShip=="free" || currentUser.memberShip=="Pro" ) { %>
@@ -118,7 +118,7 @@
         </div>
 
 
-        <% include ../partails/footer.ejs %>
+        <%- include ('../partails/footer.ejs') %>
 </body>
 
 </html>

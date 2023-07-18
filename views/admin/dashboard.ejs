@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<% include ../partails/subHeader.ejs %>
+	<%- include ('../partails/subHeader.ejs') %>
 		<div class="container mt-5">
 			<form method="POST" action="/admin/<%- currentUser.id %>/dashboard?_method=PUT" novalidate
 				class="validated-form">
@@ -60,7 +60,7 @@
 		</div>
 
 
-		<% include ../partails/footer.ejs %>
+		<%- include ('../partails/footer.ejs') %>
 </body>
 
 </html>

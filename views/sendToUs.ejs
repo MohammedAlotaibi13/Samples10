@@ -4,7 +4,7 @@
 <head>
 
 
-  <% include partails/head.ejs %>
+  <%- include ('partails/head.ejs') %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/sendToUs.css">
     <meta name="descripiton" content="تواصل معنا لإبداء رايك او إذا واجهتك مشكلة أثناء استخدام الم،قع">
     <title>راسلنا | سامبلز</title>
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <% include partails/subHeader.ejs %>
+  <%- include ('partails/subHeader.ejs') %>
     <div class="grid-container">
       <form method="post" action="/send" novalidate class="validated-form" id="messageForm">
         <div class="form-group mb-3">
@@ -32,7 +32,7 @@
 
 
     <script src="/javascripts/sendToUs.js"></script>
-    <% include partails/footer.ejs %>
+    <%- include ('partails/footer.ejs') %>
 
 
 </body>

@@ -30,12 +30,7 @@ const cookieParser = require('cookie-parser')
 
 
 
-
-
-
-
-
-// Mongo Data
+//Mongo Data
 mongoose.connect(process.env.DATABASE, {
     'useNewUrlParser': true,
     'useUnifiedTopology': true,
@@ -57,12 +52,12 @@ app.use(mongooseSanitize())
 app.use(compression())
 app.use(cookieParser());
 
-const mongoStore = MongoStore.create({
-    mongoUrl: process.env.DATABASE,
-    collectionName: 'sessions',
-    dbName: 'samples10',
-    touchAfter: 24 * 3600 // time period in seconds
-})
+// const mongoStore = MongoStore.create({
+//     mongoUrl: process.env.DATABASE,
+//     collectionName: 'sessions',
+//     dbName: 'samples10',
+//     touchAfter: 24 * 3600 // time period in seconds
+// })
 
 const sessionConfig = {
     name: 'samples10',
@@ -70,7 +65,7 @@ const sessionConfig = {
     secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
-    store: mongoStore,
+    // store: mongoStore,
     secure: true,  //only work in https not localhost
     cookie: {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
@@ -180,9 +175,11 @@ app.use(function (req, res, next) {
 
 
 
+
+
 // use only in production 
 
-//app.use(redirectSSL)
+app.use(redirectSSL)
 
 
 //  config routes

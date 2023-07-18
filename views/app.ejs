@@ -7,7 +7,7 @@
 	<title>Our App</title>
 	<meta name="descripiton" content="قريباًً">
 	<link rel="icon" href="/image/circleLogo.svg">
-	<% include partails/head.ejs %>
+	<%- include ('partails/head.ejs') %>
 		<style>
 			.col-md-12 {
 				padding: 60px 0 60px 0;
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<% include partails/subHeader.ejs %>
+	<%- include ('partails/subHeader.ejs') %>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
@@ -28,7 +28,7 @@
 		</div>
 
 
-		<% include partails/footer.ejs %>
+		<%- include ('partails/footer.ejs') %>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
 
     <link rel="icon" href="/image/circleLogo.svg">
-    <% include ../partails/head.ejs %>
+    <%- include ('../partails/head.ejs') %>
         <link rel="stylesheet" type="text/css" href="../stylesheets/myBag.css">
         <title>حقيبتي | سامبلز </title>
 
@@ -13,7 +13,7 @@
 <body>
 
 
-    <% include ../partails/subHeader.ejs %>
+    <%- include ('../partails/subHeader.ejs') %>
         <div class="container">
             <div class="row">
                 <% if(currentUser.memberShip=="free" ) { %>
@@ -133,7 +133,7 @@
 
         <script type="text/javascript">
         </script>
-        <% include ../partails/footer.ejs %>
+        <%- include ('../partails/footer.ejs') %>
 </body>
 
 </html>

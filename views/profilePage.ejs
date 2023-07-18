@@ -4,7 +4,7 @@
 <head>
 
 
-    <% include partails/head.ejs %>
+    <%- include ('partails/head.ejs') %>
         <link rel="stylesheet" type="text/css" href="../stylesheets/profilePage.css">
         <title>صفحتي الشخصية | سامبلز</title>
         <meta name="description" content="يمكنك ترقية عضويتك او تغير كلمة المرور او حذف عضويتك لدينا">
@@ -12,7 +12,7 @@
 <link rel="icon" href="/image/circleLogo.svg">
 
 <body>
-    <% include partails/subHeader.ejs %>
+    <%- include ('partails/subHeader.ejs') %>
 
 
         <h3 class="h3 mb-3 font-weight-normal text-center" id="title">بيانات الحساب</h3>
@@ -56,6 +56,6 @@
         </div>
 
 
-        <% include partails/footer.ejs %>
+        <%- include ('partails/footer.ejs') %>
 
 </body>
