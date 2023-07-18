@@ -53,12 +53,6 @@ app.use(mongooseSanitize())
 app.use(compression())
 app.use(cookieParser());
 
-// const mongoStore = MongoStore.create({
-//     mongoUrl: process.env.DATABASE,
-//     collectionName: 'sessions',
-//     dbName: 'samples10',
-//     touchAfter: 24 * 3600 // time period in seconds
-// })
 
 const sessionConfig = {
     name: 'samples10',
@@ -70,10 +64,7 @@ const sessionConfig = {
         checkPeriod: 86400000 // prune expired entries every 24h
     }),
     secure: true,  //only work in https not localhost
-    cookie: {
-        expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //for onw week
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    },
+    cookie: { maxAge: 86400000 },
 }
 
 app.use(session(sessionConfig));
