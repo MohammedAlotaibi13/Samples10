@@ -17,7 +17,6 @@ const tests = require("./routes/tests");
 const index = require("./routes/index");
 const mailChimp = require('./controller/mailChimp')
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
 const catchAsync = require('./utilities/catchAsync')
@@ -56,21 +55,22 @@ app.use(compression())
 app.use(cookieParser());
 
 
-const mongoStore = MongoStore.create({
-    mongoUrl: process.env.DATABASE,
 
-})
+var store = new MongoDBStore({
+    uri: process.env.DATABASE,
+    collection: 'sessions'
+});
 
-const memorystore = new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-})
-
+// Catch errors
+store.on('error', function (error) {
+    console.log(error);
+});
 
 
 const sessionConfig = {
     secret: process.env.SESSIONSECRET,
-    store: memorystore,
-    resave: false,
+    store: store,
+    resave: true,
     saveUninitialized: true,
 
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
@@ -183,7 +183,7 @@ app.use(function (req, res, next) {
 
 // use only in production 
 
-app.use(redirectSSL)
+//app.use(redirectSSL)
 
 
 //  config routes
