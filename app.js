@@ -28,15 +28,17 @@ const compression = require('compression')
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const MemoryStore = require('memorystore')(session)
+var MongoDBStore = require('connect-mongodb-session')(session);
+
 
 
 
 //Mongo Data
 mongoose.connect(process.env.DATABASE, {
-    'useNewUrlParser': true,
-    'useUnifiedTopology': true,
-    'useCreateIndex': true,
-    'useFindAndModify': false
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 app.set('view engine', 'ejs')
 app.use(timeout('10s'))
@@ -54,35 +56,28 @@ app.use(compression())
 app.use(cookieParser());
 
 
-// const mongoStore = MongoStore.create({
-//     mongoUrl: process.env.DATABASE,
-//     collectionName: 'sessions',
-//     dbName: 'samples10',
-// })
+const mongoStore = MongoStore.create({
+    mongoUrl: process.env.DATABASE,
 
-// const sessionConfig = {
-//     name: 'samples10',
-//     httpOnly: true,
-//     secret: process.env.SESSIONSECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: mongoStore,
-//     secure: true,  //only work in https not localhost
-//     cookie: { maxAge: 86400000 },
-// }
+})
+
+const memorystore = new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+})
 
 
-app.use(session({
-    cookie: { maxAge: 86400000 },
-    store: new MemoryStore({
-        checkPeriod: 86400000 // prune expired entries every 24h
-    }),
+
+const sessionConfig = {
+    secret: process.env.SESSIONSECRET,
+    store: memorystore,
     resave: false,
-    saveUninitialized: false,
-    secret: process.env.SESSIONSECRET
-}))
+    saveUninitialized: true,
 
-//app.use(session(sessionConfig));
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+}
+
+
+app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function (user, done) {

@@ -221,14 +221,22 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الاختبار في وقت
                             آخر</button>
-                        <a href="/Exam/examOne/<%= currentUser.id %>" class="btn btn-success btn">ابدأ الاختبار
+                        <a href="/Exam/examOne/<%= currentUser.id %>" class="btn btn-success btn">ابدأ
+                            الاختبار
                             الآن</a>
 
                     </div>
                 </div>
             </div>
         </div>
-
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('closeModal', () => {
+                    var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    modal.hide();
+                });
+            });
+        </script>
         <%- include ('../partails/footer.ejs') %>
 </body>
 
