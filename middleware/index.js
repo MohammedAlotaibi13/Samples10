@@ -1,4 +1,5 @@
 var middlewareObj = {}
+const { body, sanitizeBody, validationResult } = require('express-validator');
 const User = require('../models/user')
 const catchAsync = require('../utilities/catchAsync')
 const mailChimp = require('../controller/mailChimp');
@@ -146,91 +147,81 @@ middlewareObj.isadmin = catchAsync(async (req, res, next) => {
 
 })
 
-middlewareObj.registerValidation = (req, res, next) => {
-  req.checkBody('email', 'الرجاء كتابة الإيميل  ').isEmail().trim().escape().normalizeEmail()
-  req.checkBody('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty().trim().escape()
-  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().escape()
-  req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().escape()
-  req.checkBody('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password)
-  req.getValidationResult()
-    .then(function (result) {
-      if (result.isEmpty() === false) {
-        result.array().forEach((error) => {
-          req.flash("error", error.msg)
-        });
-        return res.redirect("back");
-      } else {
-        return next()
-      }
-    })
+middlewareObj.registerValidation = async (req, res, next) => {
+  await body('email', 'الرجاء كتابة إيميل صحيح  ').isEmail().trim().normalizeEmail().run(req)
+  await body('username', 'الرجاء كتابة اسم المستخدم  ').notEmpty().trim().run(req)
+  await body('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().run(req)
+  await body('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().run(req)
+  await body('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password).run(req)
+  const result = validationResult(req)
+  if (result.isEmpty() === false) {
+    result.array().forEach((error) => {
+      req.flash("error", error.msg)
+    });
+    return res.redirect("back");
+  } else {
+    return next()
+  }
 }
 
 
-middlewareObj.logInValidation = (req, res, next) => {
-  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
-  req.checkBody('password', 'الإيميل أو كلمة المرور غير صحيحة').isLength({ min: 5 }).trim().escape()
-  req.getValidationResult()
-    .then(function (result) {
-      if (result.isEmpty() === false) {
-        result.array().forEach((error) => {
-          req.flash("error", error.msg)
-        });
-        return res.redirect("back");
-      } else {
-        return next()
-      }
-    })
+middlewareObj.logInValidation = async (req, res, next) => {
+  await body('email', 'الرجاء كتابة إيميل صحيح  ').trim().isEmail().normalizeEmail().run(req)
+  await body('password', 'الإيميل أو كلمة المرور غير صحيحة').isLength({ min: 5 }).trim().run(req)
+  const result = validationResult(req)
+  if (result.isEmpty() === false) {
+    result.array().forEach((error) => {
+      req.flash("error", error.msg)
+    });
+    return res.redirect("back");
+  } else {
+    return next()
+  }
 }
 
 
-middlewareObj.sendMessageValidation = (req, res, next) => {
-  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
-  req.checkBody('subject', 'الرجاء كتابة عنوان الموضوع').escape()
-  req.checkBody('message', 'الرجاء كتابة الرسالة').escape()
+middlewareObj.sendMessageValidation = async (req, res, next) => {
+  await body('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail().run(req)
+  await body('subject', 'الرجاء كتابة عنوان الموضوع').run(req)
+  await body('message', 'الرجاء كتابة الرسالة').run(req)
 
-  req.getValidationResult()
-    .then(function (result) {
-      if (result.isEmpty() === false) {
-        result.array().forEach((error) => {
-          req.flash("error", error.msg)
-        });
-        return res.redirect("back");
-      } else {
-        return next()
-      }
-    })
+  const result = validationResult(req)
+  if (result.isEmpty() === false) {
+    result.array().forEach((error) => {
+      req.flash("error", error.msg)
+    });
+    return res.redirect("back");
+  } else {
+    return next()
+  }
 }
 
-middlewareObj.forgetPasswordValidation = (req, res, next) => {
-  req.checkBody('email', 'الرجاء كتابة الإيمل  ').isEmail().trim().escape().normalizeEmail()
-  req.getValidationResult()
-    .then(function (result) {
-      if (result.isEmpty() === false) {
-        result.array().forEach((error) => {
-          req.flash("error", error.msg)
-        });
-        return res.redirect("back");
-      } else {
-        return next()
-      }
-    })
+middlewareObj.forgetPasswordValidation = async (req, res, next) => {
+  await body('email', 'الرجاء كتابة إيميل صحيح ').isEmail().trim().normalizeEmail().run(req)
+  const result = validationResult(req)
+  if (result.isEmpty() === false) {
+    result.array().forEach((error) => {
+      req.flash("error", error.msg)
+    });
+    return res.redirect("back");
+  } else {
+    return next()
+  }
 }
 
-middlewareObj.validationCreatingNewPassword = (req, res, next) => {
-  req.checkBody('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().escape()
-  req.checkBody('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().escape()
-  req.checkBody('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password);
-  req.getValidationResult()
-    .then(function (result) {
-      if (result.isEmpty() === false) {
-        result.array().forEach((error) => {
-          req.flash("error", error.msg)
-        });
-        return res.redirect("back");
-      } else {
-        return next()
-      }
-    })
+middlewareObj.validationCreatingNewPassword = async (req, res, next) => {
+  await body('password', 'كلمة المرور يجب أن تتكون من ست خانات على الأقل').isLength({ min: 5 }).trim().run(req)
+  await body('confirm', 'الرجاء إعادة كتابة كلمة المرور  ').isLength({ min: 5 }).trim().run(req)
+  await body('confirm', 'كلمة المرور غير متطابقة ').equals(req.body.password).run(req);
+  const result = validationResult(req)
+  if (result.isEmpty() === false) {
+    result.array().forEach((error) => {
+      req.flash("error", error.msg)
+    });
+    return res.redirect("back");
+  } else {
+    return next()
+  }
 
 }
 

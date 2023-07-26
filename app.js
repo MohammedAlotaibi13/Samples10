@@ -10,7 +10,6 @@ const localStrategy = require("passport-local").Strategy;
 const User = require("./models/user");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
-const expressVlidator = require("express-validator");
 const users = require("./routes/users");
 const tests = require("./routes/tests");
 const index = require("./routes/index");
@@ -42,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride("_method"));
 app.use(flash());
-app.use(expressVlidator());
+
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
