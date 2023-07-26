@@ -8,7 +8,6 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const localStrategy = require("passport-local").Strategy;
 const User = require("./models/user");
-const passportLocalMongoose = require("passport-local-mongoose");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const expressVlidator = require("express-validator");
@@ -17,17 +16,15 @@ const tests = require("./routes/tests");
 const index = require("./routes/index");
 const mailChimp = require('./controller/mailChimp')
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session)
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const ExpressError = require('./utilities/ExpressError')
-const catchAsync = require('./utilities/catchAsync')
 const mongooseSanitize = require('express-mongo-sanitize')
 const redirectSSL = require('redirect-ssl')
 const timeout = require('connect-timeout');
 const compression = require('compression')
 const cors = require('cors');
-const cookieParser = require('cookie-parser')
-const MemoryStore = require('memorystore')(session)
-var MongoDBStore = require('connect-mongodb-session')(session);
+
 
 
 
@@ -52,28 +49,19 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 app.use(mongooseSanitize())
 app.use(compression())
-app.use(cookieParser());
 
 
 
-var store = new MongoDBStore({
-    uri: process.env.DATABASE,
-    collection: 'sessions'
+var store = new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
 });
-
-// Catch errors
-store.on('error', function (error) {
-    console.log(error);
-});
-
 
 const sessionConfig = {
     secret: process.env.SESSIONSECRET,
+    resave: false,
+    saveUninitialized: false,
     store: store,
-    resave: true,
-    saveUninitialized: true,
-
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    cookie: { maxAge: 86400000 },
 }
 
 
@@ -182,7 +170,6 @@ app.use(function (req, res, next) {
 
 
 // use only in production 
-
 
 app.use(redirectSSL)
 
