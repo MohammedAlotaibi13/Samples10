@@ -1,4 +1,3 @@
-const User = require("../models/user");
 const convert = require('xml-js');
 const mailChimp = require('./mailChimp');
 

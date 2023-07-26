@@ -1,6 +1,3 @@
-const querystring = require('querystring')
-const https = require('https');
-const axios = require('axios');
 const Payment = require("../models/payment");
 const mailChimp = require('./mailChimp')
 

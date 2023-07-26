@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
-const Payment = require("../models/payment");
 const middleware = require("../middleware/index")
 const indexes = require('../controller/index')
 const payments = require('../controller/payment')

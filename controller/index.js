@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const nodemailer = require("nodemailer")
-const path = require('path');
+
 
 
 
@@ -63,6 +63,9 @@ module.exports.renderToMessagePage = (req, res) => {
 }
 
 module.exports.sendMessage = async (req, res) => {
+    console.log(req.user.email)
+    console.log(req.user.username)
+
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         name: "www.samples10.com",

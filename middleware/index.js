@@ -1,5 +1,4 @@
 var middlewareObj = {}
-const expressVlidator = require("express-validator");
 const User = require('../models/user')
 const catchAsync = require('../utilities/catchAsync')
 const mailChimp = require('../controller/mailChimp');

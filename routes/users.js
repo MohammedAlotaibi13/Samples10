@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const middleware = require("../middleware/index")
 const user = require('../controller/user');
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const catchAsync = require('../utilities/catchAsync')
 
 
