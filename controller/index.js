@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const nodemailer = require("nodemailer")
+const sendEmail = require('./sendEmail');
 
 
 
@@ -63,43 +63,7 @@ module.exports.renderToMessagePage = (req, res) => {
 }
 
 module.exports.sendMessage = async (req, res) => {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-        name: "www.samples10.com",
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true, // true for 465, false for other ports
-        auth: {
-            type: "OAuth2",
-            user: "info@samples10.com",
-            serviceClient: process.env.GOOGLECLIENTID,
-            privateKey: process.env.GOOGLEPRIVATEKEY,
-        },
-        // this only for localhost 
-    });
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"nodemailer Contact" <info@samples10.com', // sender address
-        to: 'info@samples10.com', // list of receivers
-        subject: 'Node testing', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<h3>From : </h3>' + req.body.email + '<h3>Subject: </h3>' + req.body.subject +
-            '<h3> message:</h3>' + req.body.message // html body
-    };
-
-    // send mail with defined transport object
-    await transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-        req.flash("success", "تم ارسال رسالتكم وسوف نوافيكم في أقرب وقت")
-        res.redirect("/message");
-    });
-}
+    sendEmail('info@samples10.com', 'Message from Website', { email: req.body.email, subject: req.body.subject, message: req.body.message }, './templates/sendToUs.handlebars')
+    req.flash("success", "تم ارسال رسالتكم وسوف نوافيكم في أقرب وقت")
+    res.redirect("/message");
+};

@@ -29,19 +29,22 @@
 		<div class="item-1">
 			<h1 class="h3 mb-3 font-weight-normal">إعادة تعيين كلمة المرور</h1>
 		</div>
-		<form method="post" action="/reset/<%= token %>" novalidate class="validated-form">
-			<div class="form-group">
-				<div class="item-2">
-					<input type="password" class="form-control" placeholder="Password" name="password" required>
-					<input type="password" class="form-control" placeholder="Rewrire Password" name="confirm" required>
+		<form method="post" action="/reset/<%= token %>?id=<%= userId %>" novalidate class="validated-form">
+			<div class="form-group" dir="rtl">
+				<div class="item-2 mb-3">
+					<input type="password" class="form-control" placeholder="كلمة المرور" name="password" required>
+				</div>
+				<div class="item3 mb-3">
+					<input type="password" class="form-control" placeholder="إعادة كلمة المرور" name="confirm" required>
+
 				</div>
 			</div>
-			<div class="item-3 mb-3">
+			<div class="item-4 mb-3">
 				<div class="form-group">
 					<button type="submit" class="btn btn-lg btn-success" id="sign-button">تقدم</button>
 				</div>
 			</div>
-			<div class="item-4 mb-3">
+			<div class="item-5 mb-3">
 				<div class="form-group">
 					<p>Copyright © 2023 Samples, Inc.</p>
 				</div>

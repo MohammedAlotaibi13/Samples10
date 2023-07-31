@@ -4,7 +4,6 @@ const mailChimp = require('./mailChimp');
 
 
 module.exports.renderToMyBagPage = (req, res) => {
-
     res.render("tests/myBag")
 }
 module.exports.renderToAllExams = (req, res) => {

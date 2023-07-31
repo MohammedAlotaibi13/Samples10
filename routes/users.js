@@ -32,12 +32,7 @@ router.get("/reset/:token", user.renderToWriteNewPassword);
 
 router.post("/reset/:token", middleware.validationCreatingNewPassword, user.createNewPassword);
 
-router.get('/auth/google',
-    passport.authenticate('google', {
-        scope:
-            ['email', 'profile']
-    }
-    ));
+router.get('/login/google', passport.authenticate('google'));
 
 router.get('/auth/google/callback',
     passport.authenticate('google', {

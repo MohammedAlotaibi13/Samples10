@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
-var bcrypt = require("bcrypt-nodejs");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 
 
@@ -48,18 +48,19 @@ var userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now() + 86400000 // 24 hours
     },
-    resetPasswordToken: String,
-    resetPasswordExpiration: Date,
 
 });
 
-userSchema.methods.hashPassword = function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-}
 
-userSchema.methods.comparePassword = function (password, hash) {
-    return bcrypt.compareSync(password, hash)
-}
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next()
+    }
+    const hash = await bcrypt.hash(this.password, saltRounds);
+    this.password = hash;
+    next()
+})
 
-userSchema.plugin(passportLocalMongoose);
+
+
 module.exports = mongoose.model("User", userSchema);
