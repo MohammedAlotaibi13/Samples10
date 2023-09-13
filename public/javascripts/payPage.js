@@ -53,7 +53,16 @@ function applyWelcomeCoupon() {
         } else if (total.value == "165") {
             total.value = "140"
         }
-    } else {
+    }
+    else if (couponInput.value == "SAUDI23") {
+        if (total.value == "199") {
+            total.value = "139"
+        } else if (total.value == "165") {
+            total.value = "115"
+        }
+
+    }
+    else {
         alert('رمز خاطئ أو منتهي الصلاحية')
     }
 }
