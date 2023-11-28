@@ -18,7 +18,7 @@ module.exports.renderToInstructionPage = (req, res) => {
 module.exports.renderToExamOne = (req, res) => {
     const session = req.session
     session.userId = req.user.id
-    res.render("tests/Exams/examOne/index");
+    res.render("tests/Exams/examOne/indexFree");
 }
 
 

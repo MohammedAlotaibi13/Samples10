@@ -82,7 +82,7 @@ app.use(function (req, res, next) {
 
 // use only in production 
 
-app.use(redirectSSL)
+//app.use(redirectSSL)
 
 
 //  config routes
